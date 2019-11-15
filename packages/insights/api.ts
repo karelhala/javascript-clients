@@ -95,6 +95,160 @@ export interface Ack {
      * @memberof Ack
      */
     rule?: string;
+    /**
+     * The reason the rule was acked
+     * @type {string}
+     * @memberof Ack
+     */
+    justification?: string;
+    /**
+     * The user who created the ack
+     * @type {string}
+     * @memberof Ack
+     */
+    createdBy?: string;
+    /**
+     *
+     * @type {Date}
+     * @memberof Ack
+     */
+    createdAt?: Date;
+    /**
+     *
+     * @type {Date}
+     * @memberof Ack
+     */
+    updatedAt?: Date;
+}
+
+/**
+ *
+ * @export
+ * @interface AckInput
+ */
+export interface AckInput {
+    /**
+     *
+     * @type {string}
+     * @memberof AckInput
+     */
+    ruleId: string;
+    /**
+     *
+     * @type {string}
+     * @memberof AckInput
+     */
+    justification?: string;
+}
+
+/**
+ *
+ * @export
+ * @interface AckJustification
+ */
+export interface AckJustification {
+    /**
+     * The reason the rule was acked
+     * @type {string}
+     * @memberof AckJustification
+     */
+    justification?: string;
+}
+
+/**
+ *
+ * @export
+ * @interface HostAck
+ */
+export interface HostAck {
+    /**
+     *
+     * @type {number}
+     * @memberof HostAck
+     */
+    id?: number;
+    /**
+     *
+     * @type {string}
+     * @memberof HostAck
+     */
+    rule?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof HostAck
+     */
+    systemUuid: string;
+    /**
+     *
+     * @type {string}
+     * @memberof HostAck
+     */
+    justification?: string;
+    /**
+     * The username that created this acknowledgement
+     * @type {string}
+     * @memberof HostAck
+     */
+    createdBy?: string;
+    /**
+     *
+     * @type {Date}
+     * @memberof HostAck
+     */
+    createdAt?: Date;
+    /**
+     *
+     * @type {Date}
+     * @memberof HostAck
+     */
+    updatedAt?: Date;
+}
+
+/**
+ *
+ * @export
+ * @interface HostAckInput
+ */
+export interface HostAckInput {
+    /**
+     *
+     * @type {string}
+     * @memberof HostAckInput
+     */
+    systemUuid: string;
+    /**
+     *
+     * @type {string}
+     * @memberof HostAckInput
+     */
+    ruleId: string;
+    /**
+     *
+     * @type {string}
+     * @memberof HostAckInput
+     */
+    justification: string;
+}
+
+/**
+ *
+ * @export
+ * @interface HostAckJustification
+ */
+export interface HostAckJustification {
+    /**
+     *
+     * @type {number}
+     * @memberof HostAckJustification
+     */
+    id?: number;
+    /**
+     *
+     * @type {string}
+     * @memberof HostAckJustification
+     */
+    justification?: string;
 }
 
 /**
@@ -205,10 +359,62 @@ export interface InlineResponse2002 {
     links?: InlineResponse200Links;
     /**
      *
-     * @type {Array<RuleForAccount>}
+     * @type {Array<HostAck>}
      * @memberof InlineResponse2002
      */
+    data: Array<HostAck>;
+}
+
+/**
+ *
+ * @export
+ * @interface InlineResponse2003
+ */
+export interface InlineResponse2003 {
+    /**
+     *
+     * @type {InlineResponse200Meta}
+     * @memberof InlineResponse2003
+     */
+    meta?: InlineResponse200Meta;
+    /**
+     *
+     * @type {InlineResponse200Links}
+     * @memberof InlineResponse2003
+     */
+    links?: InlineResponse200Links;
+    /**
+     *
+     * @type {Array<RuleForAccount>}
+     * @memberof InlineResponse2003
+     */
     data: Array<RuleForAccount>;
+}
+
+/**
+ *
+ * @export
+ * @interface InlineResponse2004
+ */
+export interface InlineResponse2004 {
+    /**
+     *
+     * @type {InlineResponse200Meta}
+     * @memberof InlineResponse2004
+     */
+    meta?: InlineResponse200Meta;
+    /**
+     *
+     * @type {InlineResponse200Links}
+     * @memberof InlineResponse2004
+     */
+    links?: InlineResponse200Links;
+    /**
+     *
+     * @type {Array<System>}
+     * @memberof InlineResponse2004
+     */
+    data: Array<System>;
 }
 
 /**
@@ -606,20 +812,6 @@ export interface RuleForAccount {
 /**
  *
  * @export
- * @interface RuleId
- */
-export interface RuleId {
-    /**
-     *
-     * @type {string}
-     * @memberof RuleId
-     */
-    ruleId: string;
-}
-
-/**
- *
- * @export
  * @interface RuleImpact
  */
 export interface RuleImpact {
@@ -693,6 +885,58 @@ export interface RulesStats {
      * @memberof RulesStats
      */
     category: { [key: string]: number; };
+}
+
+/**
+ *
+ * @export
+ * @interface StatTimeSeries
+ */
+export interface StatTimeSeries {
+    /**
+     *
+     * @type {Date}
+     * @memberof StatTimeSeries
+     */
+    checkedDay: Date;
+    /**
+     *
+     * @type {number}
+     * @memberof StatTimeSeries
+     */
+    count: number;
+}
+
+/**
+ *
+ * @export
+ * @interface System
+ */
+export interface System {
+    /**
+     *
+     * @type {number}
+     * @memberof System
+     */
+    hits?: number;
+    /**
+     *
+     * @type {string}
+     * @memberof System
+     */
+    systemUuid?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof System
+     */
+    displayName?: string | null;
+    /**
+     *
+     * @type {Date}
+     * @memberof System
+     */
+    lastSeen?: Date;
 }
 
 /**
@@ -813,6 +1057,12 @@ export interface TopicWithRules {
     rules?: Array<string>;
     /**
      *
+     * @type {boolean}
+     * @memberof TopicWithRules
+     */
+    enabled?: boolean;
+    /**
+     *
      * @type {number}
      * @memberof TopicWithRules
      */
@@ -828,14 +1078,14 @@ export const AccountSettingApiAxiosParamCreator = function (configuration?: Conf
     return {
         /**
          * Update this account's settings, and return the updated settings.
-         * @param {AccountSetting} data
+         * @param {AccountSetting} accountSetting
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        accountSettingCreate(data: AccountSetting, options: any = {}): RequestArgs {
-            // verify required parameter 'data' is not null or undefined
-            if (data === null || data === undefined) {
-                throw new RequiredError('data','Required parameter data was null or undefined when calling accountSettingCreate.');
+        accountSettingCreate(accountSetting: AccountSetting, options: any = {}): RequestArgs {
+            // verify required parameter 'accountSetting' is not null or undefined
+            if (accountSetting === null || accountSetting === undefined) {
+                throw new RequiredError('accountSetting','Required parameter accountSetting was null or undefined when calling accountSettingCreate.');
             }
             const localVarPath = `/account_setting/`;
             const localVarUrlObj = url.parse(localVarPath, true);
@@ -847,14 +1097,14 @@ export const AccountSettingApiAxiosParamCreator = function (configuration?: Conf
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            if (data !== undefined) {
-                localVarQueryParameter['data'] = data;
-            }
+            localVarHeaderParameter['Content-Type'] = 'application/json';
 
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
             localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+            const needsSerialization = (<any>"AccountSetting" !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(accountSetting || {}) : (accountSetting || "");
 
             return {
                 url: url.format(localVarUrlObj),
@@ -898,12 +1148,12 @@ export const AccountSettingApiFp = function(configuration?: Configuration) {
     return {
         /**
          * Update this account's settings, and return the updated settings.
-         * @param {AccountSetting} data
+         * @param {AccountSetting} accountSetting
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        accountSettingCreate(data: AccountSetting, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountSetting> {
-            const localVarAxiosArgs = AccountSettingApiAxiosParamCreator(configuration).accountSettingCreate(data, options);
+        accountSettingCreate(accountSetting: AccountSetting, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<AccountSetting> {
+            const localVarAxiosArgs = AccountSettingApiAxiosParamCreator(configuration).accountSettingCreate(accountSetting, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -932,12 +1182,12 @@ export const AccountSettingApiFactory = function (configuration?: Configuration,
     return {
         /**
          * Update this account's settings, and return the updated settings.
-         * @param {AccountSetting} data
+         * @param {AccountSetting} accountSetting
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        accountSettingCreate(data: AccountSetting, options?: any) {
-            return AccountSettingApiFp(configuration).accountSettingCreate(data, options)(axios, basePath);
+        accountSettingCreate(accountSetting: AccountSetting, options?: any) {
+            return AccountSettingApiFp(configuration).accountSettingCreate(accountSetting, options)(axios, basePath);
         },
         /**
          * Show this account's settings, or the defaults.
@@ -959,13 +1209,13 @@ export const AccountSettingApiFactory = function (configuration?: Configuration,
 export class AccountSettingApi extends BaseAPI {
     /**
      * Update this account's settings, and return the updated settings.
-     * @param {AccountSetting} data
+     * @param {AccountSetting} accountSetting
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AccountSettingApi
      */
-    public accountSettingCreate(data: AccountSetting, options?: any) {
-        return AccountSettingApiFp(this.configuration).accountSettingCreate(data, options)(this.axios, this.basePath);
+    public accountSettingCreate(accountSetting: AccountSetting, options?: any) {
+        return AccountSettingApiFp(this.configuration).accountSettingCreate(accountSetting, options)(this.axios, this.basePath);
     }
 
     /**
@@ -988,14 +1238,14 @@ export const AckApiAxiosParamCreator = function (configuration?: Configuration) 
     return {
         /**
          * Add an acknowledgement for a rule, by rule ID, and return the new ack.  If there's already an acknowledgement of this rule by this account, then return that.
-         * @param {RuleId} data
+         * @param {AckInput} ackInput
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        ackCreate(data: RuleId, options: any = {}): RequestArgs {
-            // verify required parameter 'data' is not null or undefined
-            if (data === null || data === undefined) {
-                throw new RequiredError('data','Required parameter data was null or undefined when calling ackCreate.');
+        ackCreate(ackInput: AckInput, options: any = {}): RequestArgs {
+            // verify required parameter 'ackInput' is not null or undefined
+            if (ackInput === null || ackInput === undefined) {
+                throw new RequiredError('ackInput','Required parameter ackInput was null or undefined when calling ackCreate.');
             }
             const localVarPath = `/ack/`;
             const localVarUrlObj = url.parse(localVarPath, true);
@@ -1007,14 +1257,14 @@ export const AckApiAxiosParamCreator = function (configuration?: Configuration) 
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
-            if (data !== undefined) {
-                localVarQueryParameter['data'] = data;
-            }
+            localVarHeaderParameter['Content-Type'] = 'application/json';
 
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
             localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+            const needsSerialization = (<any>"AckInput" !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(ackInput || {}) : (ackInput || "");
 
             return {
                 url: url.format(localVarUrlObj),
@@ -1122,6 +1372,47 @@ export const AckApiAxiosParamCreator = function (configuration?: Configuration) 
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * Update an acknowledgement for a rule, by rule ID, and return the updated ack.
+         * @param {string} ruleId Rule ID defined by Insights ruleset
+         * @param {AckJustification} ackJustification
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        ackUpdate(ruleId: string, ackJustification: AckJustification, options: any = {}): RequestArgs {
+            // verify required parameter 'ruleId' is not null or undefined
+            if (ruleId === null || ruleId === undefined) {
+                throw new RequiredError('ruleId','Required parameter ruleId was null or undefined when calling ackUpdate.');
+            }
+            // verify required parameter 'ackJustification' is not null or undefined
+            if (ackJustification === null || ackJustification === undefined) {
+                throw new RequiredError('ackJustification','Required parameter ackJustification was null or undefined when calling ackUpdate.');
+            }
+            const localVarPath = `/ack/{rule_id}/`
+                .replace(`{${"rule_id"}}`, encodeURIComponent(String(ruleId)));
+            const localVarUrlObj = url.parse(localVarPath, true);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = Object.assign({ method: 'PUT' }, baseOptions, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+            const needsSerialization = (<any>"AckJustification" !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(ackJustification || {}) : (ackJustification || "");
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -1133,12 +1424,12 @@ export const AckApiFp = function(configuration?: Configuration) {
     return {
         /**
          * Add an acknowledgement for a rule, by rule ID, and return the new ack.  If there's already an acknowledgement of this rule by this account, then return that.
-         * @param {RuleId} data
+         * @param {AckInput} ackInput
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        ackCreate(data: RuleId, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Ack> {
-            const localVarAxiosArgs = AckApiAxiosParamCreator(configuration).ackCreate(data, options);
+        ackCreate(ackInput: AckInput, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Ack> {
+            const localVarAxiosArgs = AckApiAxiosParamCreator(configuration).ackCreate(ackInput, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -1185,6 +1476,20 @@ export const AckApiFp = function(configuration?: Configuration) {
                 return axios.request(axiosRequestArgs);
             };
         },
+        /**
+         * Update an acknowledgement for a rule, by rule ID, and return the updated ack.
+         * @param {string} ruleId Rule ID defined by Insights ruleset
+         * @param {AckJustification} ackJustification
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        ackUpdate(ruleId: string, ackJustification: AckJustification, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Ack> {
+            const localVarAxiosArgs = AckApiAxiosParamCreator(configuration).ackUpdate(ruleId, ackJustification, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
+                return axios.request(axiosRequestArgs);
+            };
+        },
     }
 };
 
@@ -1196,12 +1501,12 @@ export const AckApiFactory = function (configuration?: Configuration, basePath?:
     return {
         /**
          * Add an acknowledgement for a rule, by rule ID, and return the new ack.  If there's already an acknowledgement of this rule by this account, then return that.
-         * @param {RuleId} data
+         * @param {AckInput} ackInput
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        ackCreate(data: RuleId, options?: any) {
-            return AckApiFp(configuration).ackCreate(data, options)(axios, basePath);
+        ackCreate(ackInput: AckInput, options?: any) {
+            return AckApiFp(configuration).ackCreate(ackInput, options)(axios, basePath);
         },
         /**
          * Delete an acknowledgement for a rule, by its rule ID.
@@ -1232,6 +1537,16 @@ export const AckApiFactory = function (configuration?: Configuration, basePath?:
         ackRead(ruleId: string, options?: any) {
             return AckApiFp(configuration).ackRead(ruleId, options)(axios, basePath);
         },
+        /**
+         * Update an acknowledgement for a rule, by rule ID, and return the updated ack.
+         * @param {string} ruleId Rule ID defined by Insights ruleset
+         * @param {AckJustification} ackJustification
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        ackUpdate(ruleId: string, ackJustification: AckJustification, options?: any) {
+            return AckApiFp(configuration).ackUpdate(ruleId, ackJustification, options)(axios, basePath);
+        },
     };
 };
 
@@ -1244,13 +1559,13 @@ export const AckApiFactory = function (configuration?: Configuration, basePath?:
 export class AckApi extends BaseAPI {
     /**
      * Add an acknowledgement for a rule, by rule ID, and return the new ack.  If there's already an acknowledgement of this rule by this account, then return that.
-     * @param {RuleId} data
+     * @param {AckInput} ackInput
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AckApi
      */
-    public ackCreate(data: RuleId, options?: any) {
-        return AckApiFp(this.configuration).ackCreate(data, options)(this.axios, this.basePath);
+    public ackCreate(ackInput: AckInput, options?: any) {
+        return AckApiFp(this.configuration).ackCreate(ackInput, options)(this.axios, this.basePath);
     }
 
     /**
@@ -1288,6 +1603,18 @@ export class AckApi extends BaseAPI {
         return AckApiFp(this.configuration).ackRead(ruleId, options)(this.axios, this.basePath);
     }
 
+    /**
+     * Update an acknowledgement for a rule, by rule ID, and return the updated ack.
+     * @param {string} ruleId Rule ID defined by Insights ruleset
+     * @param {AckJustification} ackJustification
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AckApi
+     */
+    public ackUpdate(ruleId: string, ackJustification: AckJustification, options?: any) {
+        return AckApiFp(this.configuration).ackUpdate(ruleId, ackJustification, options)(this.axios, this.basePath);
+    }
+
 }
 
 /**
@@ -1297,11 +1624,17 @@ export class AckApi extends BaseAPI {
 export const ExportApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Get each host and all rules currently affecting it.  This will eventually require a request to the Inventory service to list the host name and Insights UUID (as opposed to the Inventory UUID which we store).  We also only present active, non-acked rules.
+         * Get each host and all rules currently affecting it.  This will eventually require a request to the Inventory service to list the host name and Insights UUID (as opposed to the Inventory UUID which we store).  We also only present active, non-acked (on an account AND host level) rules.
+         * @param {Array<1 | 2 | 3 | 4>} [category] Display rules of this category (number)
+         * @param {Array<1 | 2 | 3 | 4>} [impact] Display rules of this impact level (1..4)
+         * @param {Array<1 | 2 | 3 | 4>} [likelihood] Display only rules of this likelihood level (1..4)
+         * @param {Array<1 | 2 | 3 | 4>} [resRisk] Display rules with this resolution risk level (1..4)
+         * @param {string} [text] Display rules with this text in their text fields
+         * @param {Array<1 | 2 | 3 | 4>} [totalRisk] Display rules with this total risk level (1..4)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        exportHitsList(options: any = {}): RequestArgs {
+        exportHitsList(category?: Array<1 | 2 | 3 | 4>, impact?: Array<1 | 2 | 3 | 4>, likelihood?: Array<1 | 2 | 3 | 4>, resRisk?: Array<1 | 2 | 3 | 4>, text?: string, totalRisk?: Array<1 | 2 | 3 | 4>, options: any = {}): RequestArgs {
             const localVarPath = `/export/hits/`;
             const localVarUrlObj = url.parse(localVarPath, true);
             let baseOptions;
@@ -1312,6 +1645,30 @@ export const ExportApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            if (category) {
+                localVarQueryParameter['category'] = category.join(COLLECTION_FORMATS["csv"]);
+            }
+
+            if (impact) {
+                localVarQueryParameter['impact'] = impact.join(COLLECTION_FORMATS["csv"]);
+            }
+
+            if (likelihood) {
+                localVarQueryParameter['likelihood'] = likelihood.join(COLLECTION_FORMATS["csv"]);
+            }
+
+            if (resRisk) {
+                localVarQueryParameter['res_risk'] = resRisk.join(COLLECTION_FORMATS["csv"]);
+            }
+
+            if (text !== undefined) {
+                localVarQueryParameter['text'] = text;
+            }
+
+            if (totalRisk) {
+                localVarQueryParameter['total_risk'] = totalRisk.join(COLLECTION_FORMATS["csv"]);
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -1324,10 +1681,16 @@ export const ExportApiAxiosParamCreator = function (configuration?: Configuratio
         },
         /**
          * Export the hosts and rules listing as CSV or JSON
+         * @param {Array<1 | 2 | 3 | 4>} [category] Display rules of this category (number)
+         * @param {Array<1 | 2 | 3 | 4>} [impact] Display rules of this impact level (1..4)
+         * @param {Array<1 | 2 | 3 | 4>} [likelihood] Display only rules of this likelihood level (1..4)
+         * @param {Array<1 | 2 | 3 | 4>} [resRisk] Display rules with this resolution risk level (1..4)
+         * @param {string} [text] Display rules with this text in their text fields
+         * @param {Array<1 | 2 | 3 | 4>} [totalRisk] Display rules with this total risk level (1..4)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        exportListCsv(options: any = {}): RequestArgs {
+        exportListCsv(category?: Array<1 | 2 | 3 | 4>, impact?: Array<1 | 2 | 3 | 4>, likelihood?: Array<1 | 2 | 3 | 4>, resRisk?: Array<1 | 2 | 3 | 4>, text?: string, totalRisk?: Array<1 | 2 | 3 | 4>, options: any = {}): RequestArgs {
             const localVarPath = `/export/hits.csv`;
             const localVarUrlObj = url.parse(localVarPath, true);
             let baseOptions;
@@ -1338,6 +1701,30 @@ export const ExportApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            if (category) {
+                localVarQueryParameter['category'] = category.join(COLLECTION_FORMATS["csv"]);
+            }
+
+            if (impact) {
+                localVarQueryParameter['impact'] = impact.join(COLLECTION_FORMATS["csv"]);
+            }
+
+            if (likelihood) {
+                localVarQueryParameter['likelihood'] = likelihood.join(COLLECTION_FORMATS["csv"]);
+            }
+
+            if (resRisk) {
+                localVarQueryParameter['res_risk'] = resRisk.join(COLLECTION_FORMATS["csv"]);
+            }
+
+            if (text !== undefined) {
+                localVarQueryParameter['text'] = text;
+            }
+
+            if (totalRisk) {
+                localVarQueryParameter['total_risk'] = totalRisk.join(COLLECTION_FORMATS["csv"]);
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -1350,10 +1737,16 @@ export const ExportApiAxiosParamCreator = function (configuration?: Configuratio
         },
         /**
          * Export the hosts and rules listing as CSV or JSON
+         * @param {Array<1 | 2 | 3 | 4>} [category] Display rules of this category (number)
+         * @param {Array<1 | 2 | 3 | 4>} [impact] Display rules of this impact level (1..4)
+         * @param {Array<1 | 2 | 3 | 4>} [likelihood] Display only rules of this likelihood level (1..4)
+         * @param {Array<1 | 2 | 3 | 4>} [resRisk] Display rules with this resolution risk level (1..4)
+         * @param {string} [text] Display rules with this text in their text fields
+         * @param {Array<1 | 2 | 3 | 4>} [totalRisk] Display rules with this total risk level (1..4)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        exportListJson(options: any = {}): RequestArgs {
+        exportListJson(category?: Array<1 | 2 | 3 | 4>, impact?: Array<1 | 2 | 3 | 4>, likelihood?: Array<1 | 2 | 3 | 4>, resRisk?: Array<1 | 2 | 3 | 4>, text?: string, totalRisk?: Array<1 | 2 | 3 | 4>, options: any = {}): RequestArgs {
             const localVarPath = `/export/hits.json`;
             const localVarUrlObj = url.parse(localVarPath, true);
             let baseOptions;
@@ -1363,6 +1756,30 @@ export const ExportApiAxiosParamCreator = function (configuration?: Configuratio
             const localVarRequestOptions = Object.assign({ method: 'GET' }, baseOptions, options);
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (category) {
+                localVarQueryParameter['category'] = category.join(COLLECTION_FORMATS["csv"]);
+            }
+
+            if (impact) {
+                localVarQueryParameter['impact'] = impact.join(COLLECTION_FORMATS["csv"]);
+            }
+
+            if (likelihood) {
+                localVarQueryParameter['likelihood'] = likelihood.join(COLLECTION_FORMATS["csv"]);
+            }
+
+            if (resRisk) {
+                localVarQueryParameter['res_risk'] = resRisk.join(COLLECTION_FORMATS["csv"]);
+            }
+
+            if (text !== undefined) {
+                localVarQueryParameter['text'] = text;
+            }
+
+            if (totalRisk) {
+                localVarQueryParameter['total_risk'] = totalRisk.join(COLLECTION_FORMATS["csv"]);
+            }
 
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
@@ -1384,12 +1801,18 @@ export const ExportApiAxiosParamCreator = function (configuration?: Configuratio
 export const ExportApiFp = function(configuration?: Configuration) {
     return {
         /**
-         * Get each host and all rules currently affecting it.  This will eventually require a request to the Inventory service to list the host name and Insights UUID (as opposed to the Inventory UUID which we store).  We also only present active, non-acked rules.
+         * Get each host and all rules currently affecting it.  This will eventually require a request to the Inventory service to list the host name and Insights UUID (as opposed to the Inventory UUID which we store).  We also only present active, non-acked (on an account AND host level) rules.
+         * @param {Array<1 | 2 | 3 | 4>} [category] Display rules of this category (number)
+         * @param {Array<1 | 2 | 3 | 4>} [impact] Display rules of this impact level (1..4)
+         * @param {Array<1 | 2 | 3 | 4>} [likelihood] Display only rules of this likelihood level (1..4)
+         * @param {Array<1 | 2 | 3 | 4>} [resRisk] Display rules with this resolution risk level (1..4)
+         * @param {string} [text] Display rules with this text in their text fields
+         * @param {Array<1 | 2 | 3 | 4>} [totalRisk] Display rules with this total risk level (1..4)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        exportHitsList(options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<InlineResponse2001>> {
-            const localVarAxiosArgs = ExportApiAxiosParamCreator(configuration).exportHitsList(options);
+        exportHitsList(category?: Array<1 | 2 | 3 | 4>, impact?: Array<1 | 2 | 3 | 4>, likelihood?: Array<1 | 2 | 3 | 4>, resRisk?: Array<1 | 2 | 3 | 4>, text?: string, totalRisk?: Array<1 | 2 | 3 | 4>, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<InlineResponse2001>> {
+            const localVarAxiosArgs = ExportApiAxiosParamCreator(configuration).exportHitsList(category, impact, likelihood, resRisk, text, totalRisk, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -1397,11 +1820,17 @@ export const ExportApiFp = function(configuration?: Configuration) {
         },
         /**
          * Export the hosts and rules listing as CSV or JSON
+         * @param {Array<1 | 2 | 3 | 4>} [category] Display rules of this category (number)
+         * @param {Array<1 | 2 | 3 | 4>} [impact] Display rules of this impact level (1..4)
+         * @param {Array<1 | 2 | 3 | 4>} [likelihood] Display only rules of this likelihood level (1..4)
+         * @param {Array<1 | 2 | 3 | 4>} [resRisk] Display rules with this resolution risk level (1..4)
+         * @param {string} [text] Display rules with this text in their text fields
+         * @param {Array<1 | 2 | 3 | 4>} [totalRisk] Display rules with this total risk level (1..4)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        exportListCsv(options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Response> {
-            const localVarAxiosArgs = ExportApiAxiosParamCreator(configuration).exportListCsv(options);
+        exportListCsv(category?: Array<1 | 2 | 3 | 4>, impact?: Array<1 | 2 | 3 | 4>, likelihood?: Array<1 | 2 | 3 | 4>, resRisk?: Array<1 | 2 | 3 | 4>, text?: string, totalRisk?: Array<1 | 2 | 3 | 4>, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Response> {
+            const localVarAxiosArgs = ExportApiAxiosParamCreator(configuration).exportListCsv(category, impact, likelihood, resRisk, text, totalRisk, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -1409,11 +1838,17 @@ export const ExportApiFp = function(configuration?: Configuration) {
         },
         /**
          * Export the hosts and rules listing as CSV or JSON
+         * @param {Array<1 | 2 | 3 | 4>} [category] Display rules of this category (number)
+         * @param {Array<1 | 2 | 3 | 4>} [impact] Display rules of this impact level (1..4)
+         * @param {Array<1 | 2 | 3 | 4>} [likelihood] Display only rules of this likelihood level (1..4)
+         * @param {Array<1 | 2 | 3 | 4>} [resRisk] Display rules with this resolution risk level (1..4)
+         * @param {string} [text] Display rules with this text in their text fields
+         * @param {Array<1 | 2 | 3 | 4>} [totalRisk] Display rules with this total risk level (1..4)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        exportListJson(options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<InlineResponse2001>> {
-            const localVarAxiosArgs = ExportApiAxiosParamCreator(configuration).exportListJson(options);
+        exportListJson(category?: Array<1 | 2 | 3 | 4>, impact?: Array<1 | 2 | 3 | 4>, likelihood?: Array<1 | 2 | 3 | 4>, resRisk?: Array<1 | 2 | 3 | 4>, text?: string, totalRisk?: Array<1 | 2 | 3 | 4>, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<InlineResponse2001>> {
+            const localVarAxiosArgs = ExportApiAxiosParamCreator(configuration).exportListJson(category, impact, likelihood, resRisk, text, totalRisk, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -1429,28 +1864,46 @@ export const ExportApiFp = function(configuration?: Configuration) {
 export const ExportApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     return {
         /**
-         * Get each host and all rules currently affecting it.  This will eventually require a request to the Inventory service to list the host name and Insights UUID (as opposed to the Inventory UUID which we store).  We also only present active, non-acked rules.
+         * Get each host and all rules currently affecting it.  This will eventually require a request to the Inventory service to list the host name and Insights UUID (as opposed to the Inventory UUID which we store).  We also only present active, non-acked (on an account AND host level) rules.
+         * @param {Array<1 | 2 | 3 | 4>} [category] Display rules of this category (number)
+         * @param {Array<1 | 2 | 3 | 4>} [impact] Display rules of this impact level (1..4)
+         * @param {Array<1 | 2 | 3 | 4>} [likelihood] Display only rules of this likelihood level (1..4)
+         * @param {Array<1 | 2 | 3 | 4>} [resRisk] Display rules with this resolution risk level (1..4)
+         * @param {string} [text] Display rules with this text in their text fields
+         * @param {Array<1 | 2 | 3 | 4>} [totalRisk] Display rules with this total risk level (1..4)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        exportHitsList(options?: any) {
-            return ExportApiFp(configuration).exportHitsList(options)(axios, basePath);
+        exportHitsList(category?: Array<1 | 2 | 3 | 4>, impact?: Array<1 | 2 | 3 | 4>, likelihood?: Array<1 | 2 | 3 | 4>, resRisk?: Array<1 | 2 | 3 | 4>, text?: string, totalRisk?: Array<1 | 2 | 3 | 4>, options?: any) {
+            return ExportApiFp(configuration).exportHitsList(category, impact, likelihood, resRisk, text, totalRisk, options)(axios, basePath);
         },
         /**
          * Export the hosts and rules listing as CSV or JSON
+         * @param {Array<1 | 2 | 3 | 4>} [category] Display rules of this category (number)
+         * @param {Array<1 | 2 | 3 | 4>} [impact] Display rules of this impact level (1..4)
+         * @param {Array<1 | 2 | 3 | 4>} [likelihood] Display only rules of this likelihood level (1..4)
+         * @param {Array<1 | 2 | 3 | 4>} [resRisk] Display rules with this resolution risk level (1..4)
+         * @param {string} [text] Display rules with this text in their text fields
+         * @param {Array<1 | 2 | 3 | 4>} [totalRisk] Display rules with this total risk level (1..4)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        exportListCsv(options?: any) {
-            return ExportApiFp(configuration).exportListCsv(options)(axios, basePath);
+        exportListCsv(category?: Array<1 | 2 | 3 | 4>, impact?: Array<1 | 2 | 3 | 4>, likelihood?: Array<1 | 2 | 3 | 4>, resRisk?: Array<1 | 2 | 3 | 4>, text?: string, totalRisk?: Array<1 | 2 | 3 | 4>, options?: any) {
+            return ExportApiFp(configuration).exportListCsv(category, impact, likelihood, resRisk, text, totalRisk, options)(axios, basePath);
         },
         /**
          * Export the hosts and rules listing as CSV or JSON
+         * @param {Array<1 | 2 | 3 | 4>} [category] Display rules of this category (number)
+         * @param {Array<1 | 2 | 3 | 4>} [impact] Display rules of this impact level (1..4)
+         * @param {Array<1 | 2 | 3 | 4>} [likelihood] Display only rules of this likelihood level (1..4)
+         * @param {Array<1 | 2 | 3 | 4>} [resRisk] Display rules with this resolution risk level (1..4)
+         * @param {string} [text] Display rules with this text in their text fields
+         * @param {Array<1 | 2 | 3 | 4>} [totalRisk] Display rules with this total risk level (1..4)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        exportListJson(options?: any) {
-            return ExportApiFp(configuration).exportListJson(options)(axios, basePath);
+        exportListJson(category?: Array<1 | 2 | 3 | 4>, impact?: Array<1 | 2 | 3 | 4>, likelihood?: Array<1 | 2 | 3 | 4>, resRisk?: Array<1 | 2 | 3 | 4>, text?: string, totalRisk?: Array<1 | 2 | 3 | 4>, options?: any) {
+            return ExportApiFp(configuration).exportListJson(category, impact, likelihood, resRisk, text, totalRisk, options)(axios, basePath);
         },
     };
 };
@@ -1463,33 +1916,454 @@ export const ExportApiFactory = function (configuration?: Configuration, basePat
  */
 export class ExportApi extends BaseAPI {
     /**
-     * Get each host and all rules currently affecting it.  This will eventually require a request to the Inventory service to list the host name and Insights UUID (as opposed to the Inventory UUID which we store).  We also only present active, non-acked rules.
+     * Get each host and all rules currently affecting it.  This will eventually require a request to the Inventory service to list the host name and Insights UUID (as opposed to the Inventory UUID which we store).  We also only present active, non-acked (on an account AND host level) rules.
+     * @param {Array<1 | 2 | 3 | 4>} [category] Display rules of this category (number)
+     * @param {Array<1 | 2 | 3 | 4>} [impact] Display rules of this impact level (1..4)
+     * @param {Array<1 | 2 | 3 | 4>} [likelihood] Display only rules of this likelihood level (1..4)
+     * @param {Array<1 | 2 | 3 | 4>} [resRisk] Display rules with this resolution risk level (1..4)
+     * @param {string} [text] Display rules with this text in their text fields
+     * @param {Array<1 | 2 | 3 | 4>} [totalRisk] Display rules with this total risk level (1..4)
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ExportApi
      */
-    public exportHitsList(options?: any) {
-        return ExportApiFp(this.configuration).exportHitsList(options)(this.axios, this.basePath);
+    public exportHitsList(category?: Array<1 | 2 | 3 | 4>, impact?: Array<1 | 2 | 3 | 4>, likelihood?: Array<1 | 2 | 3 | 4>, resRisk?: Array<1 | 2 | 3 | 4>, text?: string, totalRisk?: Array<1 | 2 | 3 | 4>, options?: any) {
+        return ExportApiFp(this.configuration).exportHitsList(category, impact, likelihood, resRisk, text, totalRisk, options)(this.axios, this.basePath);
     }
 
     /**
      * Export the hosts and rules listing as CSV or JSON
+     * @param {Array<1 | 2 | 3 | 4>} [category] Display rules of this category (number)
+     * @param {Array<1 | 2 | 3 | 4>} [impact] Display rules of this impact level (1..4)
+     * @param {Array<1 | 2 | 3 | 4>} [likelihood] Display only rules of this likelihood level (1..4)
+     * @param {Array<1 | 2 | 3 | 4>} [resRisk] Display rules with this resolution risk level (1..4)
+     * @param {string} [text] Display rules with this text in their text fields
+     * @param {Array<1 | 2 | 3 | 4>} [totalRisk] Display rules with this total risk level (1..4)
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ExportApi
      */
-    public exportListCsv(options?: any) {
-        return ExportApiFp(this.configuration).exportListCsv(options)(this.axios, this.basePath);
+    public exportListCsv(category?: Array<1 | 2 | 3 | 4>, impact?: Array<1 | 2 | 3 | 4>, likelihood?: Array<1 | 2 | 3 | 4>, resRisk?: Array<1 | 2 | 3 | 4>, text?: string, totalRisk?: Array<1 | 2 | 3 | 4>, options?: any) {
+        return ExportApiFp(this.configuration).exportListCsv(category, impact, likelihood, resRisk, text, totalRisk, options)(this.axios, this.basePath);
     }
 
     /**
      * Export the hosts and rules listing as CSV or JSON
+     * @param {Array<1 | 2 | 3 | 4>} [category] Display rules of this category (number)
+     * @param {Array<1 | 2 | 3 | 4>} [impact] Display rules of this impact level (1..4)
+     * @param {Array<1 | 2 | 3 | 4>} [likelihood] Display only rules of this likelihood level (1..4)
+     * @param {Array<1 | 2 | 3 | 4>} [resRisk] Display rules with this resolution risk level (1..4)
+     * @param {string} [text] Display rules with this text in their text fields
+     * @param {Array<1 | 2 | 3 | 4>} [totalRisk] Display rules with this total risk level (1..4)
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ExportApi
      */
-    public exportListJson(options?: any) {
-        return ExportApiFp(this.configuration).exportListJson(options)(this.axios, this.basePath);
+    public exportListJson(category?: Array<1 | 2 | 3 | 4>, impact?: Array<1 | 2 | 3 | 4>, likelihood?: Array<1 | 2 | 3 | 4>, resRisk?: Array<1 | 2 | 3 | 4>, text?: string, totalRisk?: Array<1 | 2 | 3 | 4>, options?: any) {
+        return ExportApiFp(this.configuration).exportListJson(category, impact, likelihood, resRisk, text, totalRisk, options)(this.axios, this.basePath);
+    }
+
+}
+
+/**
+ * HostackApi - axios parameter creator
+ * @export
+ */
+export const HostackApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * Return the new hostack.  If there's already an acknowledgement of this rule by this account for a system, then return that.  This does not take an 'id' number.
+         * @summary Add an acknowledgement for a rule, by rule ID, system, and account.
+         * @param {HostAckInput} hostAckInput
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        hostackCreate(hostAckInput: HostAckInput, options: any = {}): RequestArgs {
+            // verify required parameter 'hostAckInput' is not null or undefined
+            if (hostAckInput === null || hostAckInput === undefined) {
+                throw new RequiredError('hostAckInput','Required parameter hostAckInput was null or undefined when calling hostackCreate.');
+            }
+            const localVarPath = `/hostack/`;
+            const localVarUrlObj = url.parse(localVarPath, true);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = Object.assign({ method: 'POST' }, baseOptions, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+            const needsSerialization = (<any>"HostAckInput" !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(hostAckInput || {}) : (hostAckInput || "");
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Takes the hostack ID (given in the hostack list) as an identifier.
+         * @summary Delete an acknowledgement for a rule, for a system, for an account, by its ID.
+         * @param {number} id A unique integer value identifying this host ack.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        hostackDelete(id: number, options: any = {}): RequestArgs {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling hostackDelete.');
+            }
+            const localVarPath = `/hostack/{id}/`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            const localVarUrlObj = url.parse(localVarPath, true);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = Object.assign({ method: 'DELETE' }, baseOptions, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Hostacks are retrieved, edited and deleted by the 'id' field.
+         * @summary List host acks from this account for a system where the rule is active.
+         * @param {number} [limit] Number of results to return per page.
+         * @param {number} [offset] The initial index from which to return the results.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        hostackList(limit?: number, offset?: number, options: any = {}): RequestArgs {
+            const localVarPath = `/hostack/`;
+            const localVarUrlObj = url.parse(localVarPath, true);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = Object.assign({ method: 'GET' }, baseOptions, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * This view handles listing, retrieving, creating and deleting hostacks.
+         * @summary HostAcks acknowledge (and therefore hide) a rule from view in an account for a specific system.
+         * @param {number} id A unique integer value identifying this host ack.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        hostackRead(id: number, options: any = {}): RequestArgs {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling hostackRead.');
+            }
+            const localVarPath = `/hostack/{id}/`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            const localVarUrlObj = url.parse(localVarPath, true);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = Object.assign({ method: 'GET' }, baseOptions, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * The justification is taken from the request body.  The created_by field is taken from the username in the x-rh-identity field, and the updated_at field is set to the current time.
+         * @summary Update the justification for this host acknowledgement.
+         * @param {number} id A unique integer value identifying this host ack.
+         * @param {HostAckJustification} hostAckJustification
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        hostackUpdate(id: number, hostAckJustification: HostAckJustification, options: any = {}): RequestArgs {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling hostackUpdate.');
+            }
+            // verify required parameter 'hostAckJustification' is not null or undefined
+            if (hostAckJustification === null || hostAckJustification === undefined) {
+                throw new RequiredError('hostAckJustification','Required parameter hostAckJustification was null or undefined when calling hostackUpdate.');
+            }
+            const localVarPath = `/hostack/{id}/`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            const localVarUrlObj = url.parse(localVarPath, true);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = Object.assign({ method: 'PUT' }, baseOptions, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+            const needsSerialization = (<any>"HostAckJustification" !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(hostAckJustification || {}) : (hostAckJustification || "");
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * HostackApi - functional programming interface
+ * @export
+ */
+export const HostackApiFp = function(configuration?: Configuration) {
+    return {
+        /**
+         * Return the new hostack.  If there's already an acknowledgement of this rule by this account for a system, then return that.  This does not take an 'id' number.
+         * @summary Add an acknowledgement for a rule, by rule ID, system, and account.
+         * @param {HostAckInput} hostAckInput
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        hostackCreate(hostAckInput: HostAckInput, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<HostAck> {
+            const localVarAxiosArgs = HostackApiAxiosParamCreator(configuration).hostackCreate(hostAckInput, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * Takes the hostack ID (given in the hostack list) as an identifier.
+         * @summary Delete an acknowledgement for a rule, for a system, for an account, by its ID.
+         * @param {number} id A unique integer value identifying this host ack.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        hostackDelete(id: number, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Response> {
+            const localVarAxiosArgs = HostackApiAxiosParamCreator(configuration).hostackDelete(id, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * Hostacks are retrieved, edited and deleted by the 'id' field.
+         * @summary List host acks from this account for a system where the rule is active.
+         * @param {number} [limit] Number of results to return per page.
+         * @param {number} [offset] The initial index from which to return the results.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        hostackList(limit?: number, offset?: number, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2002> {
+            const localVarAxiosArgs = HostackApiAxiosParamCreator(configuration).hostackList(limit, offset, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * This view handles listing, retrieving, creating and deleting hostacks.
+         * @summary HostAcks acknowledge (and therefore hide) a rule from view in an account for a specific system.
+         * @param {number} id A unique integer value identifying this host ack.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        hostackRead(id: number, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<HostAck> {
+            const localVarAxiosArgs = HostackApiAxiosParamCreator(configuration).hostackRead(id, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * The justification is taken from the request body.  The created_by field is taken from the username in the x-rh-identity field, and the updated_at field is set to the current time.
+         * @summary Update the justification for this host acknowledgement.
+         * @param {number} id A unique integer value identifying this host ack.
+         * @param {HostAckJustification} hostAckJustification
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        hostackUpdate(id: number, hostAckJustification: HostAckJustification, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<HostAckJustification> {
+            const localVarAxiosArgs = HostackApiAxiosParamCreator(configuration).hostackUpdate(id, hostAckJustification, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
+                return axios.request(axiosRequestArgs);
+            };
+        },
+    }
+};
+
+/**
+ * HostackApi - factory interface
+ * @export
+ */
+export const HostackApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    return {
+        /**
+         * Return the new hostack.  If there's already an acknowledgement of this rule by this account for a system, then return that.  This does not take an 'id' number.
+         * @summary Add an acknowledgement for a rule, by rule ID, system, and account.
+         * @param {HostAckInput} hostAckInput
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        hostackCreate(hostAckInput: HostAckInput, options?: any) {
+            return HostackApiFp(configuration).hostackCreate(hostAckInput, options)(axios, basePath);
+        },
+        /**
+         * Takes the hostack ID (given in the hostack list) as an identifier.
+         * @summary Delete an acknowledgement for a rule, for a system, for an account, by its ID.
+         * @param {number} id A unique integer value identifying this host ack.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        hostackDelete(id: number, options?: any) {
+            return HostackApiFp(configuration).hostackDelete(id, options)(axios, basePath);
+        },
+        /**
+         * Hostacks are retrieved, edited and deleted by the 'id' field.
+         * @summary List host acks from this account for a system where the rule is active.
+         * @param {number} [limit] Number of results to return per page.
+         * @param {number} [offset] The initial index from which to return the results.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        hostackList(limit?: number, offset?: number, options?: any) {
+            return HostackApiFp(configuration).hostackList(limit, offset, options)(axios, basePath);
+        },
+        /**
+         * This view handles listing, retrieving, creating and deleting hostacks.
+         * @summary HostAcks acknowledge (and therefore hide) a rule from view in an account for a specific system.
+         * @param {number} id A unique integer value identifying this host ack.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        hostackRead(id: number, options?: any) {
+            return HostackApiFp(configuration).hostackRead(id, options)(axios, basePath);
+        },
+        /**
+         * The justification is taken from the request body.  The created_by field is taken from the username in the x-rh-identity field, and the updated_at field is set to the current time.
+         * @summary Update the justification for this host acknowledgement.
+         * @param {number} id A unique integer value identifying this host ack.
+         * @param {HostAckJustification} hostAckJustification
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        hostackUpdate(id: number, hostAckJustification: HostAckJustification, options?: any) {
+            return HostackApiFp(configuration).hostackUpdate(id, hostAckJustification, options)(axios, basePath);
+        },
+    };
+};
+
+/**
+ * HostackApi - object-oriented interface
+ * @export
+ * @class HostackApi
+ * @extends {BaseAPI}
+ */
+export class HostackApi extends BaseAPI {
+    /**
+     * Return the new hostack.  If there's already an acknowledgement of this rule by this account for a system, then return that.  This does not take an 'id' number.
+     * @summary Add an acknowledgement for a rule, by rule ID, system, and account.
+     * @param {HostAckInput} hostAckInput
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof HostackApi
+     */
+    public hostackCreate(hostAckInput: HostAckInput, options?: any) {
+        return HostackApiFp(this.configuration).hostackCreate(hostAckInput, options)(this.axios, this.basePath);
+    }
+
+    /**
+     * Takes the hostack ID (given in the hostack list) as an identifier.
+     * @summary Delete an acknowledgement for a rule, for a system, for an account, by its ID.
+     * @param {number} id A unique integer value identifying this host ack.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof HostackApi
+     */
+    public hostackDelete(id: number, options?: any) {
+        return HostackApiFp(this.configuration).hostackDelete(id, options)(this.axios, this.basePath);
+    }
+
+    /**
+     * Hostacks are retrieved, edited and deleted by the 'id' field.
+     * @summary List host acks from this account for a system where the rule is active.
+     * @param {number} [limit] Number of results to return per page.
+     * @param {number} [offset] The initial index from which to return the results.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof HostackApi
+     */
+    public hostackList(limit?: number, offset?: number, options?: any) {
+        return HostackApiFp(this.configuration).hostackList(limit, offset, options)(this.axios, this.basePath);
+    }
+
+    /**
+     * This view handles listing, retrieving, creating and deleting hostacks.
+     * @summary HostAcks acknowledge (and therefore hide) a rule from view in an account for a specific system.
+     * @param {number} id A unique integer value identifying this host ack.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof HostackApi
+     */
+    public hostackRead(id: number, options?: any) {
+        return HostackApiFp(this.configuration).hostackRead(id, options)(this.axios, this.basePath);
+    }
+
+    /**
+     * The justification is taken from the request body.  The created_by field is taken from the username in the x-rh-identity field, and the updated_at field is set to the current time.
+     * @summary Update the justification for this host acknowledgement.
+     * @param {number} id A unique integer value identifying this host ack.
+     * @param {HostAckJustification} hostAckJustification
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof HostackApi
+     */
+    public hostackUpdate(id: number, hostAckJustification: HostAckJustification, options?: any) {
+        return HostackApiFp(this.configuration).hostackUpdate(id, hostAckJustification, options)(this.axios, this.basePath);
     }
 
 }
@@ -1688,7 +2562,7 @@ export const RuleApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        ruleList(limit?: number, offset?: number, category?: Array<1 | 2 | 3 | 4>, hasTag?: Array<string>, impact?: Array<1 | 2 | 3 | 4>, impacting?: boolean, incident?: boolean, likelihood?: Array<1 | 2 | 3 | 4>, reportsShown?: boolean, resRisk?: Array<1 | 2 | 3 | 4>, sort?: 'category' | 'description' | 'impact' | 'impacted_count' | 'likelihood' | 'playbook_count' | 'publish_date' | 'rule_id' | 'total_risk' | 'resolution_risk' | '-category' | '-description' | '-impact' | '-impacted_count' | '-likelihood' | '-playbook_count' | '-publish_date' | '-rule_id' | '-total_risk' | '-resolution_risk', text?: string, topic?: string, totalRisk?: Array<1 | 2 | 3 | 4>, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2002> {
+        ruleList(limit?: number, offset?: number, category?: Array<1 | 2 | 3 | 4>, hasTag?: Array<string>, impact?: Array<1 | 2 | 3 | 4>, impacting?: boolean, incident?: boolean, likelihood?: Array<1 | 2 | 3 | 4>, reportsShown?: boolean, resRisk?: Array<1 | 2 | 3 | 4>, sort?: 'category' | 'description' | 'impact' | 'impacted_count' | 'likelihood' | 'playbook_count' | 'publish_date' | 'rule_id' | 'total_risk' | 'resolution_risk' | '-category' | '-description' | '-impact' | '-impacted_count' | '-likelihood' | '-playbook_count' | '-publish_date' | '-rule_id' | '-total_risk' | '-resolution_risk', text?: string, topic?: string, totalRisk?: Array<1 | 2 | 3 | 4>, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2003> {
             const localVarAxiosArgs = RuleApiAxiosParamCreator(configuration).ruleList(limit, offset, category, hasTag, impact, impacting, incident, likelihood, reportsShown, resRisk, sort, text, topic, totalRisk, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
@@ -1992,6 +2866,47 @@ export class RulecategoryApi extends BaseAPI {
 export const StatsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
+         * Simple time series of day and number of hits (per system-rule tuple) per day.
+         * @param {string} [start] Start date for statistics range
+         * @param {string} [end] End date for statistics range
+         * @param {'ever' | 'year' | 'quarter' | 'month' | 'week' | 'day'} [grain] Granularity for date queries
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        statsHitsSeries(start?: string, end?: string, grain?: 'ever' | 'year' | 'quarter' | 'month' | 'week' | 'day', options: any = {}): RequestArgs {
+            const localVarPath = `/stats/hits_series/`;
+            const localVarUrlObj = url.parse(localVarPath, true);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = Object.assign({ method: 'GET' }, baseOptions, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (start !== undefined) {
+                localVarQueryParameter['start'] = (start as any).toISOString();
+            }
+
+            if (end !== undefined) {
+                localVarQueryParameter['end'] = (end as any).toISOString();
+            }
+
+            if (grain !== undefined) {
+                localVarQueryParameter['grain'] = grain;
+            }
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Provide a simple list of URLs contained here.  Copied sort-of from the APIRootView's `get` method.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -2070,6 +2985,47 @@ export const StatsApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
+         * Simple time series of day and number of systems impacted by any rule
+         * @param {string} [start] Start date for statistics range
+         * @param {string} [end] End date for statistics range
+         * @param {'ever' | 'year' | 'quarter' | 'month' | 'week' | 'day'} [grain] Granularity for date queries
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        statsRulesHitSeries(start?: string, end?: string, grain?: 'ever' | 'year' | 'quarter' | 'month' | 'week' | 'day', options: any = {}): RequestArgs {
+            const localVarPath = `/stats/rules_hit_series/`;
+            const localVarUrlObj = url.parse(localVarPath, true);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = Object.assign({ method: 'GET' }, baseOptions, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (start !== undefined) {
+                localVarQueryParameter['start'] = (start as any).toISOString();
+            }
+
+            if (end !== undefined) {
+                localVarQueryParameter['end'] = (end as any).toISOString();
+            }
+
+            if (grain !== undefined) {
+                localVarQueryParameter['grain'] = grain;
+            }
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * View the statistics for this account.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -2095,6 +3051,88 @@ export const StatsApiAxiosParamCreator = function (configuration?: Configuration
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * Simple time series of day and number of systems impacted by any rule
+         * @param {string} [start] Start date for statistics range
+         * @param {string} [end] End date for statistics range
+         * @param {'ever' | 'year' | 'quarter' | 'month' | 'week' | 'day'} [grain] Granularity for date queries
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        statsSystemsImpactedSeries(start?: string, end?: string, grain?: 'ever' | 'year' | 'quarter' | 'month' | 'week' | 'day', options: any = {}): RequestArgs {
+            const localVarPath = `/stats/systems_impacted_series/`;
+            const localVarUrlObj = url.parse(localVarPath, true);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = Object.assign({ method: 'GET' }, baseOptions, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (start !== undefined) {
+                localVarQueryParameter['start'] = (start as any).toISOString();
+            }
+
+            if (end !== undefined) {
+                localVarQueryParameter['end'] = (end as any).toISOString();
+            }
+
+            if (grain !== undefined) {
+                localVarQueryParameter['grain'] = grain;
+            }
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Simple time series of day and number of systems having uploaded that day.
+         * @param {string} [start] Start date for statistics range
+         * @param {string} [end] End date for statistics range
+         * @param {'ever' | 'year' | 'quarter' | 'month' | 'week' | 'day'} [grain] Granularity for date queries
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        statsSystemsReportingSeries(start?: string, end?: string, grain?: 'ever' | 'year' | 'quarter' | 'month' | 'week' | 'day', options: any = {}): RequestArgs {
+            const localVarPath = `/stats/systems_reporting_series/`;
+            const localVarUrlObj = url.parse(localVarPath, true);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = Object.assign({ method: 'GET' }, baseOptions, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (start !== undefined) {
+                localVarQueryParameter['start'] = (start as any).toISOString();
+            }
+
+            if (end !== undefined) {
+                localVarQueryParameter['end'] = (end as any).toISOString();
+            }
+
+            if (grain !== undefined) {
+                localVarQueryParameter['grain'] = grain;
+            }
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -2104,6 +3142,21 @@ export const StatsApiAxiosParamCreator = function (configuration?: Configuration
  */
 export const StatsApiFp = function(configuration?: Configuration) {
     return {
+        /**
+         * Simple time series of day and number of hits (per system-rule tuple) per day.
+         * @param {string} [start] Start date for statistics range
+         * @param {string} [end] End date for statistics range
+         * @param {'ever' | 'year' | 'quarter' | 'month' | 'week' | 'day'} [grain] Granularity for date queries
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        statsHitsSeries(start?: string, end?: string, grain?: 'ever' | 'year' | 'quarter' | 'month' | 'week' | 'day', options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<StatTimeSeries>> {
+            const localVarAxiosArgs = StatsApiAxiosParamCreator(configuration).statsHitsSeries(start, end, grain, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
+                return axios.request(axiosRequestArgs);
+            };
+        },
         /**
          * Provide a simple list of URLs contained here.  Copied sort-of from the APIRootView's `get` method.
          * @param {*} [options] Override http request option.
@@ -2141,12 +3194,57 @@ export const StatsApiFp = function(configuration?: Configuration) {
             };
         },
         /**
+         * Simple time series of day and number of systems impacted by any rule
+         * @param {string} [start] Start date for statistics range
+         * @param {string} [end] End date for statistics range
+         * @param {'ever' | 'year' | 'quarter' | 'month' | 'week' | 'day'} [grain] Granularity for date queries
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        statsRulesHitSeries(start?: string, end?: string, grain?: 'ever' | 'year' | 'quarter' | 'month' | 'week' | 'day', options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<StatTimeSeries>> {
+            const localVarAxiosArgs = StatsApiAxiosParamCreator(configuration).statsRulesHitSeries(start, end, grain, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
          * View the statistics for this account.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         statsSystems(options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<SystemsStats> {
             const localVarAxiosArgs = StatsApiAxiosParamCreator(configuration).statsSystems(options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * Simple time series of day and number of systems impacted by any rule
+         * @param {string} [start] Start date for statistics range
+         * @param {string} [end] End date for statistics range
+         * @param {'ever' | 'year' | 'quarter' | 'month' | 'week' | 'day'} [grain] Granularity for date queries
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        statsSystemsImpactedSeries(start?: string, end?: string, grain?: 'ever' | 'year' | 'quarter' | 'month' | 'week' | 'day', options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<StatTimeSeries>> {
+            const localVarAxiosArgs = StatsApiAxiosParamCreator(configuration).statsSystemsImpactedSeries(start, end, grain, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * Simple time series of day and number of systems having uploaded that day.
+         * @param {string} [start] Start date for statistics range
+         * @param {string} [end] End date for statistics range
+         * @param {'ever' | 'year' | 'quarter' | 'month' | 'week' | 'day'} [grain] Granularity for date queries
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        statsSystemsReportingSeries(start?: string, end?: string, grain?: 'ever' | 'year' | 'quarter' | 'month' | 'week' | 'day', options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<StatTimeSeries>> {
+            const localVarAxiosArgs = StatsApiAxiosParamCreator(configuration).statsSystemsReportingSeries(start, end, grain, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -2161,6 +3259,17 @@ export const StatsApiFp = function(configuration?: Configuration) {
  */
 export const StatsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     return {
+        /**
+         * Simple time series of day and number of hits (per system-rule tuple) per day.
+         * @param {string} [start] Start date for statistics range
+         * @param {string} [end] End date for statistics range
+         * @param {'ever' | 'year' | 'quarter' | 'month' | 'week' | 'day'} [grain] Granularity for date queries
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        statsHitsSeries(start?: string, end?: string, grain?: 'ever' | 'year' | 'quarter' | 'month' | 'week' | 'day', options?: any) {
+            return StatsApiFp(configuration).statsHitsSeries(start, end, grain, options)(axios, basePath);
+        },
         /**
          * Provide a simple list of URLs contained here.  Copied sort-of from the APIRootView's `get` method.
          * @param {*} [options] Override http request option.
@@ -2186,12 +3295,45 @@ export const StatsApiFactory = function (configuration?: Configuration, basePath
             return StatsApiFp(configuration).statsRules(options)(axios, basePath);
         },
         /**
+         * Simple time series of day and number of systems impacted by any rule
+         * @param {string} [start] Start date for statistics range
+         * @param {string} [end] End date for statistics range
+         * @param {'ever' | 'year' | 'quarter' | 'month' | 'week' | 'day'} [grain] Granularity for date queries
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        statsRulesHitSeries(start?: string, end?: string, grain?: 'ever' | 'year' | 'quarter' | 'month' | 'week' | 'day', options?: any) {
+            return StatsApiFp(configuration).statsRulesHitSeries(start, end, grain, options)(axios, basePath);
+        },
+        /**
          * View the statistics for this account.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
         statsSystems(options?: any) {
             return StatsApiFp(configuration).statsSystems(options)(axios, basePath);
+        },
+        /**
+         * Simple time series of day and number of systems impacted by any rule
+         * @param {string} [start] Start date for statistics range
+         * @param {string} [end] End date for statistics range
+         * @param {'ever' | 'year' | 'quarter' | 'month' | 'week' | 'day'} [grain] Granularity for date queries
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        statsSystemsImpactedSeries(start?: string, end?: string, grain?: 'ever' | 'year' | 'quarter' | 'month' | 'week' | 'day', options?: any) {
+            return StatsApiFp(configuration).statsSystemsImpactedSeries(start, end, grain, options)(axios, basePath);
+        },
+        /**
+         * Simple time series of day and number of systems having uploaded that day.
+         * @param {string} [start] Start date for statistics range
+         * @param {string} [end] End date for statistics range
+         * @param {'ever' | 'year' | 'quarter' | 'month' | 'week' | 'day'} [grain] Granularity for date queries
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        statsSystemsReportingSeries(start?: string, end?: string, grain?: 'ever' | 'year' | 'quarter' | 'month' | 'week' | 'day', options?: any) {
+            return StatsApiFp(configuration).statsSystemsReportingSeries(start, end, grain, options)(axios, basePath);
         },
     };
 };
@@ -2203,6 +3345,19 @@ export const StatsApiFactory = function (configuration?: Configuration, basePath
  * @extends {BaseAPI}
  */
 export class StatsApi extends BaseAPI {
+    /**
+     * Simple time series of day and number of hits (per system-rule tuple) per day.
+     * @param {string} [start] Start date for statistics range
+     * @param {string} [end] End date for statistics range
+     * @param {'ever' | 'year' | 'quarter' | 'month' | 'week' | 'day'} [grain] Granularity for date queries
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof StatsApi
+     */
+    public statsHitsSeries(start?: string, end?: string, grain?: 'ever' | 'year' | 'quarter' | 'month' | 'week' | 'day', options?: any) {
+        return StatsApiFp(this.configuration).statsHitsSeries(start, end, grain, options)(this.axios, this.basePath);
+    }
+
     /**
      * Provide a simple list of URLs contained here.  Copied sort-of from the APIRootView's `get` method.
      * @param {*} [options] Override http request option.
@@ -2234,6 +3389,19 @@ export class StatsApi extends BaseAPI {
     }
 
     /**
+     * Simple time series of day and number of systems impacted by any rule
+     * @param {string} [start] Start date for statistics range
+     * @param {string} [end] End date for statistics range
+     * @param {'ever' | 'year' | 'quarter' | 'month' | 'week' | 'day'} [grain] Granularity for date queries
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof StatsApi
+     */
+    public statsRulesHitSeries(start?: string, end?: string, grain?: 'ever' | 'year' | 'quarter' | 'month' | 'week' | 'day', options?: any) {
+        return StatsApiFp(this.configuration).statsRulesHitSeries(start, end, grain, options)(this.axios, this.basePath);
+    }
+
+    /**
      * View the statistics for this account.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -2241,6 +3409,32 @@ export class StatsApi extends BaseAPI {
      */
     public statsSystems(options?: any) {
         return StatsApiFp(this.configuration).statsSystems(options)(this.axios, this.basePath);
+    }
+
+    /**
+     * Simple time series of day and number of systems impacted by any rule
+     * @param {string} [start] Start date for statistics range
+     * @param {string} [end] End date for statistics range
+     * @param {'ever' | 'year' | 'quarter' | 'month' | 'week' | 'day'} [grain] Granularity for date queries
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof StatsApi
+     */
+    public statsSystemsImpactedSeries(start?: string, end?: string, grain?: 'ever' | 'year' | 'quarter' | 'month' | 'week' | 'day', options?: any) {
+        return StatsApiFp(this.configuration).statsSystemsImpactedSeries(start, end, grain, options)(this.axios, this.basePath);
+    }
+
+    /**
+     * Simple time series of day and number of systems having uploaded that day.
+     * @param {string} [start] Start date for statistics range
+     * @param {string} [end] End date for statistics range
+     * @param {'ever' | 'year' | 'quarter' | 'month' | 'week' | 'day'} [grain] Granularity for date queries
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof StatsApi
+     */
+    public statsSystemsReportingSeries(start?: string, end?: string, grain?: 'ever' | 'year' | 'quarter' | 'month' | 'week' | 'day', options?: any) {
+        return StatsApiFp(this.configuration).statsSystemsReportingSeries(start, end, grain, options)(this.axios, this.basePath);
     }
 
 }
@@ -2251,6 +3445,84 @@ export class StatsApi extends BaseAPI {
  */
 export const SystemApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
+        /**
+         * Returns systems with their hit count and last upload time.
+         * @param {number} [limit] Number of results to return per page.
+         * @param {number} [offset] The initial index from which to return the results.
+         * @param {'hits' | 'last_seen' | 'display_name' | '-hits' | '-last_seen' | '-display_name'} [sort] Order by this field
+         * @param {string} [displayName] Display systems with this text in their display_name
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        systemList(limit?: number, offset?: number, sort?: 'hits' | 'last_seen' | 'display_name' | '-hits' | '-last_seen' | '-display_name', displayName?: string, options: any = {}): RequestArgs {
+            const localVarPath = `/system/`;
+            const localVarUrlObj = url.parse(localVarPath, true);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = Object.assign({ method: 'GET' }, baseOptions, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+            if (sort !== undefined) {
+                localVarQueryParameter['sort'] = sort;
+            }
+
+            if (displayName !== undefined) {
+                localVarQueryParameter['display_name'] = displayName;
+            }
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * List systems, or retrieve a system by UUID.
+         * @param {string} uuid The system&#39;s Host ID in the Inventory
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        systemRead(uuid: string, options: any = {}): RequestArgs {
+            // verify required parameter 'uuid' is not null or undefined
+            if (uuid === null || uuid === undefined) {
+                throw new RequiredError('uuid','Required parameter uuid was null or undefined when calling systemRead.');
+            }
+            const localVarPath = `/system/{uuid}/`
+                .replace(`{${"uuid"}}`, encodeURIComponent(String(uuid)));
+            const localVarUrlObj = url.parse(localVarPath, true);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = Object.assign({ method: 'GET' }, baseOptions, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
         /**
          * Returns the list of latest reports for an Inventory Host ID that:  * are in the user's account  * have an active, not-deleted rule  * where the rule has not been acked by this account  If the host ID is not found, return an empty list.
          * @param {string} uuid The system&#39;s Host ID in the Inventory
@@ -2293,6 +3565,35 @@ export const SystemApiAxiosParamCreator = function (configuration?: Configuratio
 export const SystemApiFp = function(configuration?: Configuration) {
     return {
         /**
+         * Returns systems with their hit count and last upload time.
+         * @param {number} [limit] Number of results to return per page.
+         * @param {number} [offset] The initial index from which to return the results.
+         * @param {'hits' | 'last_seen' | 'display_name' | '-hits' | '-last_seen' | '-display_name'} [sort] Order by this field
+         * @param {string} [displayName] Display systems with this text in their display_name
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        systemList(limit?: number, offset?: number, sort?: 'hits' | 'last_seen' | 'display_name' | '-hits' | '-last_seen' | '-display_name', displayName?: string, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse2004> {
+            const localVarAxiosArgs = SystemApiAxiosParamCreator(configuration).systemList(limit, offset, sort, displayName, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * List systems, or retrieve a system by UUID.
+         * @param {string} uuid The system&#39;s Host ID in the Inventory
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        systemRead(uuid: string, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<System> {
+            const localVarAxiosArgs = SystemApiAxiosParamCreator(configuration).systemRead(uuid, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
          * Returns the list of latest reports for an Inventory Host ID that:  * are in the user's account  * have an active, not-deleted rule  * where the rule has not been acked by this account  If the host ID is not found, return an empty list.
          * @param {string} uuid The system&#39;s Host ID in the Inventory
          * @param {*} [options] Override http request option.
@@ -2315,6 +3616,27 @@ export const SystemApiFp = function(configuration?: Configuration) {
 export const SystemApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     return {
         /**
+         * Returns systems with their hit count and last upload time.
+         * @param {number} [limit] Number of results to return per page.
+         * @param {number} [offset] The initial index from which to return the results.
+         * @param {'hits' | 'last_seen' | 'display_name' | '-hits' | '-last_seen' | '-display_name'} [sort] Order by this field
+         * @param {string} [displayName] Display systems with this text in their display_name
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        systemList(limit?: number, offset?: number, sort?: 'hits' | 'last_seen' | 'display_name' | '-hits' | '-last_seen' | '-display_name', displayName?: string, options?: any) {
+            return SystemApiFp(configuration).systemList(limit, offset, sort, displayName, options)(axios, basePath);
+        },
+        /**
+         * List systems, or retrieve a system by UUID.
+         * @param {string} uuid The system&#39;s Host ID in the Inventory
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        systemRead(uuid: string, options?: any) {
+            return SystemApiFp(configuration).systemRead(uuid, options)(axios, basePath);
+        },
+        /**
          * Returns the list of latest reports for an Inventory Host ID that:  * are in the user's account  * have an active, not-deleted rule  * where the rule has not been acked by this account  If the host ID is not found, return an empty list.
          * @param {string} uuid The system&#39;s Host ID in the Inventory
          * @param {*} [options] Override http request option.
@@ -2333,6 +3655,31 @@ export const SystemApiFactory = function (configuration?: Configuration, basePat
  * @extends {BaseAPI}
  */
 export class SystemApi extends BaseAPI {
+    /**
+     * Returns systems with their hit count and last upload time.
+     * @param {number} [limit] Number of results to return per page.
+     * @param {number} [offset] The initial index from which to return the results.
+     * @param {'hits' | 'last_seen' | 'display_name' | '-hits' | '-last_seen' | '-display_name'} [sort] Order by this field
+     * @param {string} [displayName] Display systems with this text in their display_name
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SystemApi
+     */
+    public systemList(limit?: number, offset?: number, sort?: 'hits' | 'last_seen' | 'display_name' | '-hits' | '-last_seen' | '-display_name', displayName?: string, options?: any) {
+        return SystemApiFp(this.configuration).systemList(limit, offset, sort, displayName, options)(this.axios, this.basePath);
+    }
+
+    /**
+     * List systems, or retrieve a system by UUID.
+     * @param {string} uuid The system&#39;s Host ID in the Inventory
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SystemApi
+     */
+    public systemRead(uuid: string, options?: any) {
+        return SystemApiFp(this.configuration).systemRead(uuid, options)(this.axios, this.basePath);
+    }
+
     /**
      * Returns the list of latest reports for an Inventory Host ID that:  * are in the user's account  * have an active, not-deleted rule  * where the rule has not been acked by this account  If the host ID is not found, return an empty list.
      * @param {string} uuid The system&#39;s Host ID in the Inventory
@@ -2510,11 +3857,13 @@ export class SystemtypeApi extends BaseAPI {
 export const TopicApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Rules have topics, set by Insights administrators.  This is a view of the topics available, along with the rules and systems to which they apply.
+         * Normally this only shows enabled topics, but if the 'show_disabled' parameter is set to True then this will show disabled topics as well.
+         * @summary List the rule topics and their impacted systems counts.
+         * @param {boolean} [showDisabled] Display topics that are disabled as well as enabled
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        topicList(options: any = {}): RequestArgs {
+        topicList(showDisabled?: boolean, options: any = {}): RequestArgs {
             const localVarPath = `/topic/`;
             const localVarUrlObj = url.parse(localVarPath, true);
             let baseOptions;
@@ -2524,6 +3873,10 @@ export const TopicApiAxiosParamCreator = function (configuration?: Configuration
             const localVarRequestOptions = Object.assign({ method: 'GET' }, baseOptions, options);
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (showDisabled !== undefined) {
+                localVarQueryParameter['show_disabled'] = showDisabled;
+            }
 
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
@@ -2568,7 +3921,8 @@ export const TopicApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * View, add to or delete from the rules in this topic
+         * This will be deleted in the future.
+         * @summary View, add to or delete from the rules in this topic
          * @param {string} slug Rule topic slug
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -2600,7 +3954,8 @@ export const TopicApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * Lists the available rules that share a tag with this topic.  Some of these may also be in the given topic - can we show that?
+         * Some of these may also be in the given topic - can we show that?  This will be deprecated at some point because we only care about the tag link.
+         * @summary Lists the available rules that share a tag with this topic.
          * @param {string} slug Rule topic slug
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -2632,7 +3987,8 @@ export const TopicApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * List all systems affected by this rule topic.
+         * Systems are just listed by their UUID.
+         * @summary List all systems affected by this rule topic.
          * @param {string} slug Rule topic slug
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -2664,7 +4020,8 @@ export const TopicApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * View, add to or delete from the tags in a topic.
+         * This is the main way of linking rules to a topic.
+         * @summary View, add to or delete from the tags in a topic.
          * @param {string} slug Rule topic slug
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -2705,12 +4062,14 @@ export const TopicApiAxiosParamCreator = function (configuration?: Configuration
 export const TopicApiFp = function(configuration?: Configuration) {
     return {
         /**
-         * Rules have topics, set by Insights administrators.  This is a view of the topics available, along with the rules and systems to which they apply.
+         * Normally this only shows enabled topics, but if the 'show_disabled' parameter is set to True then this will show disabled topics as well.
+         * @summary List the rule topics and their impacted systems counts.
+         * @param {boolean} [showDisabled] Display topics that are disabled as well as enabled
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        topicList(options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<TopicWithRules>> {
-            const localVarAxiosArgs = TopicApiAxiosParamCreator(configuration).topicList(options);
+        topicList(showDisabled?: boolean, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<TopicWithRules>> {
+            const localVarAxiosArgs = TopicApiAxiosParamCreator(configuration).topicList(showDisabled, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -2730,7 +4089,8 @@ export const TopicApiFp = function(configuration?: Configuration) {
             };
         },
         /**
-         * View, add to or delete from the rules in this topic
+         * This will be deleted in the future.
+         * @summary View, add to or delete from the rules in this topic
          * @param {string} slug Rule topic slug
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -2743,7 +4103,8 @@ export const TopicApiFp = function(configuration?: Configuration) {
             };
         },
         /**
-         * Lists the available rules that share a tag with this topic.  Some of these may also be in the given topic - can we show that?
+         * Some of these may also be in the given topic - can we show that?  This will be deprecated at some point because we only care about the tag link.
+         * @summary Lists the available rules that share a tag with this topic.
          * @param {string} slug Rule topic slug
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -2756,7 +4117,8 @@ export const TopicApiFp = function(configuration?: Configuration) {
             };
         },
         /**
-         * List all systems affected by this rule topic.
+         * Systems are just listed by their UUID.
+         * @summary List all systems affected by this rule topic.
          * @param {string} slug Rule topic slug
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -2769,7 +4131,8 @@ export const TopicApiFp = function(configuration?: Configuration) {
             };
         },
         /**
-         * View, add to or delete from the tags in a topic.
+         * This is the main way of linking rules to a topic.
+         * @summary View, add to or delete from the tags in a topic.
          * @param {string} slug Rule topic slug
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -2791,12 +4154,14 @@ export const TopicApiFp = function(configuration?: Configuration) {
 export const TopicApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     return {
         /**
-         * Rules have topics, set by Insights administrators.  This is a view of the topics available, along with the rules and systems to which they apply.
+         * Normally this only shows enabled topics, but if the 'show_disabled' parameter is set to True then this will show disabled topics as well.
+         * @summary List the rule topics and their impacted systems counts.
+         * @param {boolean} [showDisabled] Display topics that are disabled as well as enabled
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        topicList(options?: any) {
-            return TopicApiFp(configuration).topicList(options)(axios, basePath);
+        topicList(showDisabled?: boolean, options?: any) {
+            return TopicApiFp(configuration).topicList(showDisabled, options)(axios, basePath);
         },
         /**
          * Rules have topics, set by Insights administrators.  This is a view of the topics available, along with the rules and systems to which they apply.
@@ -2808,7 +4173,8 @@ export const TopicApiFactory = function (configuration?: Configuration, basePath
             return TopicApiFp(configuration).topicRead(slug, options)(axios, basePath);
         },
         /**
-         * View, add to or delete from the rules in this topic
+         * This will be deleted in the future.
+         * @summary View, add to or delete from the rules in this topic
          * @param {string} slug Rule topic slug
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -2817,7 +4183,8 @@ export const TopicApiFactory = function (configuration?: Configuration, basePath
             return TopicApiFp(configuration).topicRulesRead(slug, options)(axios, basePath);
         },
         /**
-         * Lists the available rules that share a tag with this topic.  Some of these may also be in the given topic - can we show that?
+         * Some of these may also be in the given topic - can we show that?  This will be deprecated at some point because we only care about the tag link.
+         * @summary Lists the available rules that share a tag with this topic.
          * @param {string} slug Rule topic slug
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -2826,7 +4193,8 @@ export const TopicApiFactory = function (configuration?: Configuration, basePath
             return TopicApiFp(configuration).topicRulesWithTags(slug, options)(axios, basePath);
         },
         /**
-         * List all systems affected by this rule topic.
+         * Systems are just listed by their UUID.
+         * @summary List all systems affected by this rule topic.
          * @param {string} slug Rule topic slug
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -2835,7 +4203,8 @@ export const TopicApiFactory = function (configuration?: Configuration, basePath
             return TopicApiFp(configuration).topicSystems(slug, options)(axios, basePath);
         },
         /**
-         * View, add to or delete from the tags in a topic.
+         * This is the main way of linking rules to a topic.
+         * @summary View, add to or delete from the tags in a topic.
          * @param {string} slug Rule topic slug
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -2854,13 +4223,15 @@ export const TopicApiFactory = function (configuration?: Configuration, basePath
  */
 export class TopicApi extends BaseAPI {
     /**
-     * Rules have topics, set by Insights administrators.  This is a view of the topics available, along with the rules and systems to which they apply.
+     * Normally this only shows enabled topics, but if the 'show_disabled' parameter is set to True then this will show disabled topics as well.
+     * @summary List the rule topics and their impacted systems counts.
+     * @param {boolean} [showDisabled] Display topics that are disabled as well as enabled
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof TopicApi
      */
-    public topicList(options?: any) {
-        return TopicApiFp(this.configuration).topicList(options)(this.axios, this.basePath);
+    public topicList(showDisabled?: boolean, options?: any) {
+        return TopicApiFp(this.configuration).topicList(showDisabled, options)(this.axios, this.basePath);
     }
 
     /**
@@ -2875,7 +4246,8 @@ export class TopicApi extends BaseAPI {
     }
 
     /**
-     * View, add to or delete from the rules in this topic
+     * This will be deleted in the future.
+     * @summary View, add to or delete from the rules in this topic
      * @param {string} slug Rule topic slug
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -2886,7 +4258,8 @@ export class TopicApi extends BaseAPI {
     }
 
     /**
-     * Lists the available rules that share a tag with this topic.  Some of these may also be in the given topic - can we show that?
+     * Some of these may also be in the given topic - can we show that?  This will be deprecated at some point because we only care about the tag link.
+     * @summary Lists the available rules that share a tag with this topic.
      * @param {string} slug Rule topic slug
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -2897,7 +4270,8 @@ export class TopicApi extends BaseAPI {
     }
 
     /**
-     * List all systems affected by this rule topic.
+     * Systems are just listed by their UUID.
+     * @summary List all systems affected by this rule topic.
      * @param {string} slug Rule topic slug
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -2908,7 +4282,8 @@ export class TopicApi extends BaseAPI {
     }
 
     /**
-     * View, add to or delete from the tags in a topic.
+     * This is the main way of linking rules to a topic.
+     * @summary View, add to or delete from the tags in a topic.
      * @param {string} slug Rule topic slug
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

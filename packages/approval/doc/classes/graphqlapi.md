@@ -102,7 +102,7 @@ ___
 
 ▸ **postGraphql**(graphqlIn: *[GraphqlIn](../interfaces/graphqlin.md)*, options?: *`any`*): `AxiosPromise`<[GraphqlOut](../interfaces/graphqlout.md)>
 
-*Defined in [api.ts:1197](https://github.com/RedHatInsights/javascript-clients/blob/master/packages/approval/api.ts#L1197)*
+*Defined in [api.ts:1025](https://github.com/RedHatInsights/javascript-clients/blob/master/packages/approval/api.ts#L1025)*
 
 Performs a GraphQL Query
 

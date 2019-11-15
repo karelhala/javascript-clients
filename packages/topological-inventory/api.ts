@@ -72,6 +72,20 @@ export class RequiredError extends Error {
 /**
  *
  * @export
+ * @interface AppliedInventoriesParametersServicePlan
+ */
+export interface AppliedInventoriesParametersServicePlan {
+    /**
+     * The provider specific parameters needed to compute list of used service inventories
+     * @type {any}
+     * @memberof AppliedInventoriesParametersServicePlan
+     */
+    serviceParameters?: any;
+}
+
+/**
+ *
+ * @export
  * @interface AvailabilitiesCollection
  */
 export interface AvailabilitiesCollection {
@@ -292,13 +306,13 @@ export interface CollectionLinks {
      * @type {string}
      * @memberof CollectionLinks
      */
-    prev?: string;
+    next?: string;
     /**
      *
      * @type {string}
      * @memberof CollectionLinks
      */
-    next?: string;
+    prev?: string;
 }
 
 /**
@@ -318,13 +332,13 @@ export interface CollectionMetadata {
      * @type {number}
      * @memberof CollectionMetadata
      */
-    offset?: number;
+    limit?: number;
     /**
      *
      * @type {number}
      * @memberof CollectionMetadata
      */
-    limit?: number;
+    offset?: number;
 }
 
 /**
@@ -1292,6 +1306,40 @@ export interface DatastoresCollection {
 /**
  *
  * @export
+ * @interface ErrorNotFound
+ */
+export interface ErrorNotFound {
+    /**
+     *
+     * @type {Array<ErrorNotFoundErrors>}
+     * @memberof ErrorNotFound
+     */
+    errors?: Array<ErrorNotFoundErrors>;
+}
+
+/**
+ *
+ * @export
+ * @interface ErrorNotFoundErrors
+ */
+export interface ErrorNotFoundErrors {
+    /**
+     *
+     * @type {number}
+     * @memberof ErrorNotFoundErrors
+     */
+    status?: number;
+    /**
+     *
+     * @type {string}
+     * @memberof ErrorNotFoundErrors
+     */
+    detail?: string;
+}
+
+/**
+ *
+ * @export
  * @interface Flavor
  */
 export interface Flavor {
@@ -1399,6 +1447,32 @@ export interface FlavorsCollection {
      * @memberof FlavorsCollection
      */
     data?: Array<Flavor>;
+}
+
+/**
+ *
+ * @export
+ * @interface GraphQLRequest
+ */
+export interface GraphQLRequest {
+    /**
+     * The GraphQL query
+     * @type {string}
+     * @memberof GraphQLRequest
+     */
+    query: string;
+    /**
+     * If the Query contains several named operations, the operationName controls which one should be executed
+     * @type {string}
+     * @memberof GraphQLRequest
+     */
+    operationName?: string;
+    /**
+     * Optional Query variables
+     * @type {any}
+     * @memberof GraphQLRequest
+     */
+    variables?: any | null;
 }
 
 /**
@@ -1561,32 +1635,6 @@ export interface HostsCollection {
      * @memberof HostsCollection
      */
     data?: Array<Host>;
-}
-
-/**
- *
- * @export
- * @interface InlineObject
- */
-export interface InlineObject {
-    /**
-     * The GraphQL query
-     * @type {string}
-     * @memberof InlineObject
-     */
-    query: string;
-    /**
-     * If the Query contains several named operations, the operationName controls which one should be executed
-     * @type {string}
-     * @memberof InlineObject
-     */
-    operationName?: string;
-    /**
-     * Optional Query variables
-     * @type {any}
-     * @memberof InlineObject
-     */
-    variables?: any;
 }
 
 /**
@@ -2120,19 +2168,45 @@ export interface OrchestrationStacksCollection {
 /**
  *
  * @export
- * @interface OrderParameters
+ * @interface OrderParametersServiceOffering
  */
-export interface OrderParameters {
+export interface OrderParametersServiceOffering {
     /**
      * JSON object with provisioning parameters
      * @type {any}
-     * @memberof OrderParameters
+     * @memberof OrderParametersServiceOffering
      */
     serviceParameters?: any;
     /**
      * The provider specific parameters needed to provision this service. This might include namespaces, special keys
      * @type {any}
-     * @memberof OrderParameters
+     * @memberof OrderParametersServiceOffering
+     */
+    providerControlParameters?: any;
+    /**
+     * ID of the resource
+     * @type {string}
+     * @memberof OrderParametersServiceOffering
+     */
+    servicePlanId?: string;
+}
+
+/**
+ *
+ * @export
+ * @interface OrderParametersServicePlan
+ */
+export interface OrderParametersServicePlan {
+    /**
+     * JSON object with provisioning parameters
+     * @type {any}
+     * @memberof OrderParametersServicePlan
+     */
+    serviceParameters?: any;
+    /**
+     * The provider specific parameters needed to provision this service. This might include namespaces, special keys
+     * @type {any}
+     * @memberof OrderParametersServicePlan
      */
     providerControlParameters?: any;
 }
@@ -2320,6 +2394,18 @@ export interface ServiceInstance {
      * @type {string}
      * @memberof ServiceInstance
      */
+    rootServiceInstanceId?: string;
+    /**
+     * ID of the resource
+     * @type {string}
+     * @memberof ServiceInstance
+     */
+    serviceInventoryId?: string;
+    /**
+     * ID of the resource
+     * @type {string}
+     * @memberof ServiceInstance
+     */
     serviceOfferingId?: string;
     /**
      * ID of the resource
@@ -2374,6 +2460,124 @@ export interface ServiceInstance {
 /**
  *
  * @export
+ * @interface ServiceInstanceNode
+ */
+export interface ServiceInstanceNode {
+    /**
+     *
+     * @type {Date}
+     * @memberof ServiceInstanceNode
+     */
+    archivedAt?: Date;
+    /**
+     *
+     * @type {Date}
+     * @memberof ServiceInstanceNode
+     */
+    createdAt?: Date;
+    /**
+     *
+     * @type {any}
+     * @memberof ServiceInstanceNode
+     */
+    extra?: any;
+    /**
+     * ID of the resource
+     * @type {string}
+     * @memberof ServiceInstanceNode
+     */
+    id?: string;
+    /**
+     *
+     * @type {Date}
+     * @memberof ServiceInstanceNode
+     */
+    lastSeenAt?: Date;
+    /**
+     *
+     * @type {string}
+     * @memberof ServiceInstanceNode
+     */
+    name?: string;
+    /**
+     * ID of the resource
+     * @type {string}
+     * @memberof ServiceInstanceNode
+     */
+    rootServiceInstanceId?: string;
+    /**
+     * ID of the resource
+     * @type {string}
+     * @memberof ServiceInstanceNode
+     */
+    serviceInstanceId?: string;
+    /**
+     * ID of the resource
+     * @type {string}
+     * @memberof ServiceInstanceNode
+     */
+    serviceInventoryId?: string;
+    /**
+     *
+     * @type {Date}
+     * @memberof ServiceInstanceNode
+     */
+    sourceCreatedAt?: Date;
+    /**
+     * ID of the resource
+     * @type {string}
+     * @memberof ServiceInstanceNode
+     */
+    sourceId?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof ServiceInstanceNode
+     */
+    sourceRef?: string;
+    /**
+     *
+     * @type {Date}
+     * @memberof ServiceInstanceNode
+     */
+    sourceUpdatedAt?: Date;
+    /**
+     *
+     * @type {Date}
+     * @memberof ServiceInstanceNode
+     */
+    updatedAt?: Date;
+}
+
+/**
+ *
+ * @export
+ * @interface ServiceInstanceNodesCollection
+ */
+export interface ServiceInstanceNodesCollection {
+    /**
+     *
+     * @type {CollectionMetadata}
+     * @memberof ServiceInstanceNodesCollection
+     */
+    meta?: CollectionMetadata;
+    /**
+     *
+     * @type {CollectionLinks}
+     * @memberof ServiceInstanceNodesCollection
+     */
+    links?: CollectionLinks;
+    /**
+     *
+     * @type {Array<ServiceInstanceNode>}
+     * @memberof ServiceInstanceNodesCollection
+     */
+    data?: Array<ServiceInstanceNode>;
+}
+
+/**
+ *
+ * @export
  * @interface ServiceInstancesCollection
  */
 export interface ServiceInstancesCollection {
@@ -2395,6 +2599,112 @@ export interface ServiceInstancesCollection {
      * @memberof ServiceInstancesCollection
      */
     data?: Array<ServiceInstance>;
+}
+
+/**
+ *
+ * @export
+ * @interface ServiceInventoriesCollection
+ */
+export interface ServiceInventoriesCollection {
+    /**
+     *
+     * @type {CollectionMetadata}
+     * @memberof ServiceInventoriesCollection
+     */
+    meta?: CollectionMetadata;
+    /**
+     *
+     * @type {CollectionLinks}
+     * @memberof ServiceInventoriesCollection
+     */
+    links?: CollectionLinks;
+    /**
+     *
+     * @type {Array<ServiceInventory>}
+     * @memberof ServiceInventoriesCollection
+     */
+    data?: Array<ServiceInventory>;
+}
+
+/**
+ *
+ * @export
+ * @interface ServiceInventory
+ */
+export interface ServiceInventory {
+    /**
+     *
+     * @type {Date}
+     * @memberof ServiceInventory
+     */
+    archivedAt?: Date;
+    /**
+     *
+     * @type {Date}
+     * @memberof ServiceInventory
+     */
+    createdAt?: Date;
+    /**
+     *
+     * @type {string}
+     * @memberof ServiceInventory
+     */
+    description?: string;
+    /**
+     *
+     * @type {any}
+     * @memberof ServiceInventory
+     */
+    extra?: any;
+    /**
+     * ID of the resource
+     * @type {string}
+     * @memberof ServiceInventory
+     */
+    id?: string;
+    /**
+     *
+     * @type {Date}
+     * @memberof ServiceInventory
+     */
+    lastSeenAt?: Date;
+    /**
+     *
+     * @type {string}
+     * @memberof ServiceInventory
+     */
+    name?: string;
+    /**
+     *
+     * @type {Date}
+     * @memberof ServiceInventory
+     */
+    sourceCreatedAt?: Date;
+    /**
+     * ID of the resource
+     * @type {string}
+     * @memberof ServiceInventory
+     */
+    sourceId?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof ServiceInventory
+     */
+    sourceRef?: string;
+    /**
+     *
+     * @type {Date}
+     * @memberof ServiceInventory
+     */
+    sourceUpdatedAt?: Date;
+    /**
+     *
+     * @type {Date}
+     * @memberof ServiceInventory
+     */
+    updatedAt?: Date;
 }
 
 /**
@@ -2469,6 +2779,12 @@ export interface ServiceOffering {
      * @memberof ServiceOffering
      */
     name?: string;
+    /**
+     * ID of the resource
+     * @type {string}
+     * @memberof ServiceOffering
+     */
+    serviceInventoryId?: string;
     /**
      * ID of the resource
      * @type {string}
@@ -2599,6 +2915,124 @@ export interface ServiceOfferingIconsCollection {
      * @memberof ServiceOfferingIconsCollection
      */
     data?: Array<ServiceOfferingIcon>;
+}
+
+/**
+ *
+ * @export
+ * @interface ServiceOfferingNode
+ */
+export interface ServiceOfferingNode {
+    /**
+     *
+     * @type {Date}
+     * @memberof ServiceOfferingNode
+     */
+    archivedAt?: Date;
+    /**
+     *
+     * @type {Date}
+     * @memberof ServiceOfferingNode
+     */
+    createdAt?: Date;
+    /**
+     *
+     * @type {any}
+     * @memberof ServiceOfferingNode
+     */
+    extra?: any;
+    /**
+     * ID of the resource
+     * @type {string}
+     * @memberof ServiceOfferingNode
+     */
+    id?: string;
+    /**
+     *
+     * @type {Date}
+     * @memberof ServiceOfferingNode
+     */
+    lastSeenAt?: Date;
+    /**
+     *
+     * @type {string}
+     * @memberof ServiceOfferingNode
+     */
+    name?: string;
+    /**
+     * ID of the resource
+     * @type {string}
+     * @memberof ServiceOfferingNode
+     */
+    rootServiceOfferingId?: string;
+    /**
+     * ID of the resource
+     * @type {string}
+     * @memberof ServiceOfferingNode
+     */
+    serviceInventoryId?: string;
+    /**
+     * ID of the resource
+     * @type {string}
+     * @memberof ServiceOfferingNode
+     */
+    serviceOfferingId?: string;
+    /**
+     *
+     * @type {Date}
+     * @memberof ServiceOfferingNode
+     */
+    sourceCreatedAt?: Date;
+    /**
+     * ID of the resource
+     * @type {string}
+     * @memberof ServiceOfferingNode
+     */
+    sourceId?: string;
+    /**
+     *
+     * @type {string}
+     * @memberof ServiceOfferingNode
+     */
+    sourceRef?: string;
+    /**
+     *
+     * @type {Date}
+     * @memberof ServiceOfferingNode
+     */
+    sourceUpdatedAt?: Date;
+    /**
+     *
+     * @type {Date}
+     * @memberof ServiceOfferingNode
+     */
+    updatedAt?: Date;
+}
+
+/**
+ *
+ * @export
+ * @interface ServiceOfferingNodesCollection
+ */
+export interface ServiceOfferingNodesCollection {
+    /**
+     *
+     * @type {CollectionMetadata}
+     * @memberof ServiceOfferingNodesCollection
+     */
+    meta?: CollectionMetadata;
+    /**
+     *
+     * @type {CollectionLinks}
+     * @memberof ServiceOfferingNodesCollection
+     */
+    links?: CollectionLinks;
+    /**
+     *
+     * @type {Array<ServiceOfferingNode>}
+     * @memberof ServiceOfferingNodesCollection
+     */
+    data?: Array<ServiceOfferingNode>;
 }
 
 /**
@@ -3835,6 +4269,54 @@ export interface VolumesCollection {
 export const DefaultApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
+         * Returns a Task id
+         * @summary Invokes computing of ServiceInventories for given ServiceOffering
+         * @param {string} id ID of the resource
+         * @param {AppliedInventoriesParametersServicePlan} appliedInventoriesParametersServicePlan Parameters defining input data for computing inventories
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        appliedInventoriesForServiceOffering(id: string, appliedInventoriesParametersServicePlan: AppliedInventoriesParametersServicePlan, options: any = {}): RequestArgs {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling appliedInventoriesForServiceOffering.');
+            }
+            // verify required parameter 'appliedInventoriesParametersServicePlan' is not null or undefined
+            if (appliedInventoriesParametersServicePlan === null || appliedInventoriesParametersServicePlan === undefined) {
+                throw new RequiredError('appliedInventoriesParametersServicePlan','Required parameter appliedInventoriesParametersServicePlan was null or undefined when calling appliedInventoriesForServiceOffering.');
+            }
+            const localVarPath = `/service_offerings/{id}/applied_inventories`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            const localVarUrlObj = url.parse(localVarPath, true);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = Object.assign({ method: 'POST' }, baseOptions, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication UserSecurity required
+            // http basic authentication required
+            if (configuration && (configuration.username || configuration.password)) {
+                localVarHeaderParameter["Authorization"] = "Basic " + btoa(configuration.username + ":" + configuration.password);
+            }
+
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+            const needsSerialization = (<any>"AppliedInventoriesParametersServicePlan" !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(appliedInventoriesParametersServicePlan || {}) : (appliedInventoriesParametersServicePlan || "");
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          *
          * @summary Return this API document in JSON format
          * @param {*} [options] Override http request option.
@@ -3874,10 +4356,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listClusterHosts(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listClusterHosts(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listClusterHosts.');
@@ -3911,6 +4394,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -3927,10 +4414,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listClusters(limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listClusters(limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             const localVarPath = `/clusters`;
             const localVarUrlObj = url.parse(localVarPath, true);
             let baseOptions;
@@ -3959,6 +4447,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -3976,10 +4468,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listContainerGroupContainers(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listContainerGroupContainers(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listContainerGroupContainers.');
@@ -4013,6 +4506,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -4030,10 +4527,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listContainerGroupTags(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listContainerGroupTags(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listContainerGroupTags.');
@@ -4067,6 +4565,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -4083,10 +4585,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listContainerGroups(limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listContainerGroups(limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             const localVarPath = `/container_groups`;
             const localVarUrlObj = url.parse(localVarPath, true);
             let baseOptions;
@@ -4115,6 +4618,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -4132,10 +4639,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listContainerImageTags(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listContainerImageTags(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listContainerImageTags.');
@@ -4169,6 +4677,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -4185,10 +4697,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listContainerImages(limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listContainerImages(limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             const localVarPath = `/container_images`;
             const localVarUrlObj = url.parse(localVarPath, true);
             let baseOptions;
@@ -4217,6 +4730,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -4234,10 +4751,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listContainerNodeContainerGroups(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listContainerNodeContainerGroups(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listContainerNodeContainerGroups.');
@@ -4271,6 +4789,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -4288,10 +4810,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listContainerNodeTags(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listContainerNodeTags(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listContainerNodeTags.');
@@ -4325,6 +4848,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -4341,10 +4868,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listContainerNodes(limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listContainerNodes(limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             const localVarPath = `/container_nodes`;
             const localVarUrlObj = url.parse(localVarPath, true);
             let baseOptions;
@@ -4373,6 +4901,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -4390,10 +4922,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listContainerProjectContainerGroups(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listContainerProjectContainerGroups(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listContainerProjectContainerGroups.');
@@ -4427,6 +4960,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -4444,10 +4981,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listContainerProjectContainerResourceQuota(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listContainerProjectContainerResourceQuota(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listContainerProjectContainerResourceQuota.');
@@ -4481,6 +5019,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -4498,10 +5040,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listContainerProjectContainerTemplates(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listContainerProjectContainerTemplates(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listContainerProjectContainerTemplates.');
@@ -4535,6 +5078,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -4552,10 +5099,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listContainerProjectTags(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listContainerProjectTags(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listContainerProjectTags.');
@@ -4589,6 +5137,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -4605,10 +5157,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listContainerProjects(limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listContainerProjects(limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             const localVarPath = `/container_projects`;
             const localVarUrlObj = url.parse(localVarPath, true);
             let baseOptions;
@@ -4637,6 +5190,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -4653,10 +5210,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listContainerResourceQuota(limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listContainerResourceQuota(limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             const localVarPath = `/container_resource_quotas`;
             const localVarUrlObj = url.parse(localVarPath, true);
             let baseOptions;
@@ -4685,6 +5243,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -4702,10 +5264,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listContainerTemplateTags(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listContainerTemplateTags(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listContainerTemplateTags.');
@@ -4739,6 +5302,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -4755,10 +5322,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listContainerTemplates(limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listContainerTemplates(limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             const localVarPath = `/container_templates`;
             const localVarUrlObj = url.parse(localVarPath, true);
             let baseOptions;
@@ -4787,6 +5355,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -4803,10 +5375,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listContainers(limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listContainers(limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             const localVarPath = `/containers`;
             const localVarUrlObj = url.parse(localVarPath, true);
             let baseOptions;
@@ -4835,6 +5408,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -4851,10 +5428,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listDatastores(limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listDatastores(limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             const localVarPath = `/datastores`;
             const localVarUrlObj = url.parse(localVarPath, true);
             let baseOptions;
@@ -4883,6 +5461,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -4899,10 +5481,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listFlavors(limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listFlavors(limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             const localVarPath = `/flavors`;
             const localVarUrlObj = url.parse(localVarPath, true);
             let baseOptions;
@@ -4931,6 +5514,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -4947,10 +5534,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listHosts(limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listHosts(limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             const localVarPath = `/hosts`;
             const localVarUrlObj = url.parse(localVarPath, true);
             let baseOptions;
@@ -4979,6 +5567,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -4996,10 +5588,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listIpaddressTags(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listIpaddressTags(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listIpaddressTags.');
@@ -5033,6 +5626,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -5049,10 +5646,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listIpaddresses(limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listIpaddresses(limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             const localVarPath = `/ipaddresses`;
             const localVarUrlObj = url.parse(localVarPath, true);
             let baseOptions;
@@ -5081,6 +5679,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -5098,10 +5700,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listNetworkAdapterIpaddresses(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listNetworkAdapterIpaddresses(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listNetworkAdapterIpaddresses.');
@@ -5135,6 +5738,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -5152,10 +5759,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listNetworkAdapterTags(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listNetworkAdapterTags(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listNetworkAdapterTags.');
@@ -5189,6 +5797,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -5205,10 +5817,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listNetworkAdapters(limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listNetworkAdapters(limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             const localVarPath = `/network_adapters`;
             const localVarUrlObj = url.parse(localVarPath, true);
             let baseOptions;
@@ -5237,6 +5850,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -5254,10 +5871,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listNetworkSubnets(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listNetworkSubnets(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listNetworkSubnets.');
@@ -5291,6 +5909,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -5308,10 +5930,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listNetworkTags(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listNetworkTags(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listNetworkTags.');
@@ -5345,6 +5968,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -5361,10 +5988,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listNetworks(limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listNetworks(limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             const localVarPath = `/networks`;
             const localVarUrlObj = url.parse(localVarPath, true);
             let baseOptions;
@@ -5393,6 +6021,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -5410,10 +6042,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listOrchestrationStackIpaddresses(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listOrchestrationStackIpaddresses(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listOrchestrationStackIpaddresses.');
@@ -5447,6 +6080,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -5464,10 +6101,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listOrchestrationStackNetworkAdapters(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listOrchestrationStackNetworkAdapters(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listOrchestrationStackNetworkAdapters.');
@@ -5501,6 +6139,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -5518,10 +6160,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listOrchestrationStackNetworks(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listOrchestrationStackNetworks(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listOrchestrationStackNetworks.');
@@ -5555,6 +6198,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -5572,10 +6219,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listOrchestrationStackSecurityGroups(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listOrchestrationStackSecurityGroups(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listOrchestrationStackSecurityGroups.');
@@ -5609,6 +6257,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -5626,10 +6278,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listOrchestrationStackSubnets(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listOrchestrationStackSubnets(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listOrchestrationStackSubnets.');
@@ -5663,6 +6316,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -5680,10 +6337,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listOrchestrationStackVms(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listOrchestrationStackVms(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listOrchestrationStackVms.');
@@ -5717,6 +6375,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -5734,10 +6396,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listOrchestrationStackVolumes(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listOrchestrationStackVolumes(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listOrchestrationStackVolumes.');
@@ -5771,6 +6434,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -5787,10 +6454,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listOrchestrationStacks(limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listOrchestrationStacks(limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             const localVarPath = `/orchestration_stacks`;
             const localVarUrlObj = url.parse(localVarPath, true);
             let baseOptions;
@@ -5819,6 +6487,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -5836,10 +6508,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSecurityGroupTags(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listSecurityGroupTags(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listSecurityGroupTags.');
@@ -5873,6 +6546,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -5890,10 +6567,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSecurityGroupVms(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listSecurityGroupVms(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listSecurityGroupVms.');
@@ -5927,6 +6605,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -5943,10 +6625,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSecurityGroups(limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listSecurityGroups(limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             const localVarPath = `/security_groups`;
             const localVarUrlObj = url.parse(localVarPath, true);
             let baseOptions;
@@ -5975,6 +6658,122 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns an array of ServiceInstanceNode objects
+         * @summary List ServiceInstanceNodes
+         * @param {number} [limit] The numbers of items to return per page.
+         * @param {number} [offset] The number of items to skip before starting to collect the result set.
+         * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listServiceInstanceNodes(limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
+            const localVarPath = `/service_instance_nodes`;
+            const localVarUrlObj = url.parse(localVarPath, true);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = Object.assign({ method: 'GET' }, baseOptions, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication UserSecurity required
+            // http basic authentication required
+            if (configuration && (configuration.username || configuration.password)) {
+                localVarHeaderParameter["Authorization"] = "Basic " + btoa(configuration.username + ":" + configuration.password);
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns an array of ServiceInstanceNode objects
+         * @summary List ServiceInstanceNodes for ServiceInstance
+         * @param {string} id ID of the resource
+         * @param {number} [limit] The numbers of items to return per page.
+         * @param {number} [offset] The number of items to skip before starting to collect the result set.
+         * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listServiceInstanceServiceInstanceNodes(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling listServiceInstanceServiceInstanceNodes.');
+            }
+            const localVarPath = `/service_instances/{id}/service_instance_nodes`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            const localVarUrlObj = url.parse(localVarPath, true);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = Object.assign({ method: 'GET' }, baseOptions, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication UserSecurity required
+            // http basic authentication required
+            if (configuration && (configuration.username || configuration.password)) {
+                localVarHeaderParameter["Authorization"] = "Basic " + btoa(configuration.username + ":" + configuration.password);
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -5991,10 +6790,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listServiceInstances(limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listServiceInstances(limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             const localVarPath = `/service_instances`;
             const localVarUrlObj = url.parse(localVarPath, true);
             let baseOptions;
@@ -6023,6 +6823,122 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns an array of ServiceInventory objects
+         * @summary List ServiceInventories
+         * @param {number} [limit] The numbers of items to return per page.
+         * @param {number} [offset] The number of items to skip before starting to collect the result set.
+         * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listServiceInventories(limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
+            const localVarPath = `/service_inventories`;
+            const localVarUrlObj = url.parse(localVarPath, true);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = Object.assign({ method: 'GET' }, baseOptions, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication UserSecurity required
+            // http basic authentication required
+            if (configuration && (configuration.username || configuration.password)) {
+                localVarHeaderParameter["Authorization"] = "Basic " + btoa(configuration.username + ":" + configuration.password);
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns an array of Tag objects
+         * @summary List Tags for ServiceInventory
+         * @param {string} id ID of the resource
+         * @param {number} [limit] The numbers of items to return per page.
+         * @param {number} [offset] The number of items to skip before starting to collect the result set.
+         * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listServiceInventoryTags(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling listServiceInventoryTags.');
+            }
+            const localVarPath = `/service_inventories/{id}/tags`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            const localVarUrlObj = url.parse(localVarPath, true);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = Object.assign({ method: 'GET' }, baseOptions, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication UserSecurity required
+            // http basic authentication required
+            if (configuration && (configuration.username || configuration.password)) {
+                localVarHeaderParameter["Authorization"] = "Basic " + btoa(configuration.username + ":" + configuration.password);
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -6039,10 +6955,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listServiceOfferingIcons(limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listServiceOfferingIcons(limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             const localVarPath = `/service_offering_icons`;
             const localVarUrlObj = url.parse(localVarPath, true);
             let baseOptions;
@@ -6071,6 +6988,63 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns an array of ServiceOfferingNode objects
+         * @summary List ServiceOfferingNodes
+         * @param {number} [limit] The numbers of items to return per page.
+         * @param {number} [offset] The number of items to skip before starting to collect the result set.
+         * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listServiceOfferingNodes(limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
+            const localVarPath = `/service_offering_nodes`;
+            const localVarUrlObj = url.parse(localVarPath, true);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = Object.assign({ method: 'GET' }, baseOptions, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication UserSecurity required
+            // http basic authentication required
+            if (configuration && (configuration.username || configuration.password)) {
+                localVarHeaderParameter["Authorization"] = "Basic " + btoa(configuration.username + ":" + configuration.password);
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -6088,10 +7062,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listServiceOfferingServiceInstances(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listServiceOfferingServiceInstances(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listServiceOfferingServiceInstances.');
@@ -6125,6 +7100,69 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns an array of ServiceOfferingNode objects
+         * @summary List ServiceOfferingNodes for ServiceOffering
+         * @param {string} id ID of the resource
+         * @param {number} [limit] The numbers of items to return per page.
+         * @param {number} [offset] The number of items to skip before starting to collect the result set.
+         * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listServiceOfferingServiceOfferingNodes(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling listServiceOfferingServiceOfferingNodes.');
+            }
+            const localVarPath = `/service_offerings/{id}/service_offering_nodes`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            const localVarUrlObj = url.parse(localVarPath, true);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = Object.assign({ method: 'GET' }, baseOptions, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication UserSecurity required
+            // http basic authentication required
+            if (configuration && (configuration.username || configuration.password)) {
+                localVarHeaderParameter["Authorization"] = "Basic " + btoa(configuration.username + ":" + configuration.password);
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -6142,10 +7180,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listServiceOfferingServicePlans(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listServiceOfferingServicePlans(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listServiceOfferingServicePlans.');
@@ -6179,6 +7218,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -6196,10 +7239,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listServiceOfferingTags(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listServiceOfferingTags(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listServiceOfferingTags.');
@@ -6233,6 +7277,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -6249,10 +7297,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listServiceOfferings(limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listServiceOfferings(limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             const localVarPath = `/service_offerings`;
             const localVarUrlObj = url.parse(localVarPath, true);
             let baseOptions;
@@ -6281,6 +7330,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -6298,10 +7351,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listServicePlanServiceInstances(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listServicePlanServiceInstances(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listServicePlanServiceInstances.');
@@ -6335,6 +7389,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -6351,10 +7409,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listServicePlans(limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listServicePlans(limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             const localVarPath = `/service_plans`;
             const localVarUrlObj = url.parse(localVarPath, true);
             let baseOptions;
@@ -6383,6 +7442,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -6400,10 +7463,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceAvailabilities(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listSourceAvailabilities(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listSourceAvailabilities.');
@@ -6437,6 +7501,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -6454,10 +7522,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceClusters(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listSourceClusters(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listSourceClusters.');
@@ -6491,6 +7560,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -6508,10 +7581,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceContainerGroups(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listSourceContainerGroups(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listSourceContainerGroups.');
@@ -6545,6 +7619,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -6562,10 +7640,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceContainerImages(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listSourceContainerImages(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listSourceContainerImages.');
@@ -6599,6 +7678,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -6616,10 +7699,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceContainerNodes(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listSourceContainerNodes(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listSourceContainerNodes.');
@@ -6653,6 +7737,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -6670,10 +7758,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceContainerProjects(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listSourceContainerProjects(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listSourceContainerProjects.');
@@ -6707,6 +7796,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -6724,10 +7817,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceContainerTemplates(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listSourceContainerTemplates(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listSourceContainerTemplates.');
@@ -6761,6 +7855,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -6778,10 +7876,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceContainers(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listSourceContainers(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listSourceContainers.');
@@ -6815,6 +7914,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -6832,10 +7935,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceDatastores(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listSourceDatastores(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listSourceDatastores.');
@@ -6869,6 +7973,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -6886,10 +7994,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceHosts(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listSourceHosts(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listSourceHosts.');
@@ -6923,6 +8032,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -6940,10 +8053,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceIpaddresses(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listSourceIpaddresses(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listSourceIpaddresses.');
@@ -6977,6 +8091,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -6994,10 +8112,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceNetworkAdapters(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listSourceNetworkAdapters(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listSourceNetworkAdapters.');
@@ -7031,6 +8150,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -7048,10 +8171,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceNetworks(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listSourceNetworks(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listSourceNetworks.');
@@ -7085,6 +8209,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -7102,10 +8230,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceOrchestrationStacks(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listSourceOrchestrationStacks(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listSourceOrchestrationStacks.');
@@ -7139,6 +8268,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -7156,10 +8289,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceRegionIpaddresses(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listSourceRegionIpaddresses(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listSourceRegionIpaddresses.');
@@ -7193,6 +8327,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -7210,10 +8348,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceRegionNetworkAdapters(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listSourceRegionNetworkAdapters(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listSourceRegionNetworkAdapters.');
@@ -7247,6 +8386,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -7264,10 +8407,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceRegionNetworks(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listSourceRegionNetworks(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listSourceRegionNetworks.');
@@ -7301,6 +8445,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -7318,10 +8466,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceRegionOrchestrationStacks(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listSourceRegionOrchestrationStacks(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listSourceRegionOrchestrationStacks.');
@@ -7355,6 +8504,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -7372,10 +8525,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceRegionSecurityGroups(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listSourceRegionSecurityGroups(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listSourceRegionSecurityGroups.');
@@ -7409,6 +8563,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -7426,10 +8584,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceRegionServiceInstances(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listSourceRegionServiceInstances(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listSourceRegionServiceInstances.');
@@ -7463,6 +8622,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -7480,10 +8643,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceRegionServiceOfferings(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listSourceRegionServiceOfferings(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listSourceRegionServiceOfferings.');
@@ -7517,6 +8681,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -7534,10 +8702,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceRegionServicePlans(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listSourceRegionServicePlans(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listSourceRegionServicePlans.');
@@ -7571,6 +8740,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -7588,10 +8761,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceRegionSubnets(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listSourceRegionSubnets(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listSourceRegionSubnets.');
@@ -7625,6 +8799,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -7642,10 +8820,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceRegionVms(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listSourceRegionVms(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listSourceRegionVms.');
@@ -7679,6 +8858,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -7696,10 +8879,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceRegionVolumes(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listSourceRegionVolumes(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listSourceRegionVolumes.');
@@ -7733,6 +8917,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -7749,10 +8937,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceRegions(limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listSourceRegions(limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             const localVarPath = `/source_regions`;
             const localVarUrlObj = url.parse(localVarPath, true);
             let baseOptions;
@@ -7781,6 +8970,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -7798,10 +8991,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceSecurityGroups(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listSourceSecurityGroups(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listSourceSecurityGroups.');
@@ -7835,6 +9029,69 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns an array of ServiceInstanceNode objects
+         * @summary List ServiceInstanceNodes for Source
+         * @param {string} id ID of the resource
+         * @param {number} [limit] The numbers of items to return per page.
+         * @param {number} [offset] The number of items to skip before starting to collect the result set.
+         * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listSourceServiceInstanceNodes(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling listSourceServiceInstanceNodes.');
+            }
+            const localVarPath = `/sources/{id}/service_instance_nodes`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            const localVarUrlObj = url.parse(localVarPath, true);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = Object.assign({ method: 'GET' }, baseOptions, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication UserSecurity required
+            // http basic authentication required
+            if (configuration && (configuration.username || configuration.password)) {
+                localVarHeaderParameter["Authorization"] = "Basic " + btoa(configuration.username + ":" + configuration.password);
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -7852,10 +9109,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceServiceInstances(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listSourceServiceInstances(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listSourceServiceInstances.');
@@ -7889,6 +9147,128 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns an array of ServiceInventory objects
+         * @summary List ServiceInventories for Source
+         * @param {string} id ID of the resource
+         * @param {number} [limit] The numbers of items to return per page.
+         * @param {number} [offset] The number of items to skip before starting to collect the result set.
+         * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listSourceServiceInventories(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling listSourceServiceInventories.');
+            }
+            const localVarPath = `/sources/{id}/service_inventories`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            const localVarUrlObj = url.parse(localVarPath, true);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = Object.assign({ method: 'GET' }, baseOptions, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication UserSecurity required
+            // http basic authentication required
+            if (configuration && (configuration.username || configuration.password)) {
+                localVarHeaderParameter["Authorization"] = "Basic " + btoa(configuration.username + ":" + configuration.password);
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns an array of ServiceOfferingNode objects
+         * @summary List ServiceOfferingNodes for Source
+         * @param {string} id ID of the resource
+         * @param {number} [limit] The numbers of items to return per page.
+         * @param {number} [offset] The number of items to skip before starting to collect the result set.
+         * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listSourceServiceOfferingNodes(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling listSourceServiceOfferingNodes.');
+            }
+            const localVarPath = `/sources/{id}/service_offering_nodes`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            const localVarUrlObj = url.parse(localVarPath, true);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = Object.assign({ method: 'GET' }, baseOptions, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication UserSecurity required
+            // http basic authentication required
+            if (configuration && (configuration.username || configuration.password)) {
+                localVarHeaderParameter["Authorization"] = "Basic " + btoa(configuration.username + ":" + configuration.password);
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -7906,10 +9286,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceServiceOfferings(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listSourceServiceOfferings(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listSourceServiceOfferings.');
@@ -7943,6 +9324,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -7960,10 +9345,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceServicePlans(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listSourceServicePlans(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listSourceServicePlans.');
@@ -7997,6 +9383,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -8014,10 +9404,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceSourceRegions(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listSourceSourceRegions(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listSourceSourceRegions.');
@@ -8051,6 +9442,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -8068,10 +9463,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceSubnets(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listSourceSubnets(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listSourceSubnets.');
@@ -8105,6 +9501,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -8122,10 +9522,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceSubscriptions(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listSourceSubscriptions(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listSourceSubscriptions.');
@@ -8159,6 +9560,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -8176,10 +9581,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceVms(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listSourceVms(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listSourceVms.');
@@ -8213,6 +9619,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -8230,10 +9640,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceVolumeTypes(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listSourceVolumeTypes(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listSourceVolumeTypes.');
@@ -8267,6 +9678,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -8284,10 +9699,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceVolumes(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listSourceVolumes(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listSourceVolumes.');
@@ -8321,6 +9737,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -8337,10 +9757,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSources(limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listSources(limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             const localVarPath = `/sources`;
             const localVarUrlObj = url.parse(localVarPath, true);
             let baseOptions;
@@ -8369,6 +9790,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -8386,10 +9811,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSubnetIpaddresses(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listSubnetIpaddresses(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listSubnetIpaddresses.');
@@ -8423,6 +9849,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -8440,10 +9870,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSubnetNetworkAdapters(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listSubnetNetworkAdapters(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listSubnetNetworkAdapters.');
@@ -8477,6 +9908,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -8494,10 +9929,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSubnetTags(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listSubnetTags(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listSubnetTags.');
@@ -8531,6 +9967,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -8547,10 +9987,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSubnets(limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listSubnets(limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             const localVarPath = `/subnets`;
             const localVarUrlObj = url.parse(localVarPath, true);
             let baseOptions;
@@ -8579,6 +10020,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -8596,10 +10041,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSubscriptionIpaddresses(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listSubscriptionIpaddresses(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listSubscriptionIpaddresses.');
@@ -8633,6 +10079,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -8650,10 +10100,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSubscriptionNetworkAdapters(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listSubscriptionNetworkAdapters(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listSubscriptionNetworkAdapters.');
@@ -8687,6 +10138,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -8704,10 +10159,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSubscriptionNetworks(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listSubscriptionNetworks(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listSubscriptionNetworks.');
@@ -8741,6 +10197,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -8758,10 +10218,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSubscriptionOrchestrationStacks(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listSubscriptionOrchestrationStacks(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listSubscriptionOrchestrationStacks.');
@@ -8795,6 +10256,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -8812,10 +10277,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSubscriptionSecurityGroups(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listSubscriptionSecurityGroups(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listSubscriptionSecurityGroups.');
@@ -8849,6 +10315,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -8866,10 +10336,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSubscriptionServiceInstances(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listSubscriptionServiceInstances(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listSubscriptionServiceInstances.');
@@ -8903,6 +10374,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -8920,10 +10395,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSubscriptionServiceOfferings(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listSubscriptionServiceOfferings(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listSubscriptionServiceOfferings.');
@@ -8957,6 +10433,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -8974,10 +10454,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSubscriptionServicePlans(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listSubscriptionServicePlans(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listSubscriptionServicePlans.');
@@ -9011,6 +10492,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -9028,10 +10513,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSubscriptionSubnets(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listSubscriptionSubnets(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listSubscriptionSubnets.');
@@ -9065,6 +10551,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -9082,10 +10572,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSubscriptionVms(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listSubscriptionVms(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listSubscriptionVms.');
@@ -9119,6 +10610,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -9136,10 +10631,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSubscriptionVolumes(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listSubscriptionVolumes(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listSubscriptionVolumes.');
@@ -9173,6 +10669,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -9189,10 +10689,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSubscriptions(limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listSubscriptions(limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             const localVarPath = `/subscriptions`;
             const localVarUrlObj = url.parse(localVarPath, true);
             let baseOptions;
@@ -9221,6 +10722,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -9238,10 +10743,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTagContainerGroups(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listTagContainerGroups(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listTagContainerGroups.');
@@ -9275,6 +10781,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -9292,10 +10802,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTagContainerImages(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listTagContainerImages(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listTagContainerImages.');
@@ -9329,6 +10840,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -9346,10 +10861,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTagContainerNodes(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listTagContainerNodes(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listTagContainerNodes.');
@@ -9383,6 +10899,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -9400,10 +10920,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTagContainerProjects(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listTagContainerProjects(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listTagContainerProjects.');
@@ -9437,6 +10958,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -9454,10 +10979,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTagContainerTemplates(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listTagContainerTemplates(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listTagContainerTemplates.');
@@ -9491,6 +11017,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -9508,10 +11038,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTagIpaddresses(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listTagIpaddresses(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listTagIpaddresses.');
@@ -9545,6 +11076,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -9562,10 +11097,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTagNetworkAdapters(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listTagNetworkAdapters(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listTagNetworkAdapters.');
@@ -9599,6 +11135,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -9616,10 +11156,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTagNetworks(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listTagNetworks(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listTagNetworks.');
@@ -9653,6 +11194,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -9670,10 +11215,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTagSecurityGroups(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listTagSecurityGroups(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listTagSecurityGroups.');
@@ -9707,6 +11253,69 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns an array of ServiceInventory objects
+         * @summary List ServiceInventories for Tag
+         * @param {string} id ID of the resource
+         * @param {number} [limit] The numbers of items to return per page.
+         * @param {number} [offset] The number of items to skip before starting to collect the result set.
+         * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listTagServiceInventories(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling listTagServiceInventories.');
+            }
+            const localVarPath = `/tags/{id}/service_inventories`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            const localVarUrlObj = url.parse(localVarPath, true);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = Object.assign({ method: 'GET' }, baseOptions, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication UserSecurity required
+            // http basic authentication required
+            if (configuration && (configuration.username || configuration.password)) {
+                localVarHeaderParameter["Authorization"] = "Basic " + btoa(configuration.username + ":" + configuration.password);
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+            if (filter !== undefined) {
+                localVarQueryParameter['filter'] = filter;
+            }
+
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -9724,10 +11333,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTagServiceOfferings(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listTagServiceOfferings(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listTagServiceOfferings.');
@@ -9761,6 +11371,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -9778,10 +11392,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTagSubnets(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listTagSubnets(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listTagSubnets.');
@@ -9815,6 +11430,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -9832,10 +11451,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTagVms(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listTagVms(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listTagVms.');
@@ -9869,6 +11489,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -9885,10 +11509,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTags(limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listTags(limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             const localVarPath = `/tags`;
             const localVarUrlObj = url.parse(localVarPath, true);
             let baseOptions;
@@ -9917,6 +11542,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -9933,10 +11562,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTasks(limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listTasks(limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             const localVarPath = `/tasks`;
             const localVarUrlObj = url.parse(localVarPath, true);
             let baseOptions;
@@ -9965,6 +11595,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -9982,10 +11616,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listVmNetworkAdapters(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listVmNetworkAdapters(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listVmNetworkAdapters.');
@@ -10019,6 +11654,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -10036,10 +11675,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listVmSecurityGroups(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listVmSecurityGroups(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listVmSecurityGroups.');
@@ -10073,6 +11713,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -10090,10 +11734,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listVmTags(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listVmTags(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listVmTags.');
@@ -10127,6 +11772,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -10144,10 +11793,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listVmVolumeAttachments(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listVmVolumeAttachments(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listVmVolumeAttachments.');
@@ -10181,6 +11831,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -10198,10 +11852,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listVmVolumes(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listVmVolumes(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listVmVolumes.');
@@ -10235,6 +11890,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -10251,10 +11910,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listVms(limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listVms(limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             const localVarPath = `/vms`;
             const localVarUrlObj = url.parse(localVarPath, true);
             let baseOptions;
@@ -10283,6 +11943,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -10299,10 +11963,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listVolumeAttachments(limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listVolumeAttachments(limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             const localVarPath = `/volume_attachments`;
             const localVarUrlObj = url.parse(localVarPath, true);
             let baseOptions;
@@ -10331,6 +11996,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -10348,10 +12017,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listVolumeTypeVolumes(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listVolumeTypeVolumes(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listVolumeTypeVolumes.');
@@ -10385,6 +12055,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -10401,10 +12075,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listVolumeTypes(limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listVolumeTypes(limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             const localVarPath = `/volume_types`;
             const localVarUrlObj = url.parse(localVarPath, true);
             let baseOptions;
@@ -10433,6 +12108,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -10450,10 +12129,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listVolumeVms(id: string, limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listVolumeVms(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling listVolumeVms.');
@@ -10487,6 +12167,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -10503,10 +12187,11 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listVolumes(limit?: number, offset?: number, filter?: any, options: any = {}): RequestArgs {
+        listVolumes(limit?: number, offset?: number, filter?: any, sortBy?: Object, options: any = {}): RequestArgs {
             const localVarPath = `/volumes`;
             const localVarUrlObj = url.parse(localVarPath, true);
             let baseOptions;
@@ -10535,6 +12220,10 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 localVarQueryParameter['filter'] = filter;
             }
 
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sort_by'] = sortBy;
+            }
+
             localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
@@ -10549,18 +12238,18 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * Returns a Task id
          * @summary Order an existing ServiceOffering
          * @param {string} id ID of the resource
-         * @param {OrderParameters} orderParameters Order parameters defining the service and provider control
+         * @param {OrderParametersServiceOffering} orderParametersServiceOffering Order parameters defining the service and provider control
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        orderServiceOffering(id: string, orderParameters: OrderParameters, options: any = {}): RequestArgs {
+        orderServiceOffering(id: string, orderParametersServiceOffering: OrderParametersServiceOffering, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling orderServiceOffering.');
             }
-            // verify required parameter 'orderParameters' is not null or undefined
-            if (orderParameters === null || orderParameters === undefined) {
-                throw new RequiredError('orderParameters','Required parameter orderParameters was null or undefined when calling orderServiceOffering.');
+            // verify required parameter 'orderParametersServiceOffering' is not null or undefined
+            if (orderParametersServiceOffering === null || orderParametersServiceOffering === undefined) {
+                throw new RequiredError('orderParametersServiceOffering','Required parameter orderParametersServiceOffering was null or undefined when calling orderServiceOffering.');
             }
             const localVarPath = `/service_offerings/{id}/order`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
@@ -10585,8 +12274,8 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
             localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
-            const needsSerialization = (<any>"OrderParameters" !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
-            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(orderParameters || {}) : (orderParameters || "");
+            const needsSerialization = (<any>"OrderParametersServiceOffering" !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(orderParametersServiceOffering || {}) : (orderParametersServiceOffering || "");
 
             return {
                 url: url.format(localVarUrlObj),
@@ -10597,18 +12286,18 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
          * Returns a Task id
          * @summary Order an existing ServicePlan
          * @param {string} id ID of the resource
-         * @param {OrderParameters} orderParameters Order parameters defining the service and provider control
+         * @param {OrderParametersServicePlan} orderParametersServicePlan Order parameters defining the service and provider control
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        orderServicePlan(id: string, orderParameters: OrderParameters, options: any = {}): RequestArgs {
+        orderServicePlan(id: string, orderParametersServicePlan: OrderParametersServicePlan, options: any = {}): RequestArgs {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling orderServicePlan.');
             }
-            // verify required parameter 'orderParameters' is not null or undefined
-            if (orderParameters === null || orderParameters === undefined) {
-                throw new RequiredError('orderParameters','Required parameter orderParameters was null or undefined when calling orderServicePlan.');
+            // verify required parameter 'orderParametersServicePlan' is not null or undefined
+            if (orderParametersServicePlan === null || orderParametersServicePlan === undefined) {
+                throw new RequiredError('orderParametersServicePlan','Required parameter orderParametersServicePlan was null or undefined when calling orderServicePlan.');
             }
             const localVarPath = `/service_plans/{id}/order`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
@@ -10633,8 +12322,8 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
             localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
-            const needsSerialization = (<any>"OrderParameters" !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
-            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(orderParameters || {}) : (orderParameters || "");
+            const needsSerialization = (<any>"OrderParametersServicePlan" !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(orderParametersServicePlan || {}) : (orderParametersServicePlan || "");
 
             return {
                 url: url.format(localVarUrlObj),
@@ -10644,14 +12333,14 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * Performs a GraphQL Query
          * @summary Perform a GraphQL Query
-         * @param {InlineObject} inlineObject
+         * @param {GraphQLRequest} graphQLRequest GraphQL Query Request
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        postGraphQL(inlineObject: InlineObject, options: any = {}): RequestArgs {
-            // verify required parameter 'inlineObject' is not null or undefined
-            if (inlineObject === null || inlineObject === undefined) {
-                throw new RequiredError('inlineObject','Required parameter inlineObject was null or undefined when calling postGraphQL.');
+        postGraphQL(graphQLRequest: GraphQLRequest, options: any = {}): RequestArgs {
+            // verify required parameter 'graphQLRequest' is not null or undefined
+            if (graphQLRequest === null || graphQLRequest === undefined) {
+                throw new RequiredError('graphQLRequest','Required parameter graphQLRequest was null or undefined when calling postGraphQL.');
             }
             const localVarPath = `/graphql`;
             const localVarUrlObj = url.parse(localVarPath, true);
@@ -10675,8 +12364,8 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
             delete localVarUrlObj.search;
             localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
-            const needsSerialization = (<any>"InlineObject" !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
-            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(inlineObject || {}) : (inlineObject || "");
+            const needsSerialization = (<any>"GraphQLRequest" !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(graphQLRequest || {}) : (graphQLRequest || "");
 
             return {
                 url: url.format(localVarUrlObj),
@@ -11347,6 +13036,84 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
+         * Returns a ServiceInstanceNode object
+         * @summary Show an existing ServiceInstanceNode
+         * @param {string} id ID of the resource
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        showServiceInstanceNode(id: string, options: any = {}): RequestArgs {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling showServiceInstanceNode.');
+            }
+            const localVarPath = `/service_instance_nodes/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            const localVarUrlObj = url.parse(localVarPath, true);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = Object.assign({ method: 'GET' }, baseOptions, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication UserSecurity required
+            // http basic authentication required
+            if (configuration && (configuration.username || configuration.password)) {
+                localVarHeaderParameter["Authorization"] = "Basic " + btoa(configuration.username + ":" + configuration.password);
+            }
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns a ServiceInventory object
+         * @summary Show an existing ServiceInventory
+         * @param {string} id ID of the resource
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        showServiceInventory(id: string, options: any = {}): RequestArgs {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling showServiceInventory.');
+            }
+            const localVarPath = `/service_inventories/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            const localVarUrlObj = url.parse(localVarPath, true);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = Object.assign({ method: 'GET' }, baseOptions, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication UserSecurity required
+            // http basic authentication required
+            if (configuration && (configuration.username || configuration.password)) {
+                localVarHeaderParameter["Authorization"] = "Basic " + btoa(configuration.username + ":" + configuration.password);
+            }
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Returns a ServiceOffering object
          * @summary Show an existing ServiceOffering
          * @param {string} id ID of the resource
@@ -11437,6 +13204,45 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 throw new RequiredError('id','Required parameter id was null or undefined when calling showServiceOfferingIconIconData.');
             }
             const localVarPath = `/service_offering_icons/{id}/icon_data`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            const localVarUrlObj = url.parse(localVarPath, true);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = Object.assign({ method: 'GET' }, baseOptions, options);
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication UserSecurity required
+            // http basic authentication required
+            if (configuration && (configuration.username || configuration.password)) {
+                localVarHeaderParameter["Authorization"] = "Basic " + btoa(configuration.username + ":" + configuration.password);
+            }
+
+            localVarUrlObj.query = Object.assign({}, localVarUrlObj.query, localVarQueryParameter, options.query);
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = Object.assign({}, localVarHeaderParameter, options.headers);
+
+            return {
+                url: url.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns a ServiceOfferingNode object
+         * @summary Show an existing ServiceOfferingNode
+         * @param {string} id ID of the resource
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        showServiceOfferingNode(id: string, options: any = {}): RequestArgs {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling showServiceOfferingNode.');
+            }
+            const localVarPath = `/service_offering_nodes/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             const localVarUrlObj = url.parse(localVarPath, true);
             let baseOptions;
@@ -11950,12 +13756,27 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
 export const DefaultApiFp = function(configuration?: Configuration) {
     return {
         /**
+         * Returns a Task id
+         * @summary Invokes computing of ServiceInventories for given ServiceOffering
+         * @param {string} id ID of the resource
+         * @param {AppliedInventoriesParametersServicePlan} appliedInventoriesParametersServicePlan Parameters defining input data for computing inventories
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        appliedInventoriesForServiceOffering(id: string, appliedInventoriesParametersServicePlan: AppliedInventoriesParametersServicePlan, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse200> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).appliedInventoriesForServiceOffering(id, appliedInventoriesParametersServicePlan, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
          *
          * @summary Return this API document in JSON format
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getDocumentation(options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Response> {
+        getDocumentation(options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<any> {
             const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).getDocumentation(options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
@@ -11969,11 +13790,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listClusterHosts(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<HostsCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listClusterHosts(id, limit, offset, filter, options);
+        listClusterHosts(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<HostsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listClusterHosts(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -11985,11 +13807,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listClusters(limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ClustersCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listClusters(limit, offset, filter, options);
+        listClusters(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ClustersCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listClusters(limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12002,11 +13825,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listContainerGroupContainers(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ContainersCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listContainerGroupContainers(id, limit, offset, filter, options);
+        listContainerGroupContainers(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ContainersCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listContainerGroupContainers(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12019,11 +13843,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listContainerGroupTags(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<TagsCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listContainerGroupTags(id, limit, offset, filter, options);
+        listContainerGroupTags(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<TagsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listContainerGroupTags(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12035,11 +13860,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listContainerGroups(limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ContainerGroupsCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listContainerGroups(limit, offset, filter, options);
+        listContainerGroups(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ContainerGroupsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listContainerGroups(limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12052,11 +13878,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listContainerImageTags(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<TagsCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listContainerImageTags(id, limit, offset, filter, options);
+        listContainerImageTags(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<TagsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listContainerImageTags(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12068,11 +13895,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listContainerImages(limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ContainerImagesCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listContainerImages(limit, offset, filter, options);
+        listContainerImages(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ContainerImagesCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listContainerImages(limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12085,11 +13913,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listContainerNodeContainerGroups(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ContainerGroupsCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listContainerNodeContainerGroups(id, limit, offset, filter, options);
+        listContainerNodeContainerGroups(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ContainerGroupsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listContainerNodeContainerGroups(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12102,11 +13931,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listContainerNodeTags(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<TagsCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listContainerNodeTags(id, limit, offset, filter, options);
+        listContainerNodeTags(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<TagsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listContainerNodeTags(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12118,11 +13948,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listContainerNodes(limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ContainerNodesCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listContainerNodes(limit, offset, filter, options);
+        listContainerNodes(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ContainerNodesCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listContainerNodes(limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12135,11 +13966,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listContainerProjectContainerGroups(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ContainerGroupsCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listContainerProjectContainerGroups(id, limit, offset, filter, options);
+        listContainerProjectContainerGroups(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ContainerGroupsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listContainerProjectContainerGroups(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12152,11 +13984,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listContainerProjectContainerResourceQuota(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ContainerResourceQuotaCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listContainerProjectContainerResourceQuota(id, limit, offset, filter, options);
+        listContainerProjectContainerResourceQuota(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ContainerResourceQuotaCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listContainerProjectContainerResourceQuota(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12169,11 +14002,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listContainerProjectContainerTemplates(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ContainerTemplatesCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listContainerProjectContainerTemplates(id, limit, offset, filter, options);
+        listContainerProjectContainerTemplates(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ContainerTemplatesCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listContainerProjectContainerTemplates(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12186,11 +14020,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listContainerProjectTags(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<TagsCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listContainerProjectTags(id, limit, offset, filter, options);
+        listContainerProjectTags(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<TagsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listContainerProjectTags(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12202,11 +14037,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listContainerProjects(limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ContainerProjectsCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listContainerProjects(limit, offset, filter, options);
+        listContainerProjects(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ContainerProjectsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listContainerProjects(limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12218,11 +14054,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listContainerResourceQuota(limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ContainerResourceQuotaCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listContainerResourceQuota(limit, offset, filter, options);
+        listContainerResourceQuota(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ContainerResourceQuotaCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listContainerResourceQuota(limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12235,11 +14072,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listContainerTemplateTags(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<TagsCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listContainerTemplateTags(id, limit, offset, filter, options);
+        listContainerTemplateTags(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<TagsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listContainerTemplateTags(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12251,11 +14089,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listContainerTemplates(limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ContainerTemplatesCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listContainerTemplates(limit, offset, filter, options);
+        listContainerTemplates(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ContainerTemplatesCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listContainerTemplates(limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12267,11 +14106,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listContainers(limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ContainersCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listContainers(limit, offset, filter, options);
+        listContainers(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ContainersCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listContainers(limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12283,11 +14123,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listDatastores(limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<DatastoresCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listDatastores(limit, offset, filter, options);
+        listDatastores(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<DatastoresCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listDatastores(limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12299,11 +14140,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listFlavors(limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<FlavorsCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listFlavors(limit, offset, filter, options);
+        listFlavors(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<FlavorsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listFlavors(limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12315,11 +14157,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listHosts(limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<HostsCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listHosts(limit, offset, filter, options);
+        listHosts(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<HostsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listHosts(limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12332,11 +14175,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listIpaddressTags(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<TagsCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listIpaddressTags(id, limit, offset, filter, options);
+        listIpaddressTags(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<TagsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listIpaddressTags(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12348,11 +14192,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listIpaddresses(limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<IpaddressesCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listIpaddresses(limit, offset, filter, options);
+        listIpaddresses(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<IpaddressesCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listIpaddresses(limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12365,11 +14210,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listNetworkAdapterIpaddresses(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<IpaddressesCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listNetworkAdapterIpaddresses(id, limit, offset, filter, options);
+        listNetworkAdapterIpaddresses(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<IpaddressesCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listNetworkAdapterIpaddresses(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12382,11 +14228,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listNetworkAdapterTags(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<TagsCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listNetworkAdapterTags(id, limit, offset, filter, options);
+        listNetworkAdapterTags(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<TagsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listNetworkAdapterTags(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12398,11 +14245,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listNetworkAdapters(limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<NetworkAdaptersCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listNetworkAdapters(limit, offset, filter, options);
+        listNetworkAdapters(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<NetworkAdaptersCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listNetworkAdapters(limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12415,11 +14263,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listNetworkSubnets(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<SubnetsCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listNetworkSubnets(id, limit, offset, filter, options);
+        listNetworkSubnets(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<SubnetsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listNetworkSubnets(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12432,11 +14281,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listNetworkTags(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<TagsCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listNetworkTags(id, limit, offset, filter, options);
+        listNetworkTags(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<TagsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listNetworkTags(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12448,11 +14298,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listNetworks(limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<NetworksCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listNetworks(limit, offset, filter, options);
+        listNetworks(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<NetworksCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listNetworks(limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12465,11 +14316,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listOrchestrationStackIpaddresses(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<IpaddressesCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listOrchestrationStackIpaddresses(id, limit, offset, filter, options);
+        listOrchestrationStackIpaddresses(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<IpaddressesCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listOrchestrationStackIpaddresses(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12482,11 +14334,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listOrchestrationStackNetworkAdapters(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<NetworkAdaptersCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listOrchestrationStackNetworkAdapters(id, limit, offset, filter, options);
+        listOrchestrationStackNetworkAdapters(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<NetworkAdaptersCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listOrchestrationStackNetworkAdapters(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12499,11 +14352,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listOrchestrationStackNetworks(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<NetworksCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listOrchestrationStackNetworks(id, limit, offset, filter, options);
+        listOrchestrationStackNetworks(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<NetworksCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listOrchestrationStackNetworks(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12516,11 +14370,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listOrchestrationStackSecurityGroups(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<SecurityGroupsCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listOrchestrationStackSecurityGroups(id, limit, offset, filter, options);
+        listOrchestrationStackSecurityGroups(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<SecurityGroupsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listOrchestrationStackSecurityGroups(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12533,11 +14388,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listOrchestrationStackSubnets(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<SubnetsCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listOrchestrationStackSubnets(id, limit, offset, filter, options);
+        listOrchestrationStackSubnets(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<SubnetsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listOrchestrationStackSubnets(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12550,11 +14406,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listOrchestrationStackVms(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<VmsCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listOrchestrationStackVms(id, limit, offset, filter, options);
+        listOrchestrationStackVms(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<VmsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listOrchestrationStackVms(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12567,11 +14424,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listOrchestrationStackVolumes(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<VolumesCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listOrchestrationStackVolumes(id, limit, offset, filter, options);
+        listOrchestrationStackVolumes(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<VolumesCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listOrchestrationStackVolumes(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12583,11 +14441,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listOrchestrationStacks(limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<OrchestrationStacksCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listOrchestrationStacks(limit, offset, filter, options);
+        listOrchestrationStacks(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<OrchestrationStacksCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listOrchestrationStacks(limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12600,11 +14459,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSecurityGroupTags(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<TagsCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSecurityGroupTags(id, limit, offset, filter, options);
+        listSecurityGroupTags(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<TagsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSecurityGroupTags(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12617,11 +14477,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSecurityGroupVms(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<VmsCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSecurityGroupVms(id, limit, offset, filter, options);
+        listSecurityGroupVms(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<VmsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSecurityGroupVms(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12633,11 +14494,47 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSecurityGroups(limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<SecurityGroupsCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSecurityGroups(limit, offset, filter, options);
+        listSecurityGroups(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<SecurityGroupsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSecurityGroups(limit, offset, filter, sortBy, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * Returns an array of ServiceInstanceNode objects
+         * @summary List ServiceInstanceNodes
+         * @param {number} [limit] The numbers of items to return per page.
+         * @param {number} [offset] The number of items to skip before starting to collect the result set.
+         * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listServiceInstanceNodes(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceInstanceNodesCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listServiceInstanceNodes(limit, offset, filter, sortBy, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * Returns an array of ServiceInstanceNode objects
+         * @summary List ServiceInstanceNodes for ServiceInstance
+         * @param {string} id ID of the resource
+         * @param {number} [limit] The numbers of items to return per page.
+         * @param {number} [offset] The number of items to skip before starting to collect the result set.
+         * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listServiceInstanceServiceInstanceNodes(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceInstanceNodesCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listServiceInstanceServiceInstanceNodes(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12649,11 +14546,47 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listServiceInstances(limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceInstancesCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listServiceInstances(limit, offset, filter, options);
+        listServiceInstances(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceInstancesCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listServiceInstances(limit, offset, filter, sortBy, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * Returns an array of ServiceInventory objects
+         * @summary List ServiceInventories
+         * @param {number} [limit] The numbers of items to return per page.
+         * @param {number} [offset] The number of items to skip before starting to collect the result set.
+         * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listServiceInventories(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceInventoriesCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listServiceInventories(limit, offset, filter, sortBy, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * Returns an array of Tag objects
+         * @summary List Tags for ServiceInventory
+         * @param {string} id ID of the resource
+         * @param {number} [limit] The numbers of items to return per page.
+         * @param {number} [offset] The number of items to skip before starting to collect the result set.
+         * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listServiceInventoryTags(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<TagsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listServiceInventoryTags(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12665,11 +14598,29 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listServiceOfferingIcons(limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceOfferingIconsCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listServiceOfferingIcons(limit, offset, filter, options);
+        listServiceOfferingIcons(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceOfferingIconsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listServiceOfferingIcons(limit, offset, filter, sortBy, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * Returns an array of ServiceOfferingNode objects
+         * @summary List ServiceOfferingNodes
+         * @param {number} [limit] The numbers of items to return per page.
+         * @param {number} [offset] The number of items to skip before starting to collect the result set.
+         * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listServiceOfferingNodes(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceOfferingNodesCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listServiceOfferingNodes(limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12682,11 +14633,30 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listServiceOfferingServiceInstances(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceInstancesCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listServiceOfferingServiceInstances(id, limit, offset, filter, options);
+        listServiceOfferingServiceInstances(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceInstancesCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listServiceOfferingServiceInstances(id, limit, offset, filter, sortBy, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * Returns an array of ServiceOfferingNode objects
+         * @summary List ServiceOfferingNodes for ServiceOffering
+         * @param {string} id ID of the resource
+         * @param {number} [limit] The numbers of items to return per page.
+         * @param {number} [offset] The number of items to skip before starting to collect the result set.
+         * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listServiceOfferingServiceOfferingNodes(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceOfferingNodesCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listServiceOfferingServiceOfferingNodes(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12699,11 +14669,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listServiceOfferingServicePlans(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServicePlansCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listServiceOfferingServicePlans(id, limit, offset, filter, options);
+        listServiceOfferingServicePlans(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServicePlansCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listServiceOfferingServicePlans(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12716,11 +14687,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listServiceOfferingTags(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<TagsCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listServiceOfferingTags(id, limit, offset, filter, options);
+        listServiceOfferingTags(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<TagsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listServiceOfferingTags(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12732,11 +14704,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listServiceOfferings(limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceOfferingsCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listServiceOfferings(limit, offset, filter, options);
+        listServiceOfferings(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceOfferingsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listServiceOfferings(limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12749,11 +14722,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listServicePlanServiceInstances(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceInstancesCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listServicePlanServiceInstances(id, limit, offset, filter, options);
+        listServicePlanServiceInstances(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceInstancesCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listServicePlanServiceInstances(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12765,11 +14739,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listServicePlans(limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServicePlansCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listServicePlans(limit, offset, filter, options);
+        listServicePlans(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServicePlansCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listServicePlans(limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12782,11 +14757,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceAvailabilities(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<AvailabilitiesCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceAvailabilities(id, limit, offset, filter, options);
+        listSourceAvailabilities(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<AvailabilitiesCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceAvailabilities(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12799,11 +14775,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceClusters(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ClustersCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceClusters(id, limit, offset, filter, options);
+        listSourceClusters(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ClustersCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceClusters(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12816,11 +14793,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceContainerGroups(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ContainerGroupsCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceContainerGroups(id, limit, offset, filter, options);
+        listSourceContainerGroups(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ContainerGroupsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceContainerGroups(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12833,11 +14811,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceContainerImages(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ContainerImagesCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceContainerImages(id, limit, offset, filter, options);
+        listSourceContainerImages(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ContainerImagesCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceContainerImages(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12850,11 +14829,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceContainerNodes(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ContainerNodesCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceContainerNodes(id, limit, offset, filter, options);
+        listSourceContainerNodes(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ContainerNodesCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceContainerNodes(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12867,11 +14847,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceContainerProjects(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ContainerProjectsCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceContainerProjects(id, limit, offset, filter, options);
+        listSourceContainerProjects(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ContainerProjectsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceContainerProjects(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12884,11 +14865,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceContainerTemplates(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ContainerTemplatesCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceContainerTemplates(id, limit, offset, filter, options);
+        listSourceContainerTemplates(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ContainerTemplatesCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceContainerTemplates(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12901,11 +14883,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceContainers(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ContainersCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceContainers(id, limit, offset, filter, options);
+        listSourceContainers(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ContainersCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceContainers(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12918,11 +14901,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceDatastores(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<DatastoresCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceDatastores(id, limit, offset, filter, options);
+        listSourceDatastores(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<DatastoresCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceDatastores(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12935,11 +14919,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceHosts(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<HostsCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceHosts(id, limit, offset, filter, options);
+        listSourceHosts(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<HostsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceHosts(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12952,11 +14937,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceIpaddresses(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<IpaddressesCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceIpaddresses(id, limit, offset, filter, options);
+        listSourceIpaddresses(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<IpaddressesCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceIpaddresses(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12969,11 +14955,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceNetworkAdapters(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<NetworkAdaptersCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceNetworkAdapters(id, limit, offset, filter, options);
+        listSourceNetworkAdapters(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<NetworkAdaptersCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceNetworkAdapters(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -12986,11 +14973,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceNetworks(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<NetworksCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceNetworks(id, limit, offset, filter, options);
+        listSourceNetworks(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<NetworksCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceNetworks(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13003,11 +14991,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceOrchestrationStacks(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<OrchestrationStacksCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceOrchestrationStacks(id, limit, offset, filter, options);
+        listSourceOrchestrationStacks(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<OrchestrationStacksCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceOrchestrationStacks(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13020,11 +15009,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceRegionIpaddresses(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<IpaddressesCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceRegionIpaddresses(id, limit, offset, filter, options);
+        listSourceRegionIpaddresses(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<IpaddressesCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceRegionIpaddresses(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13037,11 +15027,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceRegionNetworkAdapters(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<NetworkAdaptersCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceRegionNetworkAdapters(id, limit, offset, filter, options);
+        listSourceRegionNetworkAdapters(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<NetworkAdaptersCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceRegionNetworkAdapters(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13054,11 +15045,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceRegionNetworks(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<NetworksCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceRegionNetworks(id, limit, offset, filter, options);
+        listSourceRegionNetworks(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<NetworksCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceRegionNetworks(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13071,11 +15063,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceRegionOrchestrationStacks(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<OrchestrationStacksCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceRegionOrchestrationStacks(id, limit, offset, filter, options);
+        listSourceRegionOrchestrationStacks(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<OrchestrationStacksCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceRegionOrchestrationStacks(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13088,11 +15081,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceRegionSecurityGroups(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<SecurityGroupsCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceRegionSecurityGroups(id, limit, offset, filter, options);
+        listSourceRegionSecurityGroups(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<SecurityGroupsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceRegionSecurityGroups(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13105,11 +15099,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceRegionServiceInstances(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceInstancesCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceRegionServiceInstances(id, limit, offset, filter, options);
+        listSourceRegionServiceInstances(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceInstancesCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceRegionServiceInstances(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13122,11 +15117,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceRegionServiceOfferings(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceOfferingsCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceRegionServiceOfferings(id, limit, offset, filter, options);
+        listSourceRegionServiceOfferings(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceOfferingsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceRegionServiceOfferings(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13139,11 +15135,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceRegionServicePlans(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServicePlansCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceRegionServicePlans(id, limit, offset, filter, options);
+        listSourceRegionServicePlans(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServicePlansCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceRegionServicePlans(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13156,11 +15153,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceRegionSubnets(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<SubnetsCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceRegionSubnets(id, limit, offset, filter, options);
+        listSourceRegionSubnets(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<SubnetsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceRegionSubnets(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13173,11 +15171,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceRegionVms(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<VmsCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceRegionVms(id, limit, offset, filter, options);
+        listSourceRegionVms(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<VmsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceRegionVms(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13190,11 +15189,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceRegionVolumes(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<VolumesCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceRegionVolumes(id, limit, offset, filter, options);
+        listSourceRegionVolumes(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<VolumesCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceRegionVolumes(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13206,11 +15206,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceRegions(limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<SourceRegionsCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceRegions(limit, offset, filter, options);
+        listSourceRegions(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<SourceRegionsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceRegions(limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13223,11 +15224,30 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceSecurityGroups(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<SecurityGroupsCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceSecurityGroups(id, limit, offset, filter, options);
+        listSourceSecurityGroups(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<SecurityGroupsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceSecurityGroups(id, limit, offset, filter, sortBy, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * Returns an array of ServiceInstanceNode objects
+         * @summary List ServiceInstanceNodes for Source
+         * @param {string} id ID of the resource
+         * @param {number} [limit] The numbers of items to return per page.
+         * @param {number} [offset] The number of items to skip before starting to collect the result set.
+         * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listSourceServiceInstanceNodes(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceInstanceNodesCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceServiceInstanceNodes(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13240,11 +15260,48 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceServiceInstances(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceInstancesCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceServiceInstances(id, limit, offset, filter, options);
+        listSourceServiceInstances(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceInstancesCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceServiceInstances(id, limit, offset, filter, sortBy, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * Returns an array of ServiceInventory objects
+         * @summary List ServiceInventories for Source
+         * @param {string} id ID of the resource
+         * @param {number} [limit] The numbers of items to return per page.
+         * @param {number} [offset] The number of items to skip before starting to collect the result set.
+         * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listSourceServiceInventories(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceInventoriesCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceServiceInventories(id, limit, offset, filter, sortBy, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * Returns an array of ServiceOfferingNode objects
+         * @summary List ServiceOfferingNodes for Source
+         * @param {string} id ID of the resource
+         * @param {number} [limit] The numbers of items to return per page.
+         * @param {number} [offset] The number of items to skip before starting to collect the result set.
+         * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listSourceServiceOfferingNodes(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceOfferingNodesCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceServiceOfferingNodes(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13257,11 +15314,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceServiceOfferings(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceOfferingsCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceServiceOfferings(id, limit, offset, filter, options);
+        listSourceServiceOfferings(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceOfferingsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceServiceOfferings(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13274,11 +15332,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceServicePlans(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServicePlansCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceServicePlans(id, limit, offset, filter, options);
+        listSourceServicePlans(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServicePlansCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceServicePlans(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13291,11 +15350,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceSourceRegions(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<SourceRegionsCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceSourceRegions(id, limit, offset, filter, options);
+        listSourceSourceRegions(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<SourceRegionsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceSourceRegions(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13308,11 +15368,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceSubnets(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<SubnetsCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceSubnets(id, limit, offset, filter, options);
+        listSourceSubnets(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<SubnetsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceSubnets(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13325,11 +15386,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceSubscriptions(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<SubscriptionsCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceSubscriptions(id, limit, offset, filter, options);
+        listSourceSubscriptions(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<SubscriptionsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceSubscriptions(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13342,11 +15404,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceVms(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<VmsCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceVms(id, limit, offset, filter, options);
+        listSourceVms(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<VmsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceVms(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13359,11 +15422,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceVolumeTypes(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<VolumeTypesCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceVolumeTypes(id, limit, offset, filter, options);
+        listSourceVolumeTypes(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<VolumeTypesCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceVolumeTypes(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13376,11 +15440,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceVolumes(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<VolumesCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceVolumes(id, limit, offset, filter, options);
+        listSourceVolumes(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<VolumesCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSourceVolumes(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13392,11 +15457,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSources(limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<SourcesCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSources(limit, offset, filter, options);
+        listSources(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<SourcesCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSources(limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13409,11 +15475,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSubnetIpaddresses(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<IpaddressesCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSubnetIpaddresses(id, limit, offset, filter, options);
+        listSubnetIpaddresses(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<IpaddressesCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSubnetIpaddresses(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13426,11 +15493,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSubnetNetworkAdapters(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<NetworkAdaptersCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSubnetNetworkAdapters(id, limit, offset, filter, options);
+        listSubnetNetworkAdapters(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<NetworkAdaptersCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSubnetNetworkAdapters(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13443,11 +15511,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSubnetTags(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<TagsCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSubnetTags(id, limit, offset, filter, options);
+        listSubnetTags(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<TagsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSubnetTags(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13459,11 +15528,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSubnets(limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<SubnetsCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSubnets(limit, offset, filter, options);
+        listSubnets(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<SubnetsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSubnets(limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13476,11 +15546,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSubscriptionIpaddresses(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<IpaddressesCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSubscriptionIpaddresses(id, limit, offset, filter, options);
+        listSubscriptionIpaddresses(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<IpaddressesCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSubscriptionIpaddresses(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13493,11 +15564,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSubscriptionNetworkAdapters(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<NetworkAdaptersCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSubscriptionNetworkAdapters(id, limit, offset, filter, options);
+        listSubscriptionNetworkAdapters(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<NetworkAdaptersCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSubscriptionNetworkAdapters(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13510,11 +15582,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSubscriptionNetworks(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<NetworksCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSubscriptionNetworks(id, limit, offset, filter, options);
+        listSubscriptionNetworks(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<NetworksCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSubscriptionNetworks(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13527,11 +15600,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSubscriptionOrchestrationStacks(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<OrchestrationStacksCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSubscriptionOrchestrationStacks(id, limit, offset, filter, options);
+        listSubscriptionOrchestrationStacks(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<OrchestrationStacksCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSubscriptionOrchestrationStacks(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13544,11 +15618,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSubscriptionSecurityGroups(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<SecurityGroupsCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSubscriptionSecurityGroups(id, limit, offset, filter, options);
+        listSubscriptionSecurityGroups(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<SecurityGroupsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSubscriptionSecurityGroups(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13561,11 +15636,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSubscriptionServiceInstances(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceInstancesCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSubscriptionServiceInstances(id, limit, offset, filter, options);
+        listSubscriptionServiceInstances(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceInstancesCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSubscriptionServiceInstances(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13578,11 +15654,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSubscriptionServiceOfferings(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceOfferingsCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSubscriptionServiceOfferings(id, limit, offset, filter, options);
+        listSubscriptionServiceOfferings(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceOfferingsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSubscriptionServiceOfferings(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13595,11 +15672,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSubscriptionServicePlans(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServicePlansCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSubscriptionServicePlans(id, limit, offset, filter, options);
+        listSubscriptionServicePlans(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServicePlansCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSubscriptionServicePlans(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13612,11 +15690,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSubscriptionSubnets(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<SubnetsCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSubscriptionSubnets(id, limit, offset, filter, options);
+        listSubscriptionSubnets(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<SubnetsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSubscriptionSubnets(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13629,11 +15708,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSubscriptionVms(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<VmsCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSubscriptionVms(id, limit, offset, filter, options);
+        listSubscriptionVms(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<VmsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSubscriptionVms(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13646,11 +15726,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSubscriptionVolumes(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<VolumesCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSubscriptionVolumes(id, limit, offset, filter, options);
+        listSubscriptionVolumes(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<VolumesCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSubscriptionVolumes(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13662,11 +15743,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSubscriptions(limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<SubscriptionsCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSubscriptions(limit, offset, filter, options);
+        listSubscriptions(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<SubscriptionsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listSubscriptions(limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13679,11 +15761,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTagContainerGroups(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ContainerGroupsCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listTagContainerGroups(id, limit, offset, filter, options);
+        listTagContainerGroups(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ContainerGroupsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listTagContainerGroups(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13696,11 +15779,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTagContainerImages(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ContainerImagesCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listTagContainerImages(id, limit, offset, filter, options);
+        listTagContainerImages(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ContainerImagesCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listTagContainerImages(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13713,11 +15797,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTagContainerNodes(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ContainerNodesCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listTagContainerNodes(id, limit, offset, filter, options);
+        listTagContainerNodes(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ContainerNodesCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listTagContainerNodes(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13730,11 +15815,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTagContainerProjects(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ContainerProjectsCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listTagContainerProjects(id, limit, offset, filter, options);
+        listTagContainerProjects(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ContainerProjectsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listTagContainerProjects(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13747,11 +15833,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTagContainerTemplates(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ContainerTemplatesCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listTagContainerTemplates(id, limit, offset, filter, options);
+        listTagContainerTemplates(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ContainerTemplatesCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listTagContainerTemplates(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13764,11 +15851,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTagIpaddresses(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<IpaddressesCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listTagIpaddresses(id, limit, offset, filter, options);
+        listTagIpaddresses(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<IpaddressesCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listTagIpaddresses(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13781,11 +15869,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTagNetworkAdapters(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<NetworkAdaptersCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listTagNetworkAdapters(id, limit, offset, filter, options);
+        listTagNetworkAdapters(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<NetworkAdaptersCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listTagNetworkAdapters(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13798,11 +15887,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTagNetworks(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<NetworksCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listTagNetworks(id, limit, offset, filter, options);
+        listTagNetworks(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<NetworksCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listTagNetworks(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13815,11 +15905,30 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTagSecurityGroups(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<SecurityGroupsCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listTagSecurityGroups(id, limit, offset, filter, options);
+        listTagSecurityGroups(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<SecurityGroupsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listTagSecurityGroups(id, limit, offset, filter, sortBy, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * Returns an array of ServiceInventory objects
+         * @summary List ServiceInventories for Tag
+         * @param {string} id ID of the resource
+         * @param {number} [limit] The numbers of items to return per page.
+         * @param {number} [offset] The number of items to skip before starting to collect the result set.
+         * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listTagServiceInventories(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceInventoriesCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listTagServiceInventories(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13832,11 +15941,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTagServiceOfferings(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceOfferingsCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listTagServiceOfferings(id, limit, offset, filter, options);
+        listTagServiceOfferings(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceOfferingsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listTagServiceOfferings(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13849,11 +15959,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTagSubnets(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<SubnetsCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listTagSubnets(id, limit, offset, filter, options);
+        listTagSubnets(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<SubnetsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listTagSubnets(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13866,11 +15977,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTagVms(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<VmsCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listTagVms(id, limit, offset, filter, options);
+        listTagVms(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<VmsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listTagVms(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13882,11 +15994,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTags(limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<TagsCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listTags(limit, offset, filter, options);
+        listTags(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<TagsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listTags(limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13898,11 +16011,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTasks(limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<TasksCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listTasks(limit, offset, filter, options);
+        listTasks(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<TasksCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listTasks(limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13915,11 +16029,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listVmNetworkAdapters(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<NetworkAdaptersCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listVmNetworkAdapters(id, limit, offset, filter, options);
+        listVmNetworkAdapters(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<NetworkAdaptersCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listVmNetworkAdapters(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13932,11 +16047,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listVmSecurityGroups(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<SecurityGroupsCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listVmSecurityGroups(id, limit, offset, filter, options);
+        listVmSecurityGroups(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<SecurityGroupsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listVmSecurityGroups(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13949,11 +16065,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listVmTags(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<TagsCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listVmTags(id, limit, offset, filter, options);
+        listVmTags(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<TagsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listVmTags(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13966,11 +16083,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listVmVolumeAttachments(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<VolumeAttachmentsCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listVmVolumeAttachments(id, limit, offset, filter, options);
+        listVmVolumeAttachments(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<VolumeAttachmentsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listVmVolumeAttachments(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13983,11 +16101,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listVmVolumes(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<VolumesCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listVmVolumes(id, limit, offset, filter, options);
+        listVmVolumes(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<VolumesCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listVmVolumes(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -13999,11 +16118,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listVms(limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<VmsCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listVms(limit, offset, filter, options);
+        listVms(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<VmsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listVms(limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -14015,11 +16135,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listVolumeAttachments(limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<VolumeAttachmentsCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listVolumeAttachments(limit, offset, filter, options);
+        listVolumeAttachments(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<VolumeAttachmentsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listVolumeAttachments(limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -14032,11 +16153,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listVolumeTypeVolumes(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<VolumesCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listVolumeTypeVolumes(id, limit, offset, filter, options);
+        listVolumeTypeVolumes(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<VolumesCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listVolumeTypeVolumes(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -14048,11 +16170,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listVolumeTypes(limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<VolumeTypesCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listVolumeTypes(limit, offset, filter, options);
+        listVolumeTypes(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<VolumeTypesCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listVolumeTypes(limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -14065,11 +16188,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listVolumeVms(id: string, limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<VmsCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listVolumeVms(id, limit, offset, filter, options);
+        listVolumeVms(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<VmsCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listVolumeVms(id, limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -14081,11 +16205,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listVolumes(limit?: number, offset?: number, filter?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<VolumesCollection> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listVolumes(limit, offset, filter, options);
+        listVolumes(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<VolumesCollection> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).listVolumes(limit, offset, filter, sortBy, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -14095,12 +16220,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * Returns a Task id
          * @summary Order an existing ServiceOffering
          * @param {string} id ID of the resource
-         * @param {OrderParameters} orderParameters Order parameters defining the service and provider control
+         * @param {OrderParametersServiceOffering} orderParametersServiceOffering Order parameters defining the service and provider control
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        orderServiceOffering(id: string, orderParameters: OrderParameters, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse200> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).orderServiceOffering(id, orderParameters, options);
+        orderServiceOffering(id: string, orderParametersServiceOffering: OrderParametersServiceOffering, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse200> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).orderServiceOffering(id, orderParametersServiceOffering, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -14110,12 +16235,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          * Returns a Task id
          * @summary Order an existing ServicePlan
          * @param {string} id ID of the resource
-         * @param {OrderParameters} orderParameters Order parameters defining the service and provider control
+         * @param {OrderParametersServicePlan} orderParametersServicePlan Order parameters defining the service and provider control
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        orderServicePlan(id: string, orderParameters: OrderParameters, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse200> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).orderServicePlan(id, orderParameters, options);
+        orderServicePlan(id: string, orderParametersServicePlan: OrderParametersServicePlan, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<InlineResponse200> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).orderServicePlan(id, orderParametersServicePlan, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -14124,12 +16249,12 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         /**
          * Performs a GraphQL Query
          * @summary Perform a GraphQL Query
-         * @param {InlineObject} inlineObject
+         * @param {GraphQLRequest} graphQLRequest GraphQL Query Request
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        postGraphQL(inlineObject: InlineObject, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<GraphQLResponse> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).postGraphQL(inlineObject, options);
+        postGraphQL(graphQLRequest: GraphQLRequest, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<GraphQLResponse> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).postGraphQL(graphQLRequest, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -14374,6 +16499,34 @@ export const DefaultApiFp = function(configuration?: Configuration) {
             };
         },
         /**
+         * Returns a ServiceInstanceNode object
+         * @summary Show an existing ServiceInstanceNode
+         * @param {string} id ID of the resource
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        showServiceInstanceNode(id: string, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceInstanceNode> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).showServiceInstanceNode(id, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * Returns a ServiceInventory object
+         * @summary Show an existing ServiceInventory
+         * @param {string} id ID of the resource
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        showServiceInventory(id: string, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceInventory> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).showServiceInventory(id, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
          * Returns a ServiceOffering object
          * @summary Show an existing ServiceOffering
          * @param {string} id ID of the resource
@@ -14410,6 +16563,20 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          */
         showServiceOfferingIconIconData(id: string, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<any> {
             const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).showServiceOfferingIconIconData(id, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * Returns a ServiceOfferingNode object
+         * @summary Show an existing ServiceOfferingNode
+         * @param {string} id ID of the resource
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        showServiceOfferingNode(id: string, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<ServiceOfferingNode> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).showServiceOfferingNode(id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = Object.assign(localVarAxiosArgs.options, {url: basePath + localVarAxiosArgs.url})
                 return axios.request(axiosRequestArgs);
@@ -14594,6 +16761,17 @@ export const DefaultApiFp = function(configuration?: Configuration) {
 export const DefaultApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     return {
         /**
+         * Returns a Task id
+         * @summary Invokes computing of ServiceInventories for given ServiceOffering
+         * @param {string} id ID of the resource
+         * @param {AppliedInventoriesParametersServicePlan} appliedInventoriesParametersServicePlan Parameters defining input data for computing inventories
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        appliedInventoriesForServiceOffering(id: string, appliedInventoriesParametersServicePlan: AppliedInventoriesParametersServicePlan, options?: any) {
+            return DefaultApiFp(configuration).appliedInventoriesForServiceOffering(id, appliedInventoriesParametersServicePlan, options)(axios, basePath);
+        },
+        /**
          *
          * @summary Return this API document in JSON format
          * @param {*} [options] Override http request option.
@@ -14609,11 +16787,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listClusterHosts(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listClusterHosts(id, limit, offset, filter, options)(axios, basePath);
+        listClusterHosts(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listClusterHosts(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Cluster objects
@@ -14621,11 +16800,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listClusters(limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listClusters(limit, offset, filter, options)(axios, basePath);
+        listClusters(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listClusters(limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Container objects
@@ -14634,11 +16814,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listContainerGroupContainers(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listContainerGroupContainers(id, limit, offset, filter, options)(axios, basePath);
+        listContainerGroupContainers(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listContainerGroupContainers(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Tag objects
@@ -14647,11 +16828,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listContainerGroupTags(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listContainerGroupTags(id, limit, offset, filter, options)(axios, basePath);
+        listContainerGroupTags(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listContainerGroupTags(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of ContainerGroup objects
@@ -14659,11 +16841,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listContainerGroups(limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listContainerGroups(limit, offset, filter, options)(axios, basePath);
+        listContainerGroups(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listContainerGroups(limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Tag objects
@@ -14672,11 +16855,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listContainerImageTags(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listContainerImageTags(id, limit, offset, filter, options)(axios, basePath);
+        listContainerImageTags(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listContainerImageTags(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of ContainerImage objects
@@ -14684,11 +16868,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listContainerImages(limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listContainerImages(limit, offset, filter, options)(axios, basePath);
+        listContainerImages(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listContainerImages(limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of ContainerGroup objects
@@ -14697,11 +16882,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listContainerNodeContainerGroups(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listContainerNodeContainerGroups(id, limit, offset, filter, options)(axios, basePath);
+        listContainerNodeContainerGroups(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listContainerNodeContainerGroups(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Tag objects
@@ -14710,11 +16896,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listContainerNodeTags(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listContainerNodeTags(id, limit, offset, filter, options)(axios, basePath);
+        listContainerNodeTags(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listContainerNodeTags(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of ContainerNode objects
@@ -14722,11 +16909,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listContainerNodes(limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listContainerNodes(limit, offset, filter, options)(axios, basePath);
+        listContainerNodes(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listContainerNodes(limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of ContainerGroup objects
@@ -14735,11 +16923,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listContainerProjectContainerGroups(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listContainerProjectContainerGroups(id, limit, offset, filter, options)(axios, basePath);
+        listContainerProjectContainerGroups(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listContainerProjectContainerGroups(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of ContainerResourceQuota objects
@@ -14748,11 +16937,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listContainerProjectContainerResourceQuota(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listContainerProjectContainerResourceQuota(id, limit, offset, filter, options)(axios, basePath);
+        listContainerProjectContainerResourceQuota(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listContainerProjectContainerResourceQuota(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of ContainerTemplate objects
@@ -14761,11 +16951,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listContainerProjectContainerTemplates(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listContainerProjectContainerTemplates(id, limit, offset, filter, options)(axios, basePath);
+        listContainerProjectContainerTemplates(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listContainerProjectContainerTemplates(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Tag objects
@@ -14774,11 +16965,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listContainerProjectTags(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listContainerProjectTags(id, limit, offset, filter, options)(axios, basePath);
+        listContainerProjectTags(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listContainerProjectTags(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of ContainerProject objects
@@ -14786,11 +16978,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listContainerProjects(limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listContainerProjects(limit, offset, filter, options)(axios, basePath);
+        listContainerProjects(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listContainerProjects(limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of ContainerResourceQuota objects
@@ -14798,11 +16991,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listContainerResourceQuota(limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listContainerResourceQuota(limit, offset, filter, options)(axios, basePath);
+        listContainerResourceQuota(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listContainerResourceQuota(limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Tag objects
@@ -14811,11 +17005,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listContainerTemplateTags(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listContainerTemplateTags(id, limit, offset, filter, options)(axios, basePath);
+        listContainerTemplateTags(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listContainerTemplateTags(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of ContainerTemplate objects
@@ -14823,11 +17018,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listContainerTemplates(limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listContainerTemplates(limit, offset, filter, options)(axios, basePath);
+        listContainerTemplates(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listContainerTemplates(limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Container objects
@@ -14835,11 +17031,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listContainers(limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listContainers(limit, offset, filter, options)(axios, basePath);
+        listContainers(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listContainers(limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Datastore objects
@@ -14847,11 +17044,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listDatastores(limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listDatastores(limit, offset, filter, options)(axios, basePath);
+        listDatastores(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listDatastores(limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Flavor objects
@@ -14859,11 +17057,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listFlavors(limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listFlavors(limit, offset, filter, options)(axios, basePath);
+        listFlavors(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listFlavors(limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Host objects
@@ -14871,11 +17070,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listHosts(limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listHosts(limit, offset, filter, options)(axios, basePath);
+        listHosts(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listHosts(limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Tag objects
@@ -14884,11 +17084,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listIpaddressTags(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listIpaddressTags(id, limit, offset, filter, options)(axios, basePath);
+        listIpaddressTags(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listIpaddressTags(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Ipaddress objects
@@ -14896,11 +17097,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listIpaddresses(limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listIpaddresses(limit, offset, filter, options)(axios, basePath);
+        listIpaddresses(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listIpaddresses(limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Ipaddress objects
@@ -14909,11 +17111,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listNetworkAdapterIpaddresses(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listNetworkAdapterIpaddresses(id, limit, offset, filter, options)(axios, basePath);
+        listNetworkAdapterIpaddresses(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listNetworkAdapterIpaddresses(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Tag objects
@@ -14922,11 +17125,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listNetworkAdapterTags(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listNetworkAdapterTags(id, limit, offset, filter, options)(axios, basePath);
+        listNetworkAdapterTags(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listNetworkAdapterTags(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of NetworkAdapter objects
@@ -14934,11 +17138,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listNetworkAdapters(limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listNetworkAdapters(limit, offset, filter, options)(axios, basePath);
+        listNetworkAdapters(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listNetworkAdapters(limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Subnet objects
@@ -14947,11 +17152,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listNetworkSubnets(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listNetworkSubnets(id, limit, offset, filter, options)(axios, basePath);
+        listNetworkSubnets(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listNetworkSubnets(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Tag objects
@@ -14960,11 +17166,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listNetworkTags(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listNetworkTags(id, limit, offset, filter, options)(axios, basePath);
+        listNetworkTags(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listNetworkTags(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Network objects
@@ -14972,11 +17179,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listNetworks(limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listNetworks(limit, offset, filter, options)(axios, basePath);
+        listNetworks(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listNetworks(limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Ipaddress objects
@@ -14985,11 +17193,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listOrchestrationStackIpaddresses(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listOrchestrationStackIpaddresses(id, limit, offset, filter, options)(axios, basePath);
+        listOrchestrationStackIpaddresses(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listOrchestrationStackIpaddresses(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of NetworkAdapter objects
@@ -14998,11 +17207,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listOrchestrationStackNetworkAdapters(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listOrchestrationStackNetworkAdapters(id, limit, offset, filter, options)(axios, basePath);
+        listOrchestrationStackNetworkAdapters(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listOrchestrationStackNetworkAdapters(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Network objects
@@ -15011,11 +17221,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listOrchestrationStackNetworks(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listOrchestrationStackNetworks(id, limit, offset, filter, options)(axios, basePath);
+        listOrchestrationStackNetworks(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listOrchestrationStackNetworks(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of SecurityGroup objects
@@ -15024,11 +17235,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listOrchestrationStackSecurityGroups(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listOrchestrationStackSecurityGroups(id, limit, offset, filter, options)(axios, basePath);
+        listOrchestrationStackSecurityGroups(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listOrchestrationStackSecurityGroups(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Subnet objects
@@ -15037,11 +17249,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listOrchestrationStackSubnets(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listOrchestrationStackSubnets(id, limit, offset, filter, options)(axios, basePath);
+        listOrchestrationStackSubnets(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listOrchestrationStackSubnets(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Vm objects
@@ -15050,11 +17263,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listOrchestrationStackVms(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listOrchestrationStackVms(id, limit, offset, filter, options)(axios, basePath);
+        listOrchestrationStackVms(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listOrchestrationStackVms(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Volume objects
@@ -15063,11 +17277,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listOrchestrationStackVolumes(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listOrchestrationStackVolumes(id, limit, offset, filter, options)(axios, basePath);
+        listOrchestrationStackVolumes(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listOrchestrationStackVolumes(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of OrchestrationStack objects
@@ -15075,11 +17290,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listOrchestrationStacks(limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listOrchestrationStacks(limit, offset, filter, options)(axios, basePath);
+        listOrchestrationStacks(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listOrchestrationStacks(limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Tag objects
@@ -15088,11 +17304,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSecurityGroupTags(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listSecurityGroupTags(id, limit, offset, filter, options)(axios, basePath);
+        listSecurityGroupTags(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listSecurityGroupTags(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Vm objects
@@ -15101,11 +17318,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSecurityGroupVms(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listSecurityGroupVms(id, limit, offset, filter, options)(axios, basePath);
+        listSecurityGroupVms(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listSecurityGroupVms(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of SecurityGroup objects
@@ -15113,11 +17331,39 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSecurityGroups(limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listSecurityGroups(limit, offset, filter, options)(axios, basePath);
+        listSecurityGroups(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listSecurityGroups(limit, offset, filter, sortBy, options)(axios, basePath);
+        },
+        /**
+         * Returns an array of ServiceInstanceNode objects
+         * @summary List ServiceInstanceNodes
+         * @param {number} [limit] The numbers of items to return per page.
+         * @param {number} [offset] The number of items to skip before starting to collect the result set.
+         * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listServiceInstanceNodes(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listServiceInstanceNodes(limit, offset, filter, sortBy, options)(axios, basePath);
+        },
+        /**
+         * Returns an array of ServiceInstanceNode objects
+         * @summary List ServiceInstanceNodes for ServiceInstance
+         * @param {string} id ID of the resource
+         * @param {number} [limit] The numbers of items to return per page.
+         * @param {number} [offset] The number of items to skip before starting to collect the result set.
+         * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listServiceInstanceServiceInstanceNodes(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listServiceInstanceServiceInstanceNodes(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of ServiceInstance objects
@@ -15125,11 +17371,39 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listServiceInstances(limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listServiceInstances(limit, offset, filter, options)(axios, basePath);
+        listServiceInstances(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listServiceInstances(limit, offset, filter, sortBy, options)(axios, basePath);
+        },
+        /**
+         * Returns an array of ServiceInventory objects
+         * @summary List ServiceInventories
+         * @param {number} [limit] The numbers of items to return per page.
+         * @param {number} [offset] The number of items to skip before starting to collect the result set.
+         * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listServiceInventories(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listServiceInventories(limit, offset, filter, sortBy, options)(axios, basePath);
+        },
+        /**
+         * Returns an array of Tag objects
+         * @summary List Tags for ServiceInventory
+         * @param {string} id ID of the resource
+         * @param {number} [limit] The numbers of items to return per page.
+         * @param {number} [offset] The number of items to skip before starting to collect the result set.
+         * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listServiceInventoryTags(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listServiceInventoryTags(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of ServiceOfferingIcon objects
@@ -15137,11 +17411,25 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listServiceOfferingIcons(limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listServiceOfferingIcons(limit, offset, filter, options)(axios, basePath);
+        listServiceOfferingIcons(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listServiceOfferingIcons(limit, offset, filter, sortBy, options)(axios, basePath);
+        },
+        /**
+         * Returns an array of ServiceOfferingNode objects
+         * @summary List ServiceOfferingNodes
+         * @param {number} [limit] The numbers of items to return per page.
+         * @param {number} [offset] The number of items to skip before starting to collect the result set.
+         * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listServiceOfferingNodes(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listServiceOfferingNodes(limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of ServiceInstance objects
@@ -15150,11 +17438,26 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listServiceOfferingServiceInstances(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listServiceOfferingServiceInstances(id, limit, offset, filter, options)(axios, basePath);
+        listServiceOfferingServiceInstances(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listServiceOfferingServiceInstances(id, limit, offset, filter, sortBy, options)(axios, basePath);
+        },
+        /**
+         * Returns an array of ServiceOfferingNode objects
+         * @summary List ServiceOfferingNodes for ServiceOffering
+         * @param {string} id ID of the resource
+         * @param {number} [limit] The numbers of items to return per page.
+         * @param {number} [offset] The number of items to skip before starting to collect the result set.
+         * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listServiceOfferingServiceOfferingNodes(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listServiceOfferingServiceOfferingNodes(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of ServicePlan objects
@@ -15163,11 +17466,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listServiceOfferingServicePlans(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listServiceOfferingServicePlans(id, limit, offset, filter, options)(axios, basePath);
+        listServiceOfferingServicePlans(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listServiceOfferingServicePlans(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Tag objects
@@ -15176,11 +17480,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listServiceOfferingTags(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listServiceOfferingTags(id, limit, offset, filter, options)(axios, basePath);
+        listServiceOfferingTags(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listServiceOfferingTags(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of ServiceOffering objects
@@ -15188,11 +17493,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listServiceOfferings(limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listServiceOfferings(limit, offset, filter, options)(axios, basePath);
+        listServiceOfferings(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listServiceOfferings(limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of ServiceInstance objects
@@ -15201,11 +17507,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listServicePlanServiceInstances(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listServicePlanServiceInstances(id, limit, offset, filter, options)(axios, basePath);
+        listServicePlanServiceInstances(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listServicePlanServiceInstances(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of ServicePlan objects
@@ -15213,11 +17520,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listServicePlans(limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listServicePlans(limit, offset, filter, options)(axios, basePath);
+        listServicePlans(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listServicePlans(limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Availability objects
@@ -15226,11 +17534,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceAvailabilities(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listSourceAvailabilities(id, limit, offset, filter, options)(axios, basePath);
+        listSourceAvailabilities(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listSourceAvailabilities(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Cluster objects
@@ -15239,11 +17548,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceClusters(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listSourceClusters(id, limit, offset, filter, options)(axios, basePath);
+        listSourceClusters(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listSourceClusters(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of ContainerGroup objects
@@ -15252,11 +17562,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceContainerGroups(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listSourceContainerGroups(id, limit, offset, filter, options)(axios, basePath);
+        listSourceContainerGroups(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listSourceContainerGroups(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of ContainerImage objects
@@ -15265,11 +17576,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceContainerImages(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listSourceContainerImages(id, limit, offset, filter, options)(axios, basePath);
+        listSourceContainerImages(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listSourceContainerImages(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of ContainerNode objects
@@ -15278,11 +17590,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceContainerNodes(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listSourceContainerNodes(id, limit, offset, filter, options)(axios, basePath);
+        listSourceContainerNodes(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listSourceContainerNodes(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of ContainerProject objects
@@ -15291,11 +17604,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceContainerProjects(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listSourceContainerProjects(id, limit, offset, filter, options)(axios, basePath);
+        listSourceContainerProjects(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listSourceContainerProjects(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of ContainerTemplate objects
@@ -15304,11 +17618,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceContainerTemplates(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listSourceContainerTemplates(id, limit, offset, filter, options)(axios, basePath);
+        listSourceContainerTemplates(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listSourceContainerTemplates(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Container objects
@@ -15317,11 +17632,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceContainers(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listSourceContainers(id, limit, offset, filter, options)(axios, basePath);
+        listSourceContainers(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listSourceContainers(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Datastore objects
@@ -15330,11 +17646,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceDatastores(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listSourceDatastores(id, limit, offset, filter, options)(axios, basePath);
+        listSourceDatastores(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listSourceDatastores(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Host objects
@@ -15343,11 +17660,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceHosts(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listSourceHosts(id, limit, offset, filter, options)(axios, basePath);
+        listSourceHosts(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listSourceHosts(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Ipaddress objects
@@ -15356,11 +17674,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceIpaddresses(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listSourceIpaddresses(id, limit, offset, filter, options)(axios, basePath);
+        listSourceIpaddresses(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listSourceIpaddresses(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of NetworkAdapter objects
@@ -15369,11 +17688,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceNetworkAdapters(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listSourceNetworkAdapters(id, limit, offset, filter, options)(axios, basePath);
+        listSourceNetworkAdapters(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listSourceNetworkAdapters(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Network objects
@@ -15382,11 +17702,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceNetworks(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listSourceNetworks(id, limit, offset, filter, options)(axios, basePath);
+        listSourceNetworks(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listSourceNetworks(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of OrchestrationStack objects
@@ -15395,11 +17716,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceOrchestrationStacks(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listSourceOrchestrationStacks(id, limit, offset, filter, options)(axios, basePath);
+        listSourceOrchestrationStacks(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listSourceOrchestrationStacks(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Ipaddress objects
@@ -15408,11 +17730,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceRegionIpaddresses(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listSourceRegionIpaddresses(id, limit, offset, filter, options)(axios, basePath);
+        listSourceRegionIpaddresses(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listSourceRegionIpaddresses(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of NetworkAdapter objects
@@ -15421,11 +17744,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceRegionNetworkAdapters(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listSourceRegionNetworkAdapters(id, limit, offset, filter, options)(axios, basePath);
+        listSourceRegionNetworkAdapters(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listSourceRegionNetworkAdapters(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Network objects
@@ -15434,11 +17758,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceRegionNetworks(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listSourceRegionNetworks(id, limit, offset, filter, options)(axios, basePath);
+        listSourceRegionNetworks(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listSourceRegionNetworks(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of OrchestrationStack objects
@@ -15447,11 +17772,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceRegionOrchestrationStacks(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listSourceRegionOrchestrationStacks(id, limit, offset, filter, options)(axios, basePath);
+        listSourceRegionOrchestrationStacks(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listSourceRegionOrchestrationStacks(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of SecurityGroup objects
@@ -15460,11 +17786,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceRegionSecurityGroups(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listSourceRegionSecurityGroups(id, limit, offset, filter, options)(axios, basePath);
+        listSourceRegionSecurityGroups(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listSourceRegionSecurityGroups(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of ServiceInstance objects
@@ -15473,11 +17800,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceRegionServiceInstances(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listSourceRegionServiceInstances(id, limit, offset, filter, options)(axios, basePath);
+        listSourceRegionServiceInstances(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listSourceRegionServiceInstances(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of ServiceOffering objects
@@ -15486,11 +17814,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceRegionServiceOfferings(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listSourceRegionServiceOfferings(id, limit, offset, filter, options)(axios, basePath);
+        listSourceRegionServiceOfferings(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listSourceRegionServiceOfferings(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of ServicePlan objects
@@ -15499,11 +17828,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceRegionServicePlans(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listSourceRegionServicePlans(id, limit, offset, filter, options)(axios, basePath);
+        listSourceRegionServicePlans(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listSourceRegionServicePlans(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Subnet objects
@@ -15512,11 +17842,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceRegionSubnets(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listSourceRegionSubnets(id, limit, offset, filter, options)(axios, basePath);
+        listSourceRegionSubnets(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listSourceRegionSubnets(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Vm objects
@@ -15525,11 +17856,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceRegionVms(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listSourceRegionVms(id, limit, offset, filter, options)(axios, basePath);
+        listSourceRegionVms(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listSourceRegionVms(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Volume objects
@@ -15538,11 +17870,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceRegionVolumes(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listSourceRegionVolumes(id, limit, offset, filter, options)(axios, basePath);
+        listSourceRegionVolumes(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listSourceRegionVolumes(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of SourceRegion objects
@@ -15550,11 +17883,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceRegions(limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listSourceRegions(limit, offset, filter, options)(axios, basePath);
+        listSourceRegions(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listSourceRegions(limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of SecurityGroup objects
@@ -15563,11 +17897,26 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceSecurityGroups(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listSourceSecurityGroups(id, limit, offset, filter, options)(axios, basePath);
+        listSourceSecurityGroups(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listSourceSecurityGroups(id, limit, offset, filter, sortBy, options)(axios, basePath);
+        },
+        /**
+         * Returns an array of ServiceInstanceNode objects
+         * @summary List ServiceInstanceNodes for Source
+         * @param {string} id ID of the resource
+         * @param {number} [limit] The numbers of items to return per page.
+         * @param {number} [offset] The number of items to skip before starting to collect the result set.
+         * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listSourceServiceInstanceNodes(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listSourceServiceInstanceNodes(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of ServiceInstance objects
@@ -15576,11 +17925,40 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceServiceInstances(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listSourceServiceInstances(id, limit, offset, filter, options)(axios, basePath);
+        listSourceServiceInstances(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listSourceServiceInstances(id, limit, offset, filter, sortBy, options)(axios, basePath);
+        },
+        /**
+         * Returns an array of ServiceInventory objects
+         * @summary List ServiceInventories for Source
+         * @param {string} id ID of the resource
+         * @param {number} [limit] The numbers of items to return per page.
+         * @param {number} [offset] The number of items to skip before starting to collect the result set.
+         * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listSourceServiceInventories(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listSourceServiceInventories(id, limit, offset, filter, sortBy, options)(axios, basePath);
+        },
+        /**
+         * Returns an array of ServiceOfferingNode objects
+         * @summary List ServiceOfferingNodes for Source
+         * @param {string} id ID of the resource
+         * @param {number} [limit] The numbers of items to return per page.
+         * @param {number} [offset] The number of items to skip before starting to collect the result set.
+         * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listSourceServiceOfferingNodes(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listSourceServiceOfferingNodes(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of ServiceOffering objects
@@ -15589,11 +17967,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceServiceOfferings(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listSourceServiceOfferings(id, limit, offset, filter, options)(axios, basePath);
+        listSourceServiceOfferings(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listSourceServiceOfferings(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of ServicePlan objects
@@ -15602,11 +17981,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceServicePlans(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listSourceServicePlans(id, limit, offset, filter, options)(axios, basePath);
+        listSourceServicePlans(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listSourceServicePlans(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of SourceRegion objects
@@ -15615,11 +17995,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceSourceRegions(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listSourceSourceRegions(id, limit, offset, filter, options)(axios, basePath);
+        listSourceSourceRegions(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listSourceSourceRegions(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Subnet objects
@@ -15628,11 +18009,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceSubnets(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listSourceSubnets(id, limit, offset, filter, options)(axios, basePath);
+        listSourceSubnets(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listSourceSubnets(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Subscription objects
@@ -15641,11 +18023,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceSubscriptions(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listSourceSubscriptions(id, limit, offset, filter, options)(axios, basePath);
+        listSourceSubscriptions(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listSourceSubscriptions(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Vm objects
@@ -15654,11 +18037,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceVms(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listSourceVms(id, limit, offset, filter, options)(axios, basePath);
+        listSourceVms(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listSourceVms(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of VolumeType objects
@@ -15667,11 +18051,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceVolumeTypes(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listSourceVolumeTypes(id, limit, offset, filter, options)(axios, basePath);
+        listSourceVolumeTypes(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listSourceVolumeTypes(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Volume objects
@@ -15680,11 +18065,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSourceVolumes(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listSourceVolumes(id, limit, offset, filter, options)(axios, basePath);
+        listSourceVolumes(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listSourceVolumes(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Source objects
@@ -15692,11 +18078,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSources(limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listSources(limit, offset, filter, options)(axios, basePath);
+        listSources(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listSources(limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Ipaddress objects
@@ -15705,11 +18092,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSubnetIpaddresses(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listSubnetIpaddresses(id, limit, offset, filter, options)(axios, basePath);
+        listSubnetIpaddresses(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listSubnetIpaddresses(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of NetworkAdapter objects
@@ -15718,11 +18106,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSubnetNetworkAdapters(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listSubnetNetworkAdapters(id, limit, offset, filter, options)(axios, basePath);
+        listSubnetNetworkAdapters(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listSubnetNetworkAdapters(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Tag objects
@@ -15731,11 +18120,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSubnetTags(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listSubnetTags(id, limit, offset, filter, options)(axios, basePath);
+        listSubnetTags(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listSubnetTags(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Subnet objects
@@ -15743,11 +18133,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSubnets(limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listSubnets(limit, offset, filter, options)(axios, basePath);
+        listSubnets(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listSubnets(limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Ipaddress objects
@@ -15756,11 +18147,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSubscriptionIpaddresses(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listSubscriptionIpaddresses(id, limit, offset, filter, options)(axios, basePath);
+        listSubscriptionIpaddresses(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listSubscriptionIpaddresses(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of NetworkAdapter objects
@@ -15769,11 +18161,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSubscriptionNetworkAdapters(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listSubscriptionNetworkAdapters(id, limit, offset, filter, options)(axios, basePath);
+        listSubscriptionNetworkAdapters(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listSubscriptionNetworkAdapters(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Network objects
@@ -15782,11 +18175,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSubscriptionNetworks(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listSubscriptionNetworks(id, limit, offset, filter, options)(axios, basePath);
+        listSubscriptionNetworks(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listSubscriptionNetworks(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of OrchestrationStack objects
@@ -15795,11 +18189,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSubscriptionOrchestrationStacks(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listSubscriptionOrchestrationStacks(id, limit, offset, filter, options)(axios, basePath);
+        listSubscriptionOrchestrationStacks(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listSubscriptionOrchestrationStacks(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of SecurityGroup objects
@@ -15808,11 +18203,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSubscriptionSecurityGroups(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listSubscriptionSecurityGroups(id, limit, offset, filter, options)(axios, basePath);
+        listSubscriptionSecurityGroups(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listSubscriptionSecurityGroups(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of ServiceInstance objects
@@ -15821,11 +18217,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSubscriptionServiceInstances(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listSubscriptionServiceInstances(id, limit, offset, filter, options)(axios, basePath);
+        listSubscriptionServiceInstances(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listSubscriptionServiceInstances(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of ServiceOffering objects
@@ -15834,11 +18231,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSubscriptionServiceOfferings(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listSubscriptionServiceOfferings(id, limit, offset, filter, options)(axios, basePath);
+        listSubscriptionServiceOfferings(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listSubscriptionServiceOfferings(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of ServicePlan objects
@@ -15847,11 +18245,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSubscriptionServicePlans(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listSubscriptionServicePlans(id, limit, offset, filter, options)(axios, basePath);
+        listSubscriptionServicePlans(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listSubscriptionServicePlans(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Subnet objects
@@ -15860,11 +18259,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSubscriptionSubnets(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listSubscriptionSubnets(id, limit, offset, filter, options)(axios, basePath);
+        listSubscriptionSubnets(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listSubscriptionSubnets(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Vm objects
@@ -15873,11 +18273,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSubscriptionVms(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listSubscriptionVms(id, limit, offset, filter, options)(axios, basePath);
+        listSubscriptionVms(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listSubscriptionVms(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Volume objects
@@ -15886,11 +18287,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSubscriptionVolumes(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listSubscriptionVolumes(id, limit, offset, filter, options)(axios, basePath);
+        listSubscriptionVolumes(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listSubscriptionVolumes(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Subscription objects
@@ -15898,11 +18300,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listSubscriptions(limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listSubscriptions(limit, offset, filter, options)(axios, basePath);
+        listSubscriptions(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listSubscriptions(limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of ContainerGroup objects
@@ -15911,11 +18314,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTagContainerGroups(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listTagContainerGroups(id, limit, offset, filter, options)(axios, basePath);
+        listTagContainerGroups(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listTagContainerGroups(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of ContainerImage objects
@@ -15924,11 +18328,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTagContainerImages(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listTagContainerImages(id, limit, offset, filter, options)(axios, basePath);
+        listTagContainerImages(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listTagContainerImages(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of ContainerNode objects
@@ -15937,11 +18342,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTagContainerNodes(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listTagContainerNodes(id, limit, offset, filter, options)(axios, basePath);
+        listTagContainerNodes(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listTagContainerNodes(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of ContainerProject objects
@@ -15950,11 +18356,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTagContainerProjects(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listTagContainerProjects(id, limit, offset, filter, options)(axios, basePath);
+        listTagContainerProjects(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listTagContainerProjects(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of ContainerTemplate objects
@@ -15963,11 +18370,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTagContainerTemplates(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listTagContainerTemplates(id, limit, offset, filter, options)(axios, basePath);
+        listTagContainerTemplates(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listTagContainerTemplates(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Ipaddress objects
@@ -15976,11 +18384,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTagIpaddresses(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listTagIpaddresses(id, limit, offset, filter, options)(axios, basePath);
+        listTagIpaddresses(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listTagIpaddresses(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of NetworkAdapter objects
@@ -15989,11 +18398,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTagNetworkAdapters(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listTagNetworkAdapters(id, limit, offset, filter, options)(axios, basePath);
+        listTagNetworkAdapters(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listTagNetworkAdapters(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Network objects
@@ -16002,11 +18412,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTagNetworks(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listTagNetworks(id, limit, offset, filter, options)(axios, basePath);
+        listTagNetworks(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listTagNetworks(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of SecurityGroup objects
@@ -16015,11 +18426,26 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTagSecurityGroups(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listTagSecurityGroups(id, limit, offset, filter, options)(axios, basePath);
+        listTagSecurityGroups(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listTagSecurityGroups(id, limit, offset, filter, sortBy, options)(axios, basePath);
+        },
+        /**
+         * Returns an array of ServiceInventory objects
+         * @summary List ServiceInventories for Tag
+         * @param {string} id ID of the resource
+         * @param {number} [limit] The numbers of items to return per page.
+         * @param {number} [offset] The number of items to skip before starting to collect the result set.
+         * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        listTagServiceInventories(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listTagServiceInventories(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of ServiceOffering objects
@@ -16028,11 +18454,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTagServiceOfferings(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listTagServiceOfferings(id, limit, offset, filter, options)(axios, basePath);
+        listTagServiceOfferings(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listTagServiceOfferings(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Subnet objects
@@ -16041,11 +18468,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTagSubnets(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listTagSubnets(id, limit, offset, filter, options)(axios, basePath);
+        listTagSubnets(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listTagSubnets(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Vm objects
@@ -16054,11 +18482,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTagVms(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listTagVms(id, limit, offset, filter, options)(axios, basePath);
+        listTagVms(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listTagVms(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Tag objects
@@ -16066,11 +18495,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTags(limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listTags(limit, offset, filter, options)(axios, basePath);
+        listTags(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listTags(limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Task objects
@@ -16078,11 +18508,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listTasks(limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listTasks(limit, offset, filter, options)(axios, basePath);
+        listTasks(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listTasks(limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of NetworkAdapter objects
@@ -16091,11 +18522,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listVmNetworkAdapters(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listVmNetworkAdapters(id, limit, offset, filter, options)(axios, basePath);
+        listVmNetworkAdapters(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listVmNetworkAdapters(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of SecurityGroup objects
@@ -16104,11 +18536,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listVmSecurityGroups(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listVmSecurityGroups(id, limit, offset, filter, options)(axios, basePath);
+        listVmSecurityGroups(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listVmSecurityGroups(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Tag objects
@@ -16117,11 +18550,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listVmTags(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listVmTags(id, limit, offset, filter, options)(axios, basePath);
+        listVmTags(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listVmTags(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of VolumeAttachment objects
@@ -16130,11 +18564,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listVmVolumeAttachments(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listVmVolumeAttachments(id, limit, offset, filter, options)(axios, basePath);
+        listVmVolumeAttachments(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listVmVolumeAttachments(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Volume objects
@@ -16143,11 +18578,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listVmVolumes(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listVmVolumes(id, limit, offset, filter, options)(axios, basePath);
+        listVmVolumes(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listVmVolumes(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Vm objects
@@ -16155,11 +18591,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listVms(limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listVms(limit, offset, filter, options)(axios, basePath);
+        listVms(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listVms(limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of VolumeAttachment objects
@@ -16167,11 +18604,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listVolumeAttachments(limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listVolumeAttachments(limit, offset, filter, options)(axios, basePath);
+        listVolumeAttachments(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listVolumeAttachments(limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Volume objects
@@ -16180,11 +18618,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listVolumeTypeVolumes(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listVolumeTypeVolumes(id, limit, offset, filter, options)(axios, basePath);
+        listVolumeTypeVolumes(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listVolumeTypeVolumes(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of VolumeType objects
@@ -16192,11 +18631,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listVolumeTypes(limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listVolumeTypes(limit, offset, filter, options)(axios, basePath);
+        listVolumeTypes(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listVolumeTypes(limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Vm objects
@@ -16205,11 +18645,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listVolumeVms(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listVolumeVms(id, limit, offset, filter, options)(axios, basePath);
+        listVolumeVms(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listVolumeVms(id, limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns an array of Volume objects
@@ -16217,43 +18658,44 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          * @param {number} [limit] The numbers of items to return per page.
          * @param {number} [offset] The number of items to skip before starting to collect the result set.
          * @param {any} [filter] Filter for querying collections.
+         * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        listVolumes(limit?: number, offset?: number, filter?: any, options?: any) {
-            return DefaultApiFp(configuration).listVolumes(limit, offset, filter, options)(axios, basePath);
+        listVolumes(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+            return DefaultApiFp(configuration).listVolumes(limit, offset, filter, sortBy, options)(axios, basePath);
         },
         /**
          * Returns a Task id
          * @summary Order an existing ServiceOffering
          * @param {string} id ID of the resource
-         * @param {OrderParameters} orderParameters Order parameters defining the service and provider control
+         * @param {OrderParametersServiceOffering} orderParametersServiceOffering Order parameters defining the service and provider control
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        orderServiceOffering(id: string, orderParameters: OrderParameters, options?: any) {
-            return DefaultApiFp(configuration).orderServiceOffering(id, orderParameters, options)(axios, basePath);
+        orderServiceOffering(id: string, orderParametersServiceOffering: OrderParametersServiceOffering, options?: any) {
+            return DefaultApiFp(configuration).orderServiceOffering(id, orderParametersServiceOffering, options)(axios, basePath);
         },
         /**
          * Returns a Task id
          * @summary Order an existing ServicePlan
          * @param {string} id ID of the resource
-         * @param {OrderParameters} orderParameters Order parameters defining the service and provider control
+         * @param {OrderParametersServicePlan} orderParametersServicePlan Order parameters defining the service and provider control
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        orderServicePlan(id: string, orderParameters: OrderParameters, options?: any) {
-            return DefaultApiFp(configuration).orderServicePlan(id, orderParameters, options)(axios, basePath);
+        orderServicePlan(id: string, orderParametersServicePlan: OrderParametersServicePlan, options?: any) {
+            return DefaultApiFp(configuration).orderServicePlan(id, orderParametersServicePlan, options)(axios, basePath);
         },
         /**
          * Performs a GraphQL Query
          * @summary Perform a GraphQL Query
-         * @param {InlineObject} inlineObject
+         * @param {GraphQLRequest} graphQLRequest GraphQL Query Request
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        postGraphQL(inlineObject: InlineObject, options?: any) {
-            return DefaultApiFp(configuration).postGraphQL(inlineObject, options)(axios, basePath);
+        postGraphQL(graphQLRequest: GraphQLRequest, options?: any) {
+            return DefaultApiFp(configuration).postGraphQL(graphQLRequest, options)(axios, basePath);
         },
         /**
          * Returns a Cluster object
@@ -16426,6 +18868,26 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
             return DefaultApiFp(configuration).showServiceInstance(id, options)(axios, basePath);
         },
         /**
+         * Returns a ServiceInstanceNode object
+         * @summary Show an existing ServiceInstanceNode
+         * @param {string} id ID of the resource
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        showServiceInstanceNode(id: string, options?: any) {
+            return DefaultApiFp(configuration).showServiceInstanceNode(id, options)(axios, basePath);
+        },
+        /**
+         * Returns a ServiceInventory object
+         * @summary Show an existing ServiceInventory
+         * @param {string} id ID of the resource
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        showServiceInventory(id: string, options?: any) {
+            return DefaultApiFp(configuration).showServiceInventory(id, options)(axios, basePath);
+        },
+        /**
          * Returns a ServiceOffering object
          * @summary Show an existing ServiceOffering
          * @param {string} id ID of the resource
@@ -16454,6 +18916,16 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          */
         showServiceOfferingIconIconData(id: string, options?: any) {
             return DefaultApiFp(configuration).showServiceOfferingIconIconData(id, options)(axios, basePath);
+        },
+        /**
+         * Returns a ServiceOfferingNode object
+         * @summary Show an existing ServiceOfferingNode
+         * @param {string} id ID of the resource
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        showServiceOfferingNode(id: string, options?: any) {
+            return DefaultApiFp(configuration).showServiceOfferingNode(id, options)(axios, basePath);
         },
         /**
          * Returns a ServicePlan object
@@ -16587,6 +19059,19 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
  */
 export class DefaultApi extends BaseAPI {
     /**
+     * Returns a Task id
+     * @summary Invokes computing of ServiceInventories for given ServiceOffering
+     * @param {string} id ID of the resource
+     * @param {AppliedInventoriesParametersServicePlan} appliedInventoriesParametersServicePlan Parameters defining input data for computing inventories
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public appliedInventoriesForServiceOffering(id: string, appliedInventoriesParametersServicePlan: AppliedInventoriesParametersServicePlan, options?: any) {
+        return DefaultApiFp(this.configuration).appliedInventoriesForServiceOffering(id, appliedInventoriesParametersServicePlan, options)(this.axios, this.basePath);
+    }
+
+    /**
      *
      * @summary Return this API document in JSON format
      * @param {*} [options] Override http request option.
@@ -16604,12 +19089,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listClusterHosts(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listClusterHosts(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listClusterHosts(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listClusterHosts(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -16618,12 +19104,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listClusters(limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listClusters(limit, offset, filter, options)(this.axios, this.basePath);
+    public listClusters(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listClusters(limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -16633,12 +19120,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listContainerGroupContainers(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listContainerGroupContainers(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listContainerGroupContainers(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listContainerGroupContainers(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -16648,12 +19136,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listContainerGroupTags(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listContainerGroupTags(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listContainerGroupTags(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listContainerGroupTags(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -16662,12 +19151,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listContainerGroups(limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listContainerGroups(limit, offset, filter, options)(this.axios, this.basePath);
+    public listContainerGroups(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listContainerGroups(limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -16677,12 +19167,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listContainerImageTags(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listContainerImageTags(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listContainerImageTags(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listContainerImageTags(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -16691,12 +19182,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listContainerImages(limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listContainerImages(limit, offset, filter, options)(this.axios, this.basePath);
+    public listContainerImages(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listContainerImages(limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -16706,12 +19198,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listContainerNodeContainerGroups(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listContainerNodeContainerGroups(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listContainerNodeContainerGroups(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listContainerNodeContainerGroups(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -16721,12 +19214,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listContainerNodeTags(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listContainerNodeTags(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listContainerNodeTags(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listContainerNodeTags(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -16735,12 +19229,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listContainerNodes(limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listContainerNodes(limit, offset, filter, options)(this.axios, this.basePath);
+    public listContainerNodes(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listContainerNodes(limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -16750,12 +19245,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listContainerProjectContainerGroups(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listContainerProjectContainerGroups(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listContainerProjectContainerGroups(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listContainerProjectContainerGroups(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -16765,12 +19261,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listContainerProjectContainerResourceQuota(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listContainerProjectContainerResourceQuota(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listContainerProjectContainerResourceQuota(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listContainerProjectContainerResourceQuota(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -16780,12 +19277,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listContainerProjectContainerTemplates(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listContainerProjectContainerTemplates(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listContainerProjectContainerTemplates(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listContainerProjectContainerTemplates(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -16795,12 +19293,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listContainerProjectTags(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listContainerProjectTags(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listContainerProjectTags(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listContainerProjectTags(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -16809,12 +19308,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listContainerProjects(limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listContainerProjects(limit, offset, filter, options)(this.axios, this.basePath);
+    public listContainerProjects(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listContainerProjects(limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -16823,12 +19323,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listContainerResourceQuota(limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listContainerResourceQuota(limit, offset, filter, options)(this.axios, this.basePath);
+    public listContainerResourceQuota(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listContainerResourceQuota(limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -16838,12 +19339,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listContainerTemplateTags(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listContainerTemplateTags(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listContainerTemplateTags(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listContainerTemplateTags(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -16852,12 +19354,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listContainerTemplates(limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listContainerTemplates(limit, offset, filter, options)(this.axios, this.basePath);
+    public listContainerTemplates(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listContainerTemplates(limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -16866,12 +19369,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listContainers(limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listContainers(limit, offset, filter, options)(this.axios, this.basePath);
+    public listContainers(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listContainers(limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -16880,12 +19384,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listDatastores(limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listDatastores(limit, offset, filter, options)(this.axios, this.basePath);
+    public listDatastores(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listDatastores(limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -16894,12 +19399,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listFlavors(limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listFlavors(limit, offset, filter, options)(this.axios, this.basePath);
+    public listFlavors(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listFlavors(limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -16908,12 +19414,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listHosts(limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listHosts(limit, offset, filter, options)(this.axios, this.basePath);
+    public listHosts(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listHosts(limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -16923,12 +19430,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listIpaddressTags(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listIpaddressTags(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listIpaddressTags(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listIpaddressTags(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -16937,12 +19445,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listIpaddresses(limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listIpaddresses(limit, offset, filter, options)(this.axios, this.basePath);
+    public listIpaddresses(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listIpaddresses(limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -16952,12 +19461,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listNetworkAdapterIpaddresses(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listNetworkAdapterIpaddresses(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listNetworkAdapterIpaddresses(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listNetworkAdapterIpaddresses(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -16967,12 +19477,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listNetworkAdapterTags(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listNetworkAdapterTags(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listNetworkAdapterTags(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listNetworkAdapterTags(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -16981,12 +19492,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listNetworkAdapters(limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listNetworkAdapters(limit, offset, filter, options)(this.axios, this.basePath);
+    public listNetworkAdapters(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listNetworkAdapters(limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -16996,12 +19508,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listNetworkSubnets(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listNetworkSubnets(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listNetworkSubnets(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listNetworkSubnets(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17011,12 +19524,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listNetworkTags(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listNetworkTags(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listNetworkTags(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listNetworkTags(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17025,12 +19539,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listNetworks(limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listNetworks(limit, offset, filter, options)(this.axios, this.basePath);
+    public listNetworks(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listNetworks(limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17040,12 +19555,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listOrchestrationStackIpaddresses(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listOrchestrationStackIpaddresses(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listOrchestrationStackIpaddresses(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listOrchestrationStackIpaddresses(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17055,12 +19571,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listOrchestrationStackNetworkAdapters(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listOrchestrationStackNetworkAdapters(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listOrchestrationStackNetworkAdapters(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listOrchestrationStackNetworkAdapters(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17070,12 +19587,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listOrchestrationStackNetworks(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listOrchestrationStackNetworks(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listOrchestrationStackNetworks(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listOrchestrationStackNetworks(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17085,12 +19603,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listOrchestrationStackSecurityGroups(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listOrchestrationStackSecurityGroups(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listOrchestrationStackSecurityGroups(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listOrchestrationStackSecurityGroups(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17100,12 +19619,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listOrchestrationStackSubnets(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listOrchestrationStackSubnets(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listOrchestrationStackSubnets(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listOrchestrationStackSubnets(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17115,12 +19635,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listOrchestrationStackVms(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listOrchestrationStackVms(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listOrchestrationStackVms(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listOrchestrationStackVms(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17130,12 +19651,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listOrchestrationStackVolumes(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listOrchestrationStackVolumes(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listOrchestrationStackVolumes(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listOrchestrationStackVolumes(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17144,12 +19666,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listOrchestrationStacks(limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listOrchestrationStacks(limit, offset, filter, options)(this.axios, this.basePath);
+    public listOrchestrationStacks(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listOrchestrationStacks(limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17159,12 +19682,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listSecurityGroupTags(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listSecurityGroupTags(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listSecurityGroupTags(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listSecurityGroupTags(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17174,12 +19698,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listSecurityGroupVms(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listSecurityGroupVms(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listSecurityGroupVms(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listSecurityGroupVms(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17188,12 +19713,44 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listSecurityGroups(limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listSecurityGroups(limit, offset, filter, options)(this.axios, this.basePath);
+    public listSecurityGroups(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listSecurityGroups(limit, offset, filter, sortBy, options)(this.axios, this.basePath);
+    }
+
+    /**
+     * Returns an array of ServiceInstanceNode objects
+     * @summary List ServiceInstanceNodes
+     * @param {number} [limit] The numbers of items to return per page.
+     * @param {number} [offset] The number of items to skip before starting to collect the result set.
+     * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public listServiceInstanceNodes(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listServiceInstanceNodes(limit, offset, filter, sortBy, options)(this.axios, this.basePath);
+    }
+
+    /**
+     * Returns an array of ServiceInstanceNode objects
+     * @summary List ServiceInstanceNodes for ServiceInstance
+     * @param {string} id ID of the resource
+     * @param {number} [limit] The numbers of items to return per page.
+     * @param {number} [offset] The number of items to skip before starting to collect the result set.
+     * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public listServiceInstanceServiceInstanceNodes(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listServiceInstanceServiceInstanceNodes(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17202,12 +19759,44 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listServiceInstances(limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listServiceInstances(limit, offset, filter, options)(this.axios, this.basePath);
+    public listServiceInstances(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listServiceInstances(limit, offset, filter, sortBy, options)(this.axios, this.basePath);
+    }
+
+    /**
+     * Returns an array of ServiceInventory objects
+     * @summary List ServiceInventories
+     * @param {number} [limit] The numbers of items to return per page.
+     * @param {number} [offset] The number of items to skip before starting to collect the result set.
+     * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public listServiceInventories(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listServiceInventories(limit, offset, filter, sortBy, options)(this.axios, this.basePath);
+    }
+
+    /**
+     * Returns an array of Tag objects
+     * @summary List Tags for ServiceInventory
+     * @param {string} id ID of the resource
+     * @param {number} [limit] The numbers of items to return per page.
+     * @param {number} [offset] The number of items to skip before starting to collect the result set.
+     * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public listServiceInventoryTags(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listServiceInventoryTags(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17216,12 +19805,28 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listServiceOfferingIcons(limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listServiceOfferingIcons(limit, offset, filter, options)(this.axios, this.basePath);
+    public listServiceOfferingIcons(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listServiceOfferingIcons(limit, offset, filter, sortBy, options)(this.axios, this.basePath);
+    }
+
+    /**
+     * Returns an array of ServiceOfferingNode objects
+     * @summary List ServiceOfferingNodes
+     * @param {number} [limit] The numbers of items to return per page.
+     * @param {number} [offset] The number of items to skip before starting to collect the result set.
+     * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public listServiceOfferingNodes(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listServiceOfferingNodes(limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17231,12 +19836,29 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listServiceOfferingServiceInstances(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listServiceOfferingServiceInstances(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listServiceOfferingServiceInstances(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listServiceOfferingServiceInstances(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
+    }
+
+    /**
+     * Returns an array of ServiceOfferingNode objects
+     * @summary List ServiceOfferingNodes for ServiceOffering
+     * @param {string} id ID of the resource
+     * @param {number} [limit] The numbers of items to return per page.
+     * @param {number} [offset] The number of items to skip before starting to collect the result set.
+     * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public listServiceOfferingServiceOfferingNodes(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listServiceOfferingServiceOfferingNodes(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17246,12 +19868,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listServiceOfferingServicePlans(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listServiceOfferingServicePlans(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listServiceOfferingServicePlans(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listServiceOfferingServicePlans(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17261,12 +19884,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listServiceOfferingTags(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listServiceOfferingTags(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listServiceOfferingTags(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listServiceOfferingTags(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17275,12 +19899,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listServiceOfferings(limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listServiceOfferings(limit, offset, filter, options)(this.axios, this.basePath);
+    public listServiceOfferings(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listServiceOfferings(limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17290,12 +19915,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listServicePlanServiceInstances(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listServicePlanServiceInstances(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listServicePlanServiceInstances(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listServicePlanServiceInstances(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17304,12 +19930,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listServicePlans(limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listServicePlans(limit, offset, filter, options)(this.axios, this.basePath);
+    public listServicePlans(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listServicePlans(limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17319,12 +19946,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listSourceAvailabilities(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listSourceAvailabilities(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listSourceAvailabilities(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listSourceAvailabilities(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17334,12 +19962,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listSourceClusters(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listSourceClusters(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listSourceClusters(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listSourceClusters(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17349,12 +19978,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listSourceContainerGroups(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listSourceContainerGroups(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listSourceContainerGroups(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listSourceContainerGroups(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17364,12 +19994,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listSourceContainerImages(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listSourceContainerImages(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listSourceContainerImages(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listSourceContainerImages(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17379,12 +20010,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listSourceContainerNodes(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listSourceContainerNodes(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listSourceContainerNodes(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listSourceContainerNodes(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17394,12 +20026,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listSourceContainerProjects(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listSourceContainerProjects(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listSourceContainerProjects(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listSourceContainerProjects(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17409,12 +20042,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listSourceContainerTemplates(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listSourceContainerTemplates(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listSourceContainerTemplates(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listSourceContainerTemplates(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17424,12 +20058,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listSourceContainers(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listSourceContainers(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listSourceContainers(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listSourceContainers(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17439,12 +20074,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listSourceDatastores(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listSourceDatastores(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listSourceDatastores(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listSourceDatastores(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17454,12 +20090,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listSourceHosts(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listSourceHosts(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listSourceHosts(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listSourceHosts(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17469,12 +20106,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listSourceIpaddresses(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listSourceIpaddresses(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listSourceIpaddresses(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listSourceIpaddresses(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17484,12 +20122,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listSourceNetworkAdapters(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listSourceNetworkAdapters(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listSourceNetworkAdapters(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listSourceNetworkAdapters(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17499,12 +20138,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listSourceNetworks(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listSourceNetworks(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listSourceNetworks(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listSourceNetworks(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17514,12 +20154,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listSourceOrchestrationStacks(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listSourceOrchestrationStacks(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listSourceOrchestrationStacks(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listSourceOrchestrationStacks(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17529,12 +20170,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listSourceRegionIpaddresses(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listSourceRegionIpaddresses(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listSourceRegionIpaddresses(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listSourceRegionIpaddresses(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17544,12 +20186,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listSourceRegionNetworkAdapters(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listSourceRegionNetworkAdapters(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listSourceRegionNetworkAdapters(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listSourceRegionNetworkAdapters(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17559,12 +20202,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listSourceRegionNetworks(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listSourceRegionNetworks(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listSourceRegionNetworks(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listSourceRegionNetworks(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17574,12 +20218,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listSourceRegionOrchestrationStacks(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listSourceRegionOrchestrationStacks(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listSourceRegionOrchestrationStacks(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listSourceRegionOrchestrationStacks(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17589,12 +20234,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listSourceRegionSecurityGroups(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listSourceRegionSecurityGroups(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listSourceRegionSecurityGroups(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listSourceRegionSecurityGroups(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17604,12 +20250,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listSourceRegionServiceInstances(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listSourceRegionServiceInstances(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listSourceRegionServiceInstances(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listSourceRegionServiceInstances(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17619,12 +20266,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listSourceRegionServiceOfferings(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listSourceRegionServiceOfferings(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listSourceRegionServiceOfferings(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listSourceRegionServiceOfferings(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17634,12 +20282,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listSourceRegionServicePlans(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listSourceRegionServicePlans(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listSourceRegionServicePlans(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listSourceRegionServicePlans(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17649,12 +20298,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listSourceRegionSubnets(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listSourceRegionSubnets(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listSourceRegionSubnets(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listSourceRegionSubnets(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17664,12 +20314,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listSourceRegionVms(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listSourceRegionVms(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listSourceRegionVms(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listSourceRegionVms(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17679,12 +20330,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listSourceRegionVolumes(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listSourceRegionVolumes(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listSourceRegionVolumes(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listSourceRegionVolumes(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17693,12 +20345,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listSourceRegions(limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listSourceRegions(limit, offset, filter, options)(this.axios, this.basePath);
+    public listSourceRegions(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listSourceRegions(limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17708,12 +20361,29 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listSourceSecurityGroups(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listSourceSecurityGroups(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listSourceSecurityGroups(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listSourceSecurityGroups(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
+    }
+
+    /**
+     * Returns an array of ServiceInstanceNode objects
+     * @summary List ServiceInstanceNodes for Source
+     * @param {string} id ID of the resource
+     * @param {number} [limit] The numbers of items to return per page.
+     * @param {number} [offset] The number of items to skip before starting to collect the result set.
+     * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public listSourceServiceInstanceNodes(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listSourceServiceInstanceNodes(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17723,12 +20393,45 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listSourceServiceInstances(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listSourceServiceInstances(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listSourceServiceInstances(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listSourceServiceInstances(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
+    }
+
+    /**
+     * Returns an array of ServiceInventory objects
+     * @summary List ServiceInventories for Source
+     * @param {string} id ID of the resource
+     * @param {number} [limit] The numbers of items to return per page.
+     * @param {number} [offset] The number of items to skip before starting to collect the result set.
+     * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public listSourceServiceInventories(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listSourceServiceInventories(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
+    }
+
+    /**
+     * Returns an array of ServiceOfferingNode objects
+     * @summary List ServiceOfferingNodes for Source
+     * @param {string} id ID of the resource
+     * @param {number} [limit] The numbers of items to return per page.
+     * @param {number} [offset] The number of items to skip before starting to collect the result set.
+     * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public listSourceServiceOfferingNodes(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listSourceServiceOfferingNodes(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17738,12 +20441,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listSourceServiceOfferings(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listSourceServiceOfferings(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listSourceServiceOfferings(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listSourceServiceOfferings(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17753,12 +20457,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listSourceServicePlans(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listSourceServicePlans(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listSourceServicePlans(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listSourceServicePlans(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17768,12 +20473,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listSourceSourceRegions(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listSourceSourceRegions(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listSourceSourceRegions(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listSourceSourceRegions(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17783,12 +20489,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listSourceSubnets(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listSourceSubnets(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listSourceSubnets(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listSourceSubnets(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17798,12 +20505,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listSourceSubscriptions(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listSourceSubscriptions(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listSourceSubscriptions(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listSourceSubscriptions(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17813,12 +20521,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listSourceVms(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listSourceVms(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listSourceVms(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listSourceVms(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17828,12 +20537,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listSourceVolumeTypes(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listSourceVolumeTypes(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listSourceVolumeTypes(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listSourceVolumeTypes(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17843,12 +20553,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listSourceVolumes(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listSourceVolumes(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listSourceVolumes(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listSourceVolumes(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17857,12 +20568,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listSources(limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listSources(limit, offset, filter, options)(this.axios, this.basePath);
+    public listSources(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listSources(limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17872,12 +20584,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listSubnetIpaddresses(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listSubnetIpaddresses(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listSubnetIpaddresses(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listSubnetIpaddresses(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17887,12 +20600,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listSubnetNetworkAdapters(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listSubnetNetworkAdapters(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listSubnetNetworkAdapters(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listSubnetNetworkAdapters(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17902,12 +20616,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listSubnetTags(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listSubnetTags(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listSubnetTags(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listSubnetTags(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17916,12 +20631,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listSubnets(limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listSubnets(limit, offset, filter, options)(this.axios, this.basePath);
+    public listSubnets(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listSubnets(limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17931,12 +20647,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listSubscriptionIpaddresses(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listSubscriptionIpaddresses(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listSubscriptionIpaddresses(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listSubscriptionIpaddresses(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17946,12 +20663,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listSubscriptionNetworkAdapters(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listSubscriptionNetworkAdapters(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listSubscriptionNetworkAdapters(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listSubscriptionNetworkAdapters(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17961,12 +20679,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listSubscriptionNetworks(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listSubscriptionNetworks(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listSubscriptionNetworks(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listSubscriptionNetworks(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17976,12 +20695,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listSubscriptionOrchestrationStacks(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listSubscriptionOrchestrationStacks(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listSubscriptionOrchestrationStacks(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listSubscriptionOrchestrationStacks(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -17991,12 +20711,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listSubscriptionSecurityGroups(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listSubscriptionSecurityGroups(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listSubscriptionSecurityGroups(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listSubscriptionSecurityGroups(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -18006,12 +20727,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listSubscriptionServiceInstances(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listSubscriptionServiceInstances(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listSubscriptionServiceInstances(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listSubscriptionServiceInstances(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -18021,12 +20743,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listSubscriptionServiceOfferings(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listSubscriptionServiceOfferings(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listSubscriptionServiceOfferings(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listSubscriptionServiceOfferings(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -18036,12 +20759,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listSubscriptionServicePlans(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listSubscriptionServicePlans(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listSubscriptionServicePlans(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listSubscriptionServicePlans(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -18051,12 +20775,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listSubscriptionSubnets(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listSubscriptionSubnets(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listSubscriptionSubnets(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listSubscriptionSubnets(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -18066,12 +20791,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listSubscriptionVms(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listSubscriptionVms(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listSubscriptionVms(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listSubscriptionVms(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -18081,12 +20807,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listSubscriptionVolumes(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listSubscriptionVolumes(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listSubscriptionVolumes(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listSubscriptionVolumes(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -18095,12 +20822,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listSubscriptions(limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listSubscriptions(limit, offset, filter, options)(this.axios, this.basePath);
+    public listSubscriptions(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listSubscriptions(limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -18110,12 +20838,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listTagContainerGroups(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listTagContainerGroups(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listTagContainerGroups(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listTagContainerGroups(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -18125,12 +20854,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listTagContainerImages(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listTagContainerImages(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listTagContainerImages(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listTagContainerImages(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -18140,12 +20870,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listTagContainerNodes(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listTagContainerNodes(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listTagContainerNodes(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listTagContainerNodes(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -18155,12 +20886,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listTagContainerProjects(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listTagContainerProjects(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listTagContainerProjects(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listTagContainerProjects(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -18170,12 +20902,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listTagContainerTemplates(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listTagContainerTemplates(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listTagContainerTemplates(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listTagContainerTemplates(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -18185,12 +20918,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listTagIpaddresses(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listTagIpaddresses(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listTagIpaddresses(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listTagIpaddresses(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -18200,12 +20934,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listTagNetworkAdapters(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listTagNetworkAdapters(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listTagNetworkAdapters(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listTagNetworkAdapters(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -18215,12 +20950,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listTagNetworks(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listTagNetworks(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listTagNetworks(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listTagNetworks(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -18230,12 +20966,29 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listTagSecurityGroups(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listTagSecurityGroups(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listTagSecurityGroups(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listTagSecurityGroups(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
+    }
+
+    /**
+     * Returns an array of ServiceInventory objects
+     * @summary List ServiceInventories for Tag
+     * @param {string} id ID of the resource
+     * @param {number} [limit] The numbers of items to return per page.
+     * @param {number} [offset] The number of items to skip before starting to collect the result set.
+     * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public listTagServiceInventories(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listTagServiceInventories(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -18245,12 +20998,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listTagServiceOfferings(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listTagServiceOfferings(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listTagServiceOfferings(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listTagServiceOfferings(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -18260,12 +21014,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listTagSubnets(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listTagSubnets(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listTagSubnets(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listTagSubnets(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -18275,12 +21030,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listTagVms(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listTagVms(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listTagVms(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listTagVms(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -18289,12 +21045,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listTags(limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listTags(limit, offset, filter, options)(this.axios, this.basePath);
+    public listTags(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listTags(limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -18303,12 +21060,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listTasks(limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listTasks(limit, offset, filter, options)(this.axios, this.basePath);
+    public listTasks(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listTasks(limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -18318,12 +21076,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listVmNetworkAdapters(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listVmNetworkAdapters(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listVmNetworkAdapters(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listVmNetworkAdapters(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -18333,12 +21092,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listVmSecurityGroups(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listVmSecurityGroups(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listVmSecurityGroups(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listVmSecurityGroups(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -18348,12 +21108,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listVmTags(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listVmTags(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listVmTags(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listVmTags(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -18363,12 +21124,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listVmVolumeAttachments(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listVmVolumeAttachments(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listVmVolumeAttachments(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listVmVolumeAttachments(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -18378,12 +21140,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listVmVolumes(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listVmVolumes(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listVmVolumes(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listVmVolumes(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -18392,12 +21155,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listVms(limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listVms(limit, offset, filter, options)(this.axios, this.basePath);
+    public listVms(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listVms(limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -18406,12 +21170,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listVolumeAttachments(limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listVolumeAttachments(limit, offset, filter, options)(this.axios, this.basePath);
+    public listVolumeAttachments(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listVolumeAttachments(limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -18421,12 +21186,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listVolumeTypeVolumes(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listVolumeTypeVolumes(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listVolumeTypeVolumes(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listVolumeTypeVolumes(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -18435,12 +21201,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listVolumeTypes(limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listVolumeTypes(limit, offset, filter, options)(this.axios, this.basePath);
+    public listVolumeTypes(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listVolumeTypes(limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -18450,12 +21217,13 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listVolumeVms(id: string, limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listVolumeVms(id, limit, offset, filter, options)(this.axios, this.basePath);
+    public listVolumeVms(id: string, limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listVolumeVms(id, limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
@@ -18464,50 +21232,51 @@ export class DefaultApi extends BaseAPI {
      * @param {number} [limit] The numbers of items to return per page.
      * @param {number} [offset] The number of items to skip before starting to collect the result set.
      * @param {any} [filter] Filter for querying collections.
+     * @param {Object} [sortBy] The list of attribute and order to sort the result set by.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public listVolumes(limit?: number, offset?: number, filter?: any, options?: any) {
-        return DefaultApiFp(this.configuration).listVolumes(limit, offset, filter, options)(this.axios, this.basePath);
+    public listVolumes(limit?: number, offset?: number, filter?: any, sortBy?: Object, options?: any) {
+        return DefaultApiFp(this.configuration).listVolumes(limit, offset, filter, sortBy, options)(this.axios, this.basePath);
     }
 
     /**
      * Returns a Task id
      * @summary Order an existing ServiceOffering
      * @param {string} id ID of the resource
-     * @param {OrderParameters} orderParameters Order parameters defining the service and provider control
+     * @param {OrderParametersServiceOffering} orderParametersServiceOffering Order parameters defining the service and provider control
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public orderServiceOffering(id: string, orderParameters: OrderParameters, options?: any) {
-        return DefaultApiFp(this.configuration).orderServiceOffering(id, orderParameters, options)(this.axios, this.basePath);
+    public orderServiceOffering(id: string, orderParametersServiceOffering: OrderParametersServiceOffering, options?: any) {
+        return DefaultApiFp(this.configuration).orderServiceOffering(id, orderParametersServiceOffering, options)(this.axios, this.basePath);
     }
 
     /**
      * Returns a Task id
      * @summary Order an existing ServicePlan
      * @param {string} id ID of the resource
-     * @param {OrderParameters} orderParameters Order parameters defining the service and provider control
+     * @param {OrderParametersServicePlan} orderParametersServicePlan Order parameters defining the service and provider control
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public orderServicePlan(id: string, orderParameters: OrderParameters, options?: any) {
-        return DefaultApiFp(this.configuration).orderServicePlan(id, orderParameters, options)(this.axios, this.basePath);
+    public orderServicePlan(id: string, orderParametersServicePlan: OrderParametersServicePlan, options?: any) {
+        return DefaultApiFp(this.configuration).orderServicePlan(id, orderParametersServicePlan, options)(this.axios, this.basePath);
     }
 
     /**
      * Performs a GraphQL Query
      * @summary Perform a GraphQL Query
-     * @param {InlineObject} inlineObject
+     * @param {GraphQLRequest} graphQLRequest GraphQL Query Request
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public postGraphQL(inlineObject: InlineObject, options?: any) {
-        return DefaultApiFp(this.configuration).postGraphQL(inlineObject, options)(this.axios, this.basePath);
+    public postGraphQL(graphQLRequest: GraphQLRequest, options?: any) {
+        return DefaultApiFp(this.configuration).postGraphQL(graphQLRequest, options)(this.axios, this.basePath);
     }
 
     /**
@@ -18715,6 +21484,30 @@ export class DefaultApi extends BaseAPI {
     }
 
     /**
+     * Returns a ServiceInstanceNode object
+     * @summary Show an existing ServiceInstanceNode
+     * @param {string} id ID of the resource
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public showServiceInstanceNode(id: string, options?: any) {
+        return DefaultApiFp(this.configuration).showServiceInstanceNode(id, options)(this.axios, this.basePath);
+    }
+
+    /**
+     * Returns a ServiceInventory object
+     * @summary Show an existing ServiceInventory
+     * @param {string} id ID of the resource
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public showServiceInventory(id: string, options?: any) {
+        return DefaultApiFp(this.configuration).showServiceInventory(id, options)(this.axios, this.basePath);
+    }
+
+    /**
      * Returns a ServiceOffering object
      * @summary Show an existing ServiceOffering
      * @param {string} id ID of the resource
@@ -18748,6 +21541,18 @@ export class DefaultApi extends BaseAPI {
      */
     public showServiceOfferingIconIconData(id: string, options?: any) {
         return DefaultApiFp(this.configuration).showServiceOfferingIconIconData(id, options)(this.axios, this.basePath);
+    }
+
+    /**
+     * Returns a ServiceOfferingNode object
+     * @summary Show an existing ServiceOfferingNode
+     * @param {string} id ID of the resource
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public showServiceOfferingNode(id: string, options?: any) {
+        return DefaultApiFp(this.configuration).showServiceOfferingNode(id, options)(this.axios, this.basePath);
     }
 
     /**

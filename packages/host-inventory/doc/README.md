@@ -1,11 +1,19 @@
 
+[
+
 Javascript client for Inventory API
 ===================================
 
+](#javascript-client-for-inventory-api)
+
 If you want to use [RedHatInsights/insights-host-inventory](https://github.com/RedHatInsights/insights-host-inventory) you shouldn't use get requests directly, but rather use this client to integrate with this service.
+
+[
 
 Install
 -------
+
+](#install)
 
 NPM
 
@@ -19,7 +27,11 @@ Or Yarn
 yarn add @redhat-cloud-services/host-inventory-client
 ```
 
+[
+
 ### Usage
+
+](#usage)
 
 This client is using typescript and axios. Types are distributed with this package, so no need to define or install them separately.
 
@@ -64,8 +76,12 @@ const hostsApi = new HostsApi(undefined, BASE_PATH, instance);
 export hostsApi;
 ```
 
+[
+
 API documentation
 -----------------
+
+](#api-documentation)
 
 *   [README](doc/README.md)
 
@@ -95,8 +111,11 @@ API documentation
 * [NetworkInterface](interfaces/networkinterface.md)
 * [PatchHostIn](interfaces/patchhostin.md)
 * [RequestArgs](interfaces/requestargs.md)
+* [StructuredTag](interfaces/structuredtag.md)
 * [SystemProfileByHostOut](interfaces/systemprofilebyhostout.md)
 * [SystemProfileIn](interfaces/systemprofilein.md)
+* [TagCountOut](interfaces/tagcountout.md)
+* [TagsOut](interfaces/tagsout.md)
 * [YumRepo](interfaces/yumrepo.md)
 
 ### Variables
@@ -135,7 +154,7 @@ ___
 
 ▸ **HostsApiAxiosParamCreator**(configuration?: *[Configuration](classes/configuration.md)*): `object`
 
-*Defined in [api.ts:925](https://github.com/RedHatInsights/javascript-clients/blob/master/packages/host-inventory/api.ts#L925)*
+*Defined in [api.ts:1039](https://github.com/RedHatInsights/javascript-clients/blob/master/packages/host-inventory/api.ts#L1039)*
 
 HostsApi - axios parameter creator
 
@@ -154,7 +173,7 @@ ___
 
 ▸ **HostsApiFactory**(configuration?: *[Configuration](classes/configuration.md)*, basePath?: *`string`*, axios?: *`AxiosInstance`*): `object`
 
-*Defined in [api.ts:1543](https://github.com/RedHatInsights/javascript-clients/blob/master/packages/host-inventory/api.ts#L1543)*
+*Defined in [api.ts:1845](https://github.com/RedHatInsights/javascript-clients/blob/master/packages/host-inventory/api.ts#L1845)*
 
 HostsApi - factory interface
 
@@ -175,7 +194,7 @@ ___
 
 ▸ **HostsApiFp**(configuration?: *[Configuration](classes/configuration.md)*): `object`
 
-*Defined in [api.ts:1399](https://github.com/RedHatInsights/javascript-clients/blob/master/packages/host-inventory/api.ts#L1399)*
+*Defined in [api.ts:1660](https://github.com/RedHatInsights/javascript-clients/blob/master/packages/host-inventory/api.ts#L1660)*
 
 HostsApi - functional programming interface
 

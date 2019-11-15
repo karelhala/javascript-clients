@@ -1,11 +1,19 @@
 
+[
+
 Javascript client for Vulnerability API
 =======================================
 
+](#javascript-client-for-vulnerability-api)
+
 If you want to use [RedHatInsights/vulnerability-engine](https://github.com/RedHatInsights/vulnerability-engine) you shouldn't use get requests directly, but rather use this client to integrate with this service.
+
+[
 
 Install
 -------
+
+](#install)
 
 NPM
 
@@ -19,7 +27,11 @@ Or Yarn
 yarn add @redhat-cloud-services/vulnerabilities-client
 ```
 
+[
+
 ### Usage
+
+](#usage)
 
 This client is using typescript and axios. Types are distributed with this package, so no need to define or install them separately.
 
@@ -64,8 +76,12 @@ const vulnApi = new BaseApi(undefined, BASE_PATH, instance);
 export vulnApi;
 ```
 
+[
+
 API documentation
 -----------------
+
+](#api-documentation)
 
 *   [README](doc/README.md)
 
@@ -157,7 +173,7 @@ ___
 
 ▸ **DefaultApiAxiosParamCreator**(configuration?: *[Configuration](classes/configuration.md)*): `object`
 
-*Defined in [api.ts:1255](https://github.com/RedHatInsights/javascript-clients/blob/master/packages/vulnerabilities/api.ts#L1255)*
+*Defined in [api.ts:1261](https://github.com/RedHatInsights/javascript-clients/blob/master/packages/vulnerabilities/api.ts#L1261)*
 
 DefaultApi - axios parameter creator
 
@@ -176,7 +192,7 @@ ___
 
 ▸ **DefaultApiFactory**(configuration?: *[Configuration](classes/configuration.md)*, basePath?: *`string`*, axios?: *`AxiosInstance`*): `object`
 
-*Defined in [api.ts:2431](https://github.com/RedHatInsights/javascript-clients/blob/master/packages/vulnerabilities/api.ts#L2431)*
+*Defined in [api.ts:2437](https://github.com/RedHatInsights/javascript-clients/blob/master/packages/vulnerabilities/api.ts#L2437)*
 
 DefaultApi - factory interface
 
@@ -197,7 +213,7 @@ ___
 
 ▸ **DefaultApiFp**(configuration?: *[Configuration](classes/configuration.md)*): `object`
 
-*Defined in [api.ts:2171](https://github.com/RedHatInsights/javascript-clients/blob/master/packages/vulnerabilities/api.ts#L2171)*
+*Defined in [api.ts:2177](https://github.com/RedHatInsights/javascript-clients/blob/master/packages/vulnerabilities/api.ts#L2177)*
 
 DefaultApi - functional programming interface
 
@@ -216,7 +232,7 @@ ___
 
 ▸ **InternalApiAxiosParamCreator**(configuration?: *[Configuration](classes/configuration.md)*): `object`
 
-*Defined in [api.ts:2861](https://github.com/RedHatInsights/javascript-clients/blob/master/packages/vulnerabilities/api.ts#L2861)*
+*Defined in [api.ts:2867](https://github.com/RedHatInsights/javascript-clients/blob/master/packages/vulnerabilities/api.ts#L2867)*
 
 InternalApi - axios parameter creator
 
@@ -235,7 +251,7 @@ ___
 
 ▸ **InternalApiFactory**(configuration?: *[Configuration](classes/configuration.md)*, basePath?: *`string`*, axios?: *`AxiosInstance`*): `object`
 
-*Defined in [api.ts:3130](https://github.com/RedHatInsights/javascript-clients/blob/master/packages/vulnerabilities/api.ts#L3130)*
+*Defined in [api.ts:3136](https://github.com/RedHatInsights/javascript-clients/blob/master/packages/vulnerabilities/api.ts#L3136)*
 
 InternalApi - factory interface
 
@@ -256,7 +272,7 @@ ___
 
 ▸ **InternalApiFp**(configuration?: *[Configuration](classes/configuration.md)*): `object`
 
-*Defined in [api.ts:3064](https://github.com/RedHatInsights/javascript-clients/blob/master/packages/vulnerabilities/api.ts#L3064)*
+*Defined in [api.ts:3070](https://github.com/RedHatInsights/javascript-clients/blob/master/packages/vulnerabilities/api.ts#L3070)*
 
 InternalApi - functional programming interface
 

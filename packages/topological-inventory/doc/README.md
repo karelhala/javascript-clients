@@ -1,11 +1,19 @@
 
+[
+
 Javascript client for Topological inventory API
 ===============================================
 
+](#javascript-client-for-topological-inventory-api)
+
 If you want to use [ManageIQ/topological-inventory-api](https://github.com/ManageIQ/https://github.com/ManageIQ/topological_inventory-api) you shouldn't use get requests directly, but rather use this client to integrate with this service.
+
+[
 
 Install
 -------
+
+](#install)
 
 NPM
 
@@ -19,7 +27,11 @@ Or Yarn
 yarn add @redhat-cloud-services/topological-inventory-client
 ```
 
+[
+
 ### Usage
+
+](#usage)
 
 This client is using typescript and axios. Types are distributed with this package, so no need to define or install them separately.
 
@@ -64,8 +76,12 @@ const baseApi = new DefaultApi(undefined, BASE_PATH, instance);
 export baseApi;
 ```
 
+[
+
 API documentation
 -----------------
+
+](#api-documentation)
 
 *   [README](doc/README.md)
 
@@ -80,6 +96,7 @@ API documentation
 
 ### Interfaces
 
+* [AppliedInventoriesParametersServicePlan](interfaces/appliedinventoriesparametersserviceplan.md)
 * [AvailabilitiesCollection](interfaces/availabilitiescollection.md)
 * [Availability](interfaces/availability.md)
 * [Cluster](interfaces/cluster.md)
@@ -103,12 +120,14 @@ API documentation
 * [ContainersCollection](interfaces/containerscollection.md)
 * [Datastore](interfaces/datastore.md)
 * [DatastoresCollection](interfaces/datastorescollection.md)
+* [ErrorNotFound](interfaces/errornotfound.md)
+* [ErrorNotFoundErrors](interfaces/errornotfounderrors.md)
 * [Flavor](interfaces/flavor.md)
 * [FlavorsCollection](interfaces/flavorscollection.md)
+* [GraphQLRequest](interfaces/graphqlrequest.md)
 * [GraphQLResponse](interfaces/graphqlresponse.md)
 * [Host](interfaces/host.md)
 * [HostsCollection](interfaces/hostscollection.md)
-* [InlineObject](interfaces/inlineobject.md)
 * [InlineResponse200](interfaces/inlineresponse200.md)
 * [Ipaddress](interfaces/ipaddress.md)
 * [IpaddressesCollection](interfaces/ipaddressescollection.md)
@@ -118,15 +137,22 @@ API documentation
 * [NetworksCollection](interfaces/networkscollection.md)
 * [OrchestrationStack](interfaces/orchestrationstack.md)
 * [OrchestrationStacksCollection](interfaces/orchestrationstackscollection.md)
-* [OrderParameters](interfaces/orderparameters.md)
+* [OrderParametersServiceOffering](interfaces/orderparametersserviceoffering.md)
+* [OrderParametersServicePlan](interfaces/orderparametersserviceplan.md)
 * [RequestArgs](interfaces/requestargs.md)
 * [SecurityGroup](interfaces/securitygroup.md)
 * [SecurityGroupsCollection](interfaces/securitygroupscollection.md)
 * [ServiceInstance](interfaces/serviceinstance.md)
+* [ServiceInstanceNode](interfaces/serviceinstancenode.md)
+* [ServiceInstanceNodesCollection](interfaces/serviceinstancenodescollection.md)
 * [ServiceInstancesCollection](interfaces/serviceinstancescollection.md)
+* [ServiceInventoriesCollection](interfaces/serviceinventoriescollection.md)
+* [ServiceInventory](interfaces/serviceinventory.md)
 * [ServiceOffering](interfaces/serviceoffering.md)
 * [ServiceOfferingIcon](interfaces/serviceofferingicon.md)
 * [ServiceOfferingIconsCollection](interfaces/serviceofferingiconscollection.md)
+* [ServiceOfferingNode](interfaces/serviceofferingnode.md)
+* [ServiceOfferingNodesCollection](interfaces/serviceofferingnodescollection.md)
 * [ServiceOfferingsCollection](interfaces/serviceofferingscollection.md)
 * [ServicePlan](interfaces/serviceplan.md)
 * [ServicePlansCollection](interfaces/serviceplanscollection.md)
@@ -189,7 +215,7 @@ ___
 
 ▸ **DefaultApiAxiosParamCreator**(configuration?: *[Configuration](classes/configuration.md)*): `object`
 
-*Defined in [api.ts:3835](https://github.com/RedHatInsights/javascript-clients/blob/master/packages/topological-inventory/api.ts#L3835)*
+*Defined in [api.ts:4269](https://github.com/RedHatInsights/javascript-clients/blob/master/packages/topological-inventory/api.ts#L4269)*
 
 DefaultApi - axios parameter creator
 
@@ -208,7 +234,7 @@ ___
 
 ▸ **DefaultApiFactory**(configuration?: *[Configuration](classes/configuration.md)*, basePath?: *`string`*, axios?: *`AxiosInstance`*): `object`
 
-*Defined in [api.ts:14594](https://github.com/RedHatInsights/javascript-clients/blob/master/packages/topological-inventory/api.ts#L14594)*
+*Defined in [api.ts:16761](https://github.com/RedHatInsights/javascript-clients/blob/master/packages/topological-inventory/api.ts#L16761)*
 
 DefaultApi - factory interface
 
@@ -229,7 +255,7 @@ ___
 
 ▸ **DefaultApiFp**(configuration?: *[Configuration](classes/configuration.md)*): `object`
 
-*Defined in [api.ts:11950](https://github.com/RedHatInsights/javascript-clients/blob/master/packages/topological-inventory/api.ts#L11950)*
+*Defined in [api.ts:13756](https://github.com/RedHatInsights/javascript-clients/blob/master/packages/topological-inventory/api.ts#L13756)*
 
 DefaultApi - functional programming interface
 

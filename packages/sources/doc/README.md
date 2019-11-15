@@ -1,11 +1,19 @@
 
+[
+
 Javascript client for Sources API
 =================================
 
+](#javascript-client-for-sources-api)
+
 If you want to use [ManageIQ/sources-api](https://github.com/ManageIQ/sources-api) you shouldn't use get requests directly, but rather use this client to integrate with this service.
+
+[
 
 Install
 -------
+
+](#install)
 
 NPM
 
@@ -19,7 +27,11 @@ Or Yarn
 yarn add @redhat-cloud-services/sources-client
 ```
 
+[
+
 ### Usage
+
+](#usage)
 
 This client is using typescript and axios. Types are distributed with this package, so no need to define or install them separately.
 
@@ -64,8 +76,12 @@ const baseApi = new DefaultApi(undefined, BASE_PATH, instance);
 export baseApi;
 ```
 
+[
+
 API documentation
 -----------------
+
+](#api-documentation)
 
 *   [README](doc/README.md)
 
@@ -93,15 +109,15 @@ API documentation
 * [ConfigurationParameters](interfaces/configurationparameters.md)
 * [Endpoint](interfaces/endpoint.md)
 * [EndpointsCollection](interfaces/endpointscollection.md)
+* [ErrorNotFound](interfaces/errornotfound.md)
+* [ErrorNotFoundErrors](interfaces/errornotfounderrors.md)
+* [GraphQLRequest](interfaces/graphqlrequest.md)
 * [GraphQLResponse](interfaces/graphqlresponse.md)
-* [InlineObject](interfaces/inlineobject.md)
-* [OrderParameters](interfaces/orderparameters.md)
 * [RequestArgs](interfaces/requestargs.md)
 * [Source](interfaces/source.md)
 * [SourceType](interfaces/sourcetype.md)
 * [SourceTypesCollection](interfaces/sourcetypescollection.md)
 * [SourcesCollection](interfaces/sourcescollection.md)
-* [Tagging](interfaces/tagging.md)
 * [Tenant](interfaces/tenant.md)
 
 ### Variables
@@ -140,7 +156,7 @@ ___
 
 ▸ **DefaultApiAxiosParamCreator**(configuration?: *[Configuration](classes/configuration.md)*): `object`
 
-*Defined in [api.ts:809](https://github.com/RedHatInsights/javascript-clients/blob/master/packages/sources/api.ts#L809)*
+*Defined in [api.ts:857](https://github.com/RedHatInsights/javascript-clients/blob/master/packages/sources/api.ts#L857)*
 
 DefaultApi - axios parameter creator
 
@@ -159,7 +175,7 @@ ___
 
 ▸ **DefaultApiFactory**(configuration?: *[Configuration](classes/configuration.md)*, basePath?: *`string`*, axios?: *`AxiosInstance`*): `object`
 
-*Defined in [api.ts:2738](https://github.com/RedHatInsights/javascript-clients/blob/master/packages/sources/api.ts#L2738)*
+*Defined in [api.ts:2849](https://github.com/RedHatInsights/javascript-clients/blob/master/packages/sources/api.ts#L2849)*
 
 DefaultApi - factory interface
 
@@ -180,7 +196,7 @@ ___
 
 ▸ **DefaultApiFp**(configuration?: *[Configuration](classes/configuration.md)*): `object`
 
-*Defined in [api.ts:2249](https://github.com/RedHatInsights/javascript-clients/blob/master/packages/sources/api.ts#L2249)*
+*Defined in [api.ts:2345](https://github.com/RedHatInsights/javascript-clients/blob/master/packages/sources/api.ts#L2345)*
 
 DefaultApi - functional programming interface
 

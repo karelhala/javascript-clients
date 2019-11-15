@@ -28,7 +28,7 @@
 
 **● data**: *`Array`<[Ack](ack.md)>*
 
-*Defined in [api.ts:123](https://github.com/RedHatInsights/javascript-clients/blob/master/packages/insights/api.ts#L123)*
+*Defined in [api.ts:277](https://github.com/RedHatInsights/javascript-clients/blob/master/packages/insights/api.ts#L277)*
 
 *__type__*: {Array}
 
@@ -41,7 +41,7 @@ ___
 
 **● links**: *[InlineResponse200Links](inlineresponse200links.md)*
 
-*Defined in [api.ts:117](https://github.com/RedHatInsights/javascript-clients/blob/master/packages/insights/api.ts#L117)*
+*Defined in [api.ts:271](https://github.com/RedHatInsights/javascript-clients/blob/master/packages/insights/api.ts#L271)*
 
 *__type__*: {InlineResponse200Links}
 
@@ -54,7 +54,7 @@ ___
 
 **● meta**: *[InlineResponse200Meta](inlineresponse200meta.md)*
 
-*Defined in [api.ts:111](https://github.com/RedHatInsights/javascript-clients/blob/master/packages/insights/api.ts#L111)*
+*Defined in [api.ts:265](https://github.com/RedHatInsights/javascript-clients/blob/master/packages/insights/api.ts#L265)*
 
 *__type__*: {InlineResponse200Meta}
 
