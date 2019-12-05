@@ -1,22 +1,22 @@
-[@redhat-cloud-services/insights-client](../README.md) > [RulesStats](../interfaces/rulesstats.md)
+[@redhat-cloud-services/insights-client](../README.md) > [Stats](../interfaces/stats.md)
 
-# Interface: RulesStats
+# Interface: Stats
 
 *__export__*: 
 
-*__interface__*: RulesStats
+*__interface__*: Stats
 
 ## Hierarchy
 
-**RulesStats**
+**Stats**
 
 ## Index
 
 ### Properties
 
-* [category](rulesstats.md#category)
-* [total](rulesstats.md#total)
-* [totalRisk](rulesstats.md#totalrisk)
+* [category](stats.md#category)
+* [total](stats.md#total)
+* [totalRisk](stats.md#totalrisk)
 
 ---
 
@@ -32,7 +32,7 @@
 
 *__type__*: {{ \[key: string\]: number; }}
 
-*__memberof__*: RulesStats
+*__memberof__*: Stats
 
 #### Type declaration
 
@@ -49,7 +49,7 @@ ___
 
 *__type__*: {number}
 
-*__memberof__*: RulesStats
+*__memberof__*: Stats
 
 ___
 <a id="totalrisk"></a>
@@ -62,7 +62,7 @@ ___
 
 *__type__*: {{ \[key: string\]: number; }}
 
-*__memberof__*: RulesStats
+*__memberof__*: Stats
 
 #### Type declaration
 
