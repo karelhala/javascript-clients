@@ -6,7 +6,7 @@ cache:
   - "$HOME/.npm"
 before_install:
  - printf "@redhat-cloud-services:registry=https://registry.npmjs.org/\n//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> ~/.npmrc
- - nvm install 17
+ - nvm install 20
 install:
  - npm ci
 before_script:
